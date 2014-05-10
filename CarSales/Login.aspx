@@ -123,6 +123,55 @@
 
     </script>
 
+ <script type="text/javascript" language="javascript">
+      
+      function ValidateDetails()
+        {
+       
+            var valid=true;
+     
+             if (document.getElementById("txtUserName").value.trim()=="")
+            {
+                alert('Please enter Emp ID')
+                valid=false;
+                document.getElementById("txtUserName").value= "";
+                document.getElementById('txtUserName').focus();  
+               if(document.getElementById('lblError') != null)
+                {
+                document.getElementById('lblError').outerText = "";    
+                }
+                             
+                
+            }
+             
+           else if(document.getElementById("txtPassword").value.trim()=="")
+            {
+                alert("Please enter password"); 
+                valid=false;
+                document.getElementById("txtPassword").value = "";
+                document.getElementById('txtPassword').focus();  
+              if(document.getElementById('lblError') != null)
+                {
+                document.getElementById('lblError').outerText = "";    
+                } 
+            }  
+             else if(document.getElementById("txtCenterCode").value.trim()=="")
+            {
+                alert("Please enter center code"); 
+                valid=false;
+                document.getElementById("txtCenterCode").value = "";
+                document.getElementById('txtCenterCode').focus();  
+                if(document.getElementById('lblError') != null)
+                {
+                 document.getElementById('lblError').outerText = "";    
+                } 
+            }  
+              
+            return valid;
+        }
+
+    </script>
+
 </head>
 <body>
     <form id="form1" runat="server">

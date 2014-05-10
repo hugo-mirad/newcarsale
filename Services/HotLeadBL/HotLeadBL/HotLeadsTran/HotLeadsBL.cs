@@ -1718,6 +1718,31 @@ namespace HotLeadBL.HotLeadsTran
                 throw ex;
             }
         }
+        public DataSet GetQCDataForBrand(string Status, int AgentCenterID,int Brandurl)
+        {
+            try
+            {
+                DataSet dsUsers = new DataSet();
+                string spNameString = string.Empty;
+                Database dbDatabase = DatabaseFactory.CreateDatabase(Global.INSTANCE_NAME4);
+                //Discount 21-11-2013 starts 
+                // spNameString = "USP_GetQCDataForAll";
+                spNameString = "USP_GetQCDataForBrand";
+                //Discount 21-11-2013 Ends
+                DbCommand dbCommand = null;
+                dbCommand = dbDatabase.GetStoredProcCommand(spNameString);
+                dbDatabase.AddInParameter(dbCommand, "@Status", System.Data.DbType.String, Status);
+                dbDatabase.AddInParameter(dbCommand, "@AgentCenterID", System.Data.DbType.Int32, AgentCenterID);
+                dbDatabase.AddInParameter(dbCommand, "@Brandurlid", System.Data.DbType.Int32, Brandurl);
+                dsUsers = dbDatabase.ExecuteDataSet(dbCommand);
+                return dsUsers;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         public DataSet GetQCDataForAllSearch(string Status, int AgentCenterID, string Search)
         {
             try
