@@ -237,7 +237,7 @@
                                         <td>
                                             <asp:UpdatePanel ID="UpdatePanel2" runat="server">
                                                 <ContentTemplate>
-                                                    <asp:TextBox ID="txtPassword" runat="server"  MaxLength="30" CssClass="input1" TextMode="Password"></asp:TextBox>
+                                                    <asp:TextBox ID="txtPassword" runat="server"  MaxLength="30" CssClass="input1"></asp:TextBox>
                                                 </ContentTemplate>
                                             </asp:UpdatePanel>
                                         </td>

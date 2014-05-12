@@ -529,7 +529,7 @@
         
         <div class="content wid1000">
                  <h4>
-                     QC Results ="floarR">
+                     QC Results
                     <asp:Label ID="lblResCount" runat="server" CssClass="floarR"></asp:Label>
                     <span style="float: right; display: inline-block; width: 60px;">&nbsp;</span>
                     <asp:Label ID="lblResHead" runat="server" CssClass="floarR"></asp:Label>
@@ -538,7 +538,7 @@
                 
                 <div class="clear"> </div>
                 
-                <div class="scroll200" style="max-height: 300px; width: 100%">
+                <div class="scroll200" style="max-height: 390px; width: 100%">
                     <asp:UpdatePanel ID="updtpnltblGrdcar" runat="server">
                 <ContentTemplate>
                     <asp:UpdatePanel ID="UpdPnlGrid" runat="server">

@@ -248,7 +248,7 @@ public partial class QCReport : System.Web.UI.Page
                 lblResCount.Text = "Total " + SingleAgentSales.Tables[0].Rows.Count.ToString() + " records found";
                 grdWarmLeadInfo.DataSource = SingleAgentSales.Tables[0];
                 grdWarmLeadInfo.DataBind();
-                BizUtility.GridSortInitail("Ascending", "carid", grdWarmLeadInfo, 0, SingleAgentSales.Tables[0]);
+                BizUtility.GridSortInitail("Descending", "carid", grdWarmLeadInfo, 0, SingleAgentSales.Tables[0]);
             }
             else
             {
@@ -1775,7 +1775,7 @@ public partial class QCReport : System.Web.UI.Page
             //btnUpdate.Enabled = false;
             //btnUpdate.BackColor = System.Drawing.Color.Black;
             int pmntID = Convert.ToInt32(Session["QCPayUpPmntID"].ToString());
-            int UID = Convert.ToInt32(Session[Constants.USER_ID].ToString());
+            string UID =Session[Constants.USER_ID].ToString();
             int PSStatusID = Convert.ToInt32(ddlPaymentStatus.SelectedItem.Value);
             int PmntStatus = 0;
             if (PSStatusID == 1)

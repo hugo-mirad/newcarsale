@@ -2037,7 +2037,7 @@ namespace HotLeadBL.HotLeadsTran
                 throw ex;
             }
         }
-        public DataSet UpdateQCPayStatus(int pmntID, int PSStatusID, int PmntStatus, string TransactionID, DateTime PaymentScheduledDate, int PaymentCancelReasonID, string Amount, int LastModifiedBy, string PaymentNotes)
+        public DataSet UpdateQCPayStatus(int pmntID, int PSStatusID, int PmntStatus, string TransactionID, DateTime PaymentScheduledDate, int PaymentCancelReasonID, string Amount, string LastModifiedBy, string PaymentNotes)
         {
             try
             {
@@ -2054,7 +2054,7 @@ namespace HotLeadBL.HotLeadsTran
                 dbDatabase.AddInParameter(dbCommand, "@PaymentScheduledDate", System.Data.DbType.DateTime, PaymentScheduledDate);
                 dbDatabase.AddInParameter(dbCommand, "@PaymentCancelReasonID", System.Data.DbType.Int32, PaymentCancelReasonID);
                 dbDatabase.AddInParameter(dbCommand, "@Amount", System.Data.DbType.String, Amount);
-                dbDatabase.AddInParameter(dbCommand, "@LastModifiedBy", System.Data.DbType.Int32, LastModifiedBy);
+                dbDatabase.AddInParameter(dbCommand, "@LastModifiedBy", System.Data.DbType.String, LastModifiedBy);
                 dbDatabase.AddInParameter(dbCommand, "@PaymentNotes", System.Data.DbType.String, PaymentNotes);
                 dsUsers = dbDatabase.ExecuteDataSet(dbCommand);
                 return dsUsers;

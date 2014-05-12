@@ -42,10 +42,12 @@ public partial class Login : System.Web.UI.Page
             Session[Constants.USER_ID] = null;
             Session.Clear();
             Session.Abandon();
-            txtUserName.Text = "";
-            txtPassword.Text = "";
+            txtUserName.Text = "HM104";
+            txtPassword.Text = "sujatha";
+            txtCenterCode.Text = "INDG";
             txtUserName.Focus();
             Session.Timeout = 180;
+          
         }
     }
     protected void btnLogin_Click(object sender, EventArgs e)
@@ -90,18 +92,19 @@ public partial class Login : System.Web.UI.Page
 
                     }
                 }
-                if (uesrExist == "Login")
-                {
-                    dsGetCenterInfo = objHotLeadsBL.GetCenterData(txtCenterCode.Text);
-                    if (dsGetCenterInfo.Tables.Count > 0)
-                    {
-                        if (dsGetCenterInfo.Tables[0].Rows.Count > 0)
-                        {
-                            if (dsGetCenterInfo.Tables[0].Rows[0]["AgentCenterStatus"].ToString() == "1")
-                            {
-                                DataSet dsUserDetails = new DataSet();
-                                dsUserDetails = objHotLeadsBL.HotLeadsPerformLogin(txtUserName.Text, txtPassword.Text, txtCenterCode.Text, strIp);
 
+                dsGetCenterInfo = objHotLeadsBL.GetCenterData(txtCenterCode.Text);
+                if (dsGetCenterInfo.Tables.Count > 0)
+                {
+                    if (dsGetCenterInfo.Tables[0].Rows.Count > 0)
+                    {
+                        if (dsGetCenterInfo.Tables[0].Rows[0]["AgentCenterStatus"].ToString() == "1")
+                        {
+                            DataSet dsUserDetails = new DataSet();
+                            dsUserDetails = objHotLeadsBL.HotLeadsPerformLogin(txtUserName.Text, txtPassword.Text, txtCenterCode.Text, strIp);
+
+                            if (uesrExist == "Login")
+                            {
                                 if (dsUserDetails.Tables.Count > 0)
                                 {
                                     if (dsUserDetails.Tables[0].Rows.Count > 0)
@@ -157,6 +160,7 @@ public partial class Login : System.Web.UI.Page
                                     else
                                     {
                                         Session[Constants.USER_NAME] = txtUserName.Text;
+                                        Session[Constants.USER_ID] = "0";
                                         if (CreateUserLog(3))
                                         {
                                             lblError.Text = "Invalid username or password or center code!";
@@ -170,6 +174,7 @@ public partial class Login : System.Web.UI.Page
                                 else
                                 {
                                     Session[Constants.USER_NAME] = txtUserName.Text;
+                                    Session[Constants.USER_ID] = "0";
                                     if (CreateUserLog(3))
                                     {
                                         lblError.Text = "Invalid username or password or center code!";
@@ -180,25 +185,29 @@ public partial class Login : System.Web.UI.Page
                                     }
                                 }
                             }
-                            else
+
+                            else if (uesrExist == "NotLogin")
                             {
-                                Session[Constants.USER_NAME] = txtUserName.Text;
-                                if (CreateUserLog(3))
-                                {
-                                    lblError.Text = "Center is not active!";
-                                    lblError.Visible = true;
-                                    txtUserName.Text = "";
-                                    txtPassword.Text = "";
-                                    txtCenterCode.Text = "";
-                                }
+                                lblError.Text = "You are not Logged In. So Please Login in www.hr.bizstrides.com";
+                                // string url = "hr.bizstrides.com";
+                                //  ScriptManager.RegisterStartupScript(Page, typeof(Page), "OpenWindow", "window.open('" + url + "', '_blank');", true); Response.Write("<script type='text/javascript'> window.open('details.aspx','_blank'); </script>");
+                                //Response.Write("<script type='text/javascript'> window.open('hr.bizstrides.com','_blank'); </script>");
+                                Response.Redirect("http://hr.bizstrides.com");
+
+
+                            }
+                            else if (uesrExist == "LogOut")
+                            {
+                                System.Web.UI.ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "alert('Your are Logged Out.');", true);
                             }
                         }
                         else
                         {
                             Session[Constants.USER_NAME] = txtUserName.Text;
+                            Session[Constants.USER_ID] = "0";
                             if (CreateUserLog(3))
                             {
-                                lblError.Text = "Invalid center code!";
+                                lblError.Text = "Center is not active!";
                                 lblError.Visible = true;
                                 txtUserName.Text = "";
                                 txtPassword.Text = "";
@@ -209,6 +218,7 @@ public partial class Login : System.Web.UI.Page
                     else
                     {
                         Session[Constants.USER_NAME] = txtUserName.Text;
+                        Session[Constants.USER_ID] = "0";
                         if (CreateUserLog(3))
                         {
                             lblError.Text = "Invalid center code!";
@@ -219,20 +229,20 @@ public partial class Login : System.Web.UI.Page
                         }
                     }
                 }
-                else if (uesrExist == "NotLogin")
+                else
                 {
-                    lblError.Text = "You are not Logged In. So Please Login in www.hr.bizstrides.com";
-                    // string url = "hr.bizstrides.com";
-                    //  ScriptManager.RegisterStartupScript(Page, typeof(Page), "OpenWindow", "window.open('" + url + "', '_blank');", true); Response.Write("<script type='text/javascript'> window.open('details.aspx','_blank'); </script>");
-                    //Response.Write("<script type='text/javascript'> window.open('hr.bizstrides.com','_blank'); </script>");
-                    Response.Redirect("http://hr.bizstrides.com");
-
-
+                    Session[Constants.USER_NAME] = txtUserName.Text;
+                    Session[Constants.USER_ID] = "0";
+                    if (CreateUserLog(3))
+                    {
+                        lblError.Text = "Invalid center code!";
+                        lblError.Visible = true;
+                        txtUserName.Text = "";
+                        txtPassword.Text = "";
+                        txtCenterCode.Text = "";
+                    }
                 }
-                else if (uesrExist == "LogOut")
-                {
-                    System.Web.UI.ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "alert('Your are Logged Out.');", true);
-                }
+
 
             }
             else
@@ -272,7 +282,7 @@ public partial class Login : System.Web.UI.Page
 
 
             //Set current Login 
-            UserLogInfo.User_Id =(Session[Constants.USER_ID]).ToString();
+            UserLogInfo.User_Id = (Session[Constants.USER_ID]).ToString();
             UserLogInfo.Log_Status_Id = LogoutType;
 
             FormsAuthenticationTicket ticket = new FormsAuthenticationTicket(1, txtUserName.Text.Trim().ToLower(), DateTime.Now, DateTime.Now.AddMinutes(Convert.ToInt32(Constants.SESSIONEXPIRATIONTIME)), false, Session[Constants.USER_NAME].ToString().Trim(), FormsAuthentication.FormsCookiePath);
