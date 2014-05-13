@@ -946,7 +946,17 @@
                             <td style="width: 15px;">
                                 &nbsp;
                             </td>
-                            <td style="text-align: right; padding-top: 10px;" colspan="5">
+                            <td width="300px">
+                                <h4 class="field">
+                                    <span class="left">Brand:</span><span class="left2">
+                                        <asp:Label ID="lblbrand" runat="server"></asp:Label>
+                                    </span>
+                                </h4>
+                            </td>
+                            <td style="width: 15px;">
+                                &nbsp;
+                            </td>
+                            <td style="text-align: right; padding-top: 10px;" colspan="3">
                                 <asp:UpdatePanel ID="updtpnlSave" runat="server">
                                     <ContentTemplate>
                                         <asp:DropDownList ID="ddlQCStatus" Visible="false" runat="server" Font-Size="14px"

@@ -387,6 +387,7 @@ public partial class QCDataView : System.Web.UI.Page
                             list1.Text = Cardetais.Tables[0].Rows[0]["yearOfMake"].ToString();
                             list1.Value = Cardetais.Tables[0].Rows[0]["yearOfMake"].ToString();
                             ddlYear.SelectedIndex = ddlYear.Items.IndexOf(list1);
+                            
 
                             //ListItem listBody = new ListItem();
                             //listBody.Value = Cardetais.Tables[0].Rows[0]["bodyTypeID"].ToString();
@@ -689,6 +690,15 @@ public partial class QCDataView : System.Web.UI.Page
                             }
 
                             // lblVoiceFile.Text = Cardetais.Tables[0].Rows[0]["ConditionDescription"].ToString();
+
+                            //Getting Information is it mobi/united ect brand
+
+                            try
+                            {
+                                DataSet Brandinformation = objHotLeadBL.BrandName(PostingID);
+                                lblbrand.Text = Brandinformation.Tables[0].Rows[0]["MBrandurl"].ToString();
+                            }
+                            catch { }
                         }
 
                     }

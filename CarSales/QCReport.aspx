@@ -1,4 +1,4 @@
-﻿<%@ page language="C#" autoeventwireup="true" CodeFile="QCReport.aspx.cs" Inherits="QCReport" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="QCReport.aspx.cs" Inherits="QCReport" %>
 
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -315,7 +315,7 @@
                                     <asp:LinkButton ID="lnkMmyRep" runat="server" Text="My Report" Enabled="false"></asp:LinkButton></li>
                             </ul>
                         </li>
-                     <li class="parent "><a href="#">Reports <span class="cert"></span></a>
+                        <li class="parent "><a href="#">Reports <span class="cert"></span></a>
                             <ul class="sub1">
                                 <li class=""><a href="#">Leads <span class="cert"></span></a>
                                     <ul class="sub2">
@@ -328,7 +328,7 @@
                                         <li>
                                             <asp:LinkButton ID="leadspermonth" runat="server" Text="Per. Leads Monthly" Enabled="true"
                                                 PostBackUrl="~/LeadsMonthly.aspx"></asp:LinkButton></li>
-                                                 <li>
+                                        <li>
                                             <asp:LinkButton ID="dailleads" runat="server" Text="Daily Leads Graph" Enabled="true"
                                                 PostBackUrl="~/DailyLeadsGraphReport.aspx"></asp:LinkButton></li>
                                         <li>
@@ -355,15 +355,15 @@
                                         <li>
                                             <asp:LinkButton ID="PerfStatusMonthly" runat="server" Text="Per. Sales Monthly" Enabled="true"
                                                 PostBackUrl="~/SalesMonthly.aspx"></asp:LinkButton></li>
-                                                 <li>
-                                               <asp:LinkButton ID="DailySalesGraphs" runat="server" Text="Daily Sales Graph" Enabled="true"
+                                        <li>
+                                            <asp:LinkButton ID="DailySalesGraphs" runat="server" Text="Daily Sales Graph" Enabled="true"
                                                 PostBackUrl="~/DailySalesGraphReport.aspx"></asp:LinkButton></li>
                                         <li>
-                                            <asp:LinkButton ID="WeeklySalesGraphs" runat="server" Text="Weekly Sales Graphs" Enabled="true"
-                                                PostBackUrl="~/WeeklysalesGraphReport.aspx"></asp:LinkButton></li>
+                                            <asp:LinkButton ID="WeeklySalesGraphs" runat="server" Text="Weekly Sales Graphs"
+                                                Enabled="true" PostBackUrl="~/WeeklysalesGraphReport.aspx"></asp:LinkButton></li>
                                         <li>
-                                             <asp:LinkButton ID="MonthlySalesGraphs" runat="server" Text="Monthly Sales Graph" Enabled="true"
-                                                PostBackUrl="~/MonthlysalesGraphReport.aspx"></asp:LinkButton></li>
+                                            <asp:LinkButton ID="MonthlySalesGraphs" runat="server" Text="Monthly Sales Graph"
+                                                Enabled="true" PostBackUrl="~/MonthlysalesGraphReport.aspx"></asp:LinkButton></li>
                                         <li>
                                             <asp:LinkButton ID="DetaStat" runat="server" Text="Detailed Status" Enabled="true"
                                                 PostBackUrl="~/DailyAgentSalesReport.aspx"></asp:LinkButton></li>
@@ -407,16 +407,16 @@
                                         PostBackUrl="~/Executives.aspx"></asp:LinkButton></li>
                                 <li><a href="#">Brands <span class="cert"></span></a>
                                     <ul class="sub2">
-             Brands <span class="cert"></span></a>
-                                    <ul class="sub2">
-                                        <li>
-                                            <asp:LinkButton ID="BrandsAdmin" runat="server" Text="Brands" PostBackUrl="~/Brands.aspx"
-                                                Enabled="false"></asp:LinkButton></li>
-                                        <li class="last">
+                                        Brands <span class="cert"></span></a>
+                                        <ul class="sub2">
                                             <li>
-                                                <asp:LinkButton ID="BrnadsProducts" runat="server" Text="Products" PostBackUrl="~/Products.aspx"
-                                                    Enabled="true"></asp:LinkButton></li>
-                                    </ul>
+                                                <asp:LinkButton ID="BrandsAdmin" runat="server" Text="Brands" PostBackUrl="~/Brands.aspx"
+                                                    Enabled="false"></asp:LinkButton></li>
+                                            <li class="last">
+                                                <li>
+                                                    <asp:LinkButton ID="BrnadsProducts" runat="server" Text="Products" PostBackUrl="~/Products.aspx"
+                                                        Enabled="true"></asp:LinkButton></li>
+                                        </ul>
                                 </li>
                                 <li>
                                     <asp:LinkButton ID="CentersAdmin" runat="server" Text="Locations" PostBackUrl="~/Locations.aspx"
@@ -461,13 +461,11 @@
                                                 <ContentTemplate>
                                                     <asp:Button ID="btnGenerate" runat="server" CssClass="btn btn-warning btn-sm" Text="Generate"
                                                         OnClientClick="return ValidateData();" OnClick="btnGenerate_Click" />&nbsp;
-                                                         <asp:DropDownList ID="ddlBrandurl" runat="server" style="width:100px;" 
-                                                        onselectedindexchanged="ddlBrandurl_SelectedIndexChanged" AutoPostBack="true">
-                                                   </asp:DropDownList>
+                                                    <asp:DropDownList ID="ddlBrandurl" runat="server" Style="width: 100px;" OnSelectedIndexChanged="ddlBrandurl_SelectedIndexChanged"
+                                                        AutoPostBack="true">
+                                                    </asp:DropDownList>
                                                 </ContentTemplate>
                                             </asp:UpdatePanel>
-                                          
-                                             
                                         </td>
                                     </tr>
                                 </table>
@@ -519,156 +517,151 @@
                         </table>
                     </div>
                     <!-- Content End  -->
-                    
-                    
                     <div class="clear">
                         &nbsp;</div>
                 </ContentTemplate>
             </asp:UpdatePanel>
         </div>
-        
         <div class="content wid1000">
-                 <h4>
-                     QC Results
-                    <asp:Label ID="lblResCount" runat="server" CssClass="floarR"></asp:Label>
-                    <span style="float: right; display: inline-block; width: 60px;">&nbsp;</span>
-                    <asp:Label ID="lblResHead" runat="server" CssClass="floarR"></asp:Label>
-                </span>
+            <h4>
+                QC Results
+                <asp:UpdatePanel ID="i4" runat="server">
+                    <ContentTemplate>
+                        <asp:Label ID="lblResCount" runat="server" CssClass="floarR"></asp:Label>
+                    </ContentTemplate>
+                </asp:UpdatePanel>
+                <span style="float: right; display: inline-block; width: 60px;">&nbsp;</span>
+                <asp:Label ID="lblResHead" runat="server" CssClass="floarR"></asp:Label>
             </h4>
-                
-                <div class="clear"> </div>
-                
-                <div class="scroll200" style="max-height: 390px; width: 100%">
-                    <asp:UpdatePanel ID="updtpnltblGrdcar" runat="server">
-                <ContentTemplate>
-                    <asp:UpdatePanel ID="UpdPnlGrid" runat="server">
-                        <ContentTemplate>
-                            <input style="width: 91px" id="txthdnSortOrder" type="hidden" runat="server" enableviewstate="true" />
-                            <input style="width: 40px" id="txthdnSortColumnId" type="hidden" runat="server" enableviewstate="true" />
-                            <asp:GridView Width="1400px" ID="grdWarmLeadInfo" runat="server" CellSpacing="0"
-                                CellPadding="0" CssClass="table table-hover table-striped" AutoGenerateColumns="False"
-                                GridLines="None" ShowHeader="true" OnRowDataBound="grdWarmLeadInfo_RowDataBound"
-                                OnRowCommand="grdWarmLeadInfo_RowCommand" Style="overflow-y: scroll;" AllowSorting="true"
-                                OnSorting="grdWarmLeadInfo_Sorting">
-                                <PagerStyle HorizontalAlign="Right" BackColor="#C6C3C6" ForeColor="Black" />
-                                <SelectedRowStyle BackColor="#9471DE" Font-Bold="True" ForeColor="White" />
-                                <HeaderStyle CssClass="tbHed" />
-                                <PagerSettings Position="Top" />
-                                <FooterStyle BackColor="#C6C3C6" ForeColor="Black" />
-                                <RowStyle CssClass="row1" />
-                                <AlternatingRowStyle CssClass="row2" />
-                                <Columns>
-                                    <asp:TemplateField HeaderText="Sale ID" SortExpression="carid">
-                                        <ItemTemplate>
-                                            <asp:LinkButton ID="lnkCarID" runat="server" Text='<%# Eval("carid")%>' CommandArgument='<%# Eval("postingID")%>'
-                                                CommandName="EditSale"></asp:LinkButton>
-                                        </ItemTemplate>
-                                        <ItemStyle HorizontalAlign="Left" Width="80px" />
-                                    </asp:TemplateField>
-                                    <asp:TemplateField HeaderText="Sale Dt" SortExpression="SaleDate">
-                                        <ItemTemplate>
-                                            <asp:Label ID="lblSaleDt" runat="server" Text='<%# Bind("SaleDate", "{0:MM/dd/yy hh:mm tt}") %>'></asp:Label>
-                                        </ItemTemplate>
-                                        <ItemStyle HorizontalAlign="Left" Width="150px" />
-                                    </asp:TemplateField>
-                                    <asp:TemplateField HeaderText="Agent" SortExpression="SaleAgent">
-                                        <ItemTemplate>
-                                            <asp:Label ID="lblAgent" runat="server"></asp:Label>
-                                            <asp:HiddenField ID="hdnAgentID" runat="server" Value='<%# Eval("SaleAgentID")%>' />
-                                            <asp:HiddenField ID="hdnAgentName" runat="server" Value='<%# Eval("SaleAgent")%>' />
-                                            <asp:HiddenField ID="hdnAgentCenterID" runat="server" Value='<%# Eval("LocationId")%>' />
-                                        </ItemTemplate>
-                                        <ItemStyle HorizontalAlign="Left" Width="145px" />
-                                    </asp:TemplateField>
-                                    <asp:TemplateField HeaderText="Voice Record #" SortExpression="VoiceRecord">
-                                        <ItemTemplate>
-                                            <asp:Label ID="lblVoiceRecord" runat="server" Text='<%#objGeneralFunc.WrapTextByMaxCharacters(DataBinder.Eval(Container.DataItem,"VoiceRecord"),11)%>'></asp:Label>
-                                        </ItemTemplate>
-                                        <ItemStyle HorizontalAlign="Left" Width="148px" />
-                                    </asp:TemplateField>
-                                    <asp:TemplateField HeaderText="QC Status" SortExpression="QCStatusName">
-                                        <ItemTemplate>
-                                            <asp:Label ID="lblQCStatus" runat="server"></asp:Label>
-                                            <asp:HiddenField ID="hdnQCStatusName" runat="server" Value='<%# Eval("QCStatusName")%>' />
-                                            <asp:HiddenField ID="hdnQCStatusID" runat="server" Value='<%# Eval("QCStatusID")%>' />
-                                        </ItemTemplate>
-                                        <ItemStyle HorizontalAlign="Left" Width="108px" />
-                                    </asp:TemplateField>
-                                    <asp:TemplateField HeaderText="Pmnt Status" SortExpression="PSStatusID1">
-                                        <ItemTemplate>
-                                            <asp:LinkButton ID="lnkbtnPaymentStatus" runat="server" CommandArgument='<%# Eval("postingID")%>'
-                                                CommandName="EditPayInfo"></asp:LinkButton>
-                                            <asp:HiddenField ID="hdnPSID1Status" runat="server" Value='<%# Eval("PSStatusID1")%>' />
-                                            <asp:HiddenField ID="hdnPSID1StatusName" runat="server" Value='<%# Eval("PSStatusName1")%>' />
-                                            <asp:HiddenField ID="hdnPSAmount" runat="server" Value='<%# Eval("Amount1") %>' />
-                                        </ItemTemplate>
-                                        <ItemStyle HorizontalAlign="Left" Width="105px" />
-                                    </asp:TemplateField>
-                                    <asp:TemplateField HeaderText="Smartz St" SortExpression="SmartzStatus">
-                                        <ItemTemplate>
-                                            <asp:LinkButton ID="lnkbtnMoveSmartz" runat="server" CommandArgument='<%# Eval("postingID")%>'
-                                                CommandName="MoveSmartz"></asp:LinkButton>
-                                            <asp:HiddenField ID="hdnSmartzStatus" runat="server" Value='<%# Eval("SmartzStatus")%>' />
-                                            <asp:HiddenField ID="hdnSmartzCarID" runat="server" Value='<%# Eval("SmartzCarID")%>' />
-                                            <asp:HiddenField ID="hdnSmartzMovedDate" runat="server" Value='<%# Eval("SmartzMovedDate")%>' />
-                                        </ItemTemplate>
-                                        <ItemStyle HorizontalAlign="Left" Width="159px" />
-                                    </asp:TemplateField>
-                                    <asp:TemplateField HeaderText="Year/Make/Model" SortExpression="make">
-                                        <ItemTemplate>
-                                            <asp:Label ID="lblYear" runat="server"></asp:Label>
-                                            <asp:HiddenField ID="hdnYear" runat="server" Value='<%# Eval("yearOfMake")%>' />
-                                            <asp:HiddenField ID="hdnMake" runat="server" Value='<%# Eval("make")%>' />
-                                            <asp:HiddenField ID="hdnModel" runat="server" Value='<%# Eval("model")%>' />
-                                        </ItemTemplate>
-                                        <ItemStyle HorizontalAlign="Left" Width="188px" />
-                                    </asp:TemplateField>
-                                    <asp:TemplateField HeaderText="Package" SortExpression="PackageCode">
-                                        <ItemTemplate>
-                                            <asp:Label ID="lblPackage" runat="server"></asp:Label>
-                                            <asp:HiddenField ID="hdnPackName" runat="server" Value='<%# Eval("PackageCode")%>' />
-                                            <asp:HiddenField ID="hdnPackDiscount" runat="server" Value='<%# Eval("UCS_Discountid")%>' />
-                                            <asp:HiddenField ID="hdnPackCost" runat="server" Value='<%# Eval("Price")%>' />
-                                        </ItemTemplate>
-                                        <ItemStyle HorizontalAlign="Left" Width="106px" />
-                                    </asp:TemplateField>
-                                    <asp:TemplateField HeaderText="Name" SortExpression="sellerName">
-                                        <ItemTemplate>
-                                            <asp:Label ID="lblName" runat="server"></asp:Label>
-                                            <asp:HiddenField ID="hdnSellerName" runat="server" Value='<%# Eval("sellerName")%>' />
-                                            <asp:HiddenField ID="hdnLastName" runat="server" Value='<%# Eval("LastName")%>' />
-                                        </ItemTemplate>
-                                        <ItemStyle HorizontalAlign="Left" Width="100px" />
-                                    </asp:TemplateField>
-                                    <asp:TemplateField HeaderText="Phone" SortExpression="PhoneNum">
-                                        <ItemTemplate>
-                                            <asp:Label ID="lblPhone" runat="server"></asp:Label>
-                                            <asp:HiddenField ID="hdnPhoneNum" runat="server" Value='<%# Eval("PhoneNum")%>' />
-                                        </ItemTemplate>
-                                        <ItemStyle HorizontalAlign="Left" />
-                                    </asp:TemplateField>
-                                </Columns>
-                            </asp:GridView>
-                        </ContentTemplate>
-                        <Triggers>
-                            <asp:AsyncPostBackTrigger ControlID="grdWarmLeadInfo" EventName="Sorting" />
-                        </Triggers>
-                    </asp:UpdatePanel>
-                    <div class="clearfix">
-                    </div>
-                </ContentTemplate>
-            </asp:UpdatePanel>
-                <div class="clear"></div>
+            <div class="clear">
+            </div>
+            <div class="scroll200" style="max-height: 390px; width: 100%">
+                <asp:UpdatePanel ID="updtpnltblGrdcar" runat="server">
+                    <ContentTemplate>
+                        <asp:UpdatePanel ID="UpdPnlGrid" runat="server">
+                            <ContentTemplate>
+                                <input style="width: 91px" id="txthdnSortOrder" type="hidden" runat="server" enableviewstate="true" />
+                                <input style="width: 40px" id="txthdnSortColumnId" type="hidden" runat="server" enableviewstate="true" />
+                                <asp:GridView Width="1400px" ID="grdWarmLeadInfo" runat="server" CellSpacing="0"
+                                    CellPadding="0" CssClass="table table-hover table-striped" AutoGenerateColumns="False"
+                                    GridLines="None" ShowHeader="true" OnRowDataBound="grdWarmLeadInfo_RowDataBound"
+                                    OnRowCommand="grdWarmLeadInfo_RowCommand" Style="overflow-y: scroll;" AllowSorting="true"
+                                    OnSorting="grdWarmLeadInfo_Sorting">
+                                    <PagerStyle HorizontalAlign="Right" BackColor="#C6C3C6" ForeColor="Black" />
+                                    <SelectedRowStyle BackColor="#9471DE" Font-Bold="True" ForeColor="White" />
+                                    <HeaderStyle CssClass="tbHed" />
+                                    <PagerSettings Position="Top" />
+                                    <FooterStyle BackColor="#C6C3C6" ForeColor="Black" />
+                                    <RowStyle CssClass="row1" />
+                                    <AlternatingRowStyle CssClass="row2" />
+                                    <Columns>
+                                        <asp:TemplateField HeaderText="Sale ID" SortExpression="carid">
+                                            <ItemTemplate>
+                                                <asp:LinkButton ID="lnkCarID" runat="server" Text='<%# Eval("carid")%>' CommandArgument='<%# Eval("postingID")%>'
+                                                    CommandName="EditSale"></asp:LinkButton>
+                                            </ItemTemplate>
+                                            <ItemStyle HorizontalAlign="Left" Width="80px" />
+                                        </asp:TemplateField>
+                                        <asp:TemplateField HeaderText="Sale Dt" SortExpression="SaleDate">
+                                            <ItemTemplate>
+                                                <asp:Label ID="lblSaleDt" runat="server" Text='<%# Bind("SaleDate", "{0:MM/dd/yy hh:mm tt}") %>'></asp:Label>
+                                            </ItemTemplate>
+                                            <ItemStyle HorizontalAlign="Left" Width="150px" />
+                                        </asp:TemplateField>
+                                        <asp:TemplateField HeaderText="Agent" SortExpression="SaleAgent">
+                                            <ItemTemplate>
+                                                <asp:Label ID="lblAgent" runat="server"></asp:Label>
+                                                <asp:HiddenField ID="hdnAgentID" runat="server" Value='<%# Eval("SaleAgentID")%>' />
+                                                <asp:HiddenField ID="hdnAgentName" runat="server" Value='<%# Eval("SaleAgent")%>' />
+                                                <asp:HiddenField ID="hdnAgentCenterID" runat="server" Value='<%# Eval("LocationId")%>' />
+                                            </ItemTemplate>
+                                            <ItemStyle HorizontalAlign="Left" Width="145px" />
+                                        </asp:TemplateField>
+                                        <asp:TemplateField HeaderText="Voice Record #" SortExpression="VoiceRecord">
+                                            <ItemTemplate>
+                                                <asp:Label ID="lblVoiceRecord" runat="server" Text='<%#objGeneralFunc.WrapTextByMaxCharacters(DataBinder.Eval(Container.DataItem,"VoiceRecord"),11)%>'></asp:Label>
+                                            </ItemTemplate>
+                                            <ItemStyle HorizontalAlign="Left" Width="148px" />
+                                        </asp:TemplateField>
+                                        <asp:TemplateField HeaderText="QC Status" SortExpression="QCStatusName">
+                                            <ItemTemplate>
+                                                <asp:Label ID="lblQCStatus" runat="server"></asp:Label>
+                                                <asp:HiddenField ID="hdnQCStatusName" runat="server" Value='<%# Eval("QCStatusName")%>' />
+                                                <asp:HiddenField ID="hdnQCStatusID" runat="server" Value='<%# Eval("QCStatusID")%>' />
+                                            </ItemTemplate>
+                                            <ItemStyle HorizontalAlign="Left" Width="108px" />
+                                        </asp:TemplateField>
+                                        <asp:TemplateField HeaderText="Pmnt Status" SortExpression="PSStatusID1">
+                                            <ItemTemplate>
+                                                <asp:LinkButton ID="lnkbtnPaymentStatus" runat="server" CommandArgument='<%# Eval("postingID")%>'
+                                                    CommandName="EditPayInfo"></asp:LinkButton>
+                                                <asp:HiddenField ID="hdnPSID1Status" runat="server" Value='<%# Eval("PSStatusID1")%>' />
+                                                <asp:HiddenField ID="hdnPSID1StatusName" runat="server" Value='<%# Eval("PSStatusName1")%>' />
+                                                <asp:HiddenField ID="hdnPSAmount" runat="server" Value='<%# Eval("Amount1") %>' />
+                                            </ItemTemplate>
+                                            <ItemStyle HorizontalAlign="Left" Width="105px" />
+                                        </asp:TemplateField>
+                                        <asp:TemplateField HeaderText="Smartz St" SortExpression="SmartzStatus">
+                                            <ItemTemplate>
+                                                <asp:LinkButton ID="lnkbtnMoveSmartz" runat="server" CommandArgument='<%# Eval("postingID")%>'
+                                                    CommandName="MoveSmartz"></asp:LinkButton>
+                                                <asp:HiddenField ID="hdnSmartzStatus" runat="server" Value='<%# Eval("SmartzStatus")%>' />
+                                                <asp:HiddenField ID="hdnSmartzCarID" runat="server" Value='<%# Eval("SmartzCarID")%>' />
+                                                <asp:HiddenField ID="hdnSmartzMovedDate" runat="server" Value='<%# Eval("SmartzMovedDate")%>' />
+                                            </ItemTemplate>
+                                            <ItemStyle HorizontalAlign="Left" Width="159px" />
+                                        </asp:TemplateField>
+                                        <asp:TemplateField HeaderText="Year/Make/Model" SortExpression="make">
+                                            <ItemTemplate>
+                                                <asp:Label ID="lblYear" runat="server"></asp:Label>
+                                                <asp:HiddenField ID="hdnYear" runat="server" Value='<%# Eval("yearOfMake")%>' />
+                                                <asp:HiddenField ID="hdnMake" runat="server" Value='<%# Eval("make")%>' />
+                                                <asp:HiddenField ID="hdnModel" runat="server" Value='<%# Eval("model")%>' />
+                                            </ItemTemplate>
+                                            <ItemStyle HorizontalAlign="Left" Width="188px" />
+                                        </asp:TemplateField>
+                                        <asp:TemplateField HeaderText="Package" SortExpression="PackageCode">
+                                            <ItemTemplate>
+                                                <asp:Label ID="lblPackage" runat="server"></asp:Label>
+                                                <asp:HiddenField ID="hdnPackName" runat="server" Value='<%# Eval("PackageCode")%>' />
+                                                <asp:HiddenField ID="hdnPackDiscount" runat="server" Value='<%# Eval("UCS_Discountid")%>' />
+                                                <asp:HiddenField ID="hdnPackCost" runat="server" Value='<%# Eval("Price")%>' />
+                                            </ItemTemplate>
+                                            <ItemStyle HorizontalAlign="Left" Width="106px" />
+                                        </asp:TemplateField>
+                                        <asp:TemplateField HeaderText="Name" SortExpression="sellerName">
+                                            <ItemTemplate>
+                                                <asp:Label ID="lblName" runat="server"></asp:Label>
+                                                <asp:HiddenField ID="hdnSellerName" runat="server" Value='<%# Eval("sellerName")%>' />
+                                                <asp:HiddenField ID="hdnLastName" runat="server" Value='<%# Eval("LastName")%>' />
+                                            </ItemTemplate>
+                                            <ItemStyle HorizontalAlign="Left" Width="100px" />
+                                        </asp:TemplateField>
+                                        <asp:TemplateField HeaderText="Phone" SortExpression="PhoneNum">
+                                            <ItemTemplate>
+                                                <asp:Label ID="lblPhone" runat="server"></asp:Label>
+                                                <asp:HiddenField ID="hdnPhoneNum" runat="server" Value='<%# Eval("PhoneNum")%>' />
+                                            </ItemTemplate>
+                                            <ItemStyle HorizontalAlign="Left" />
+                                        </asp:TemplateField>
+                                    </Columns>
+                                </asp:GridView>
+                            </ContentTemplate>
+                            <Triggers>
+                                <asp:AsyncPostBackTrigger ControlID="grdWarmLeadInfo" EventName="Sorting" />
+                            </Triggers>
+                        </asp:UpdatePanel>
+                        <div class="clearfix">
+                        </div>
+                    </ContentTemplate>
+                </asp:UpdatePanel>
+                <div class="clear">
                 </div>
-                <div class="clear"></div>
-        
-        
+            </div>
+            <div class="clear">
+            </div>
         </div>
-        
-        
         <div style="padding: 15px;">
-           
-            
         </div>
     </div>
     <!-- Main Wrapper Emd  -->

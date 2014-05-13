@@ -6124,6 +6124,30 @@ namespace HotLeadBL.HotLeadsTran
             }
         }
 
+
+        public DataSet BrandName(int postingID)
+        {
+            try
+            {
+                DataSet dsMails = new DataSet();
+                string spNameString = string.Empty;
+                Database dbDatabase = DatabaseFactory.CreateDatabase(Global.INSTANCE_NAME4);
+                //Discount 21-11-2013 starts 
+                // spNameString = "USP_GetCarDetailsByPostingID";
+                spNameString = "USp_BrandName";
+                //Discount 21-11-2013 Ends
+                DbCommand dbCommand = null;
+                dbCommand = dbDatabase.GetStoredProcCommand(spNameString);
+                dbDatabase.AddInParameter(dbCommand, "@postingID", System.Data.DbType.Int32, postingID);
+                dsMails = dbDatabase.ExecuteDataSet(dbCommand);
+                return dsMails;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
     }
 }
 

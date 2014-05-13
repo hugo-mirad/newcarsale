@@ -68,10 +68,10 @@ C:\Users\padma\Desktop\Newcarsales 09-04-2014\Services\HotLeadBL\HotLeadBL\bin\D
 C:\Users\padma\Desktop\Newcarsales 09-04-2014\Services\HotLeadBL\HotLeadBL\obj\Debug\ResolveAssemblyReference.cache
 C:\Users\padma\Desktop\Newcarsales 09-04-2014\Services\HotLeadBL\HotLeadBL\obj\Debug\HotLeadBL.dll
 C:\Users\padma\Desktop\Newcarsales 09-04-2014\Services\HotLeadBL\HotLeadBL\obj\Debug\HotLeadBL.pdb
+D:\Working Sources Live\Newcarsales\Services\HotLeadBL\HotLeadBL\obj\Debug\ResolveAssemblyReference.cache
 D:\Working Sources Live\Newcarsales\Services\HotLeadBL\HotLeadBL\bin\Debug\HotLeadBL.dll
 D:\Working Sources Live\Newcarsales\Services\HotLeadBL\HotLeadBL\bin\Debug\HotLeadBL.pdb
 D:\Working Sources Live\Newcarsales\Services\HotLeadBL\HotLeadBL\bin\Debug\HotLeadInfo.dll
 D:\Working Sources Live\Newcarsales\Services\HotLeadBL\HotLeadBL\bin\Debug\HotLeadInfo.pdb
-D:\Working Sources Live\Newcarsales\Services\HotLeadBL\HotLeadBL\obj\Debug\ResolveAssemblyReference.cache
 D:\Working Sources Live\Newcarsales\Services\HotLeadBL\HotLeadBL\obj\Debug\HotLeadBL.dll
 D:\Working Sources Live\Newcarsales\Services\HotLeadBL\HotLeadBL\obj\Debug\HotLeadBL.pdb
