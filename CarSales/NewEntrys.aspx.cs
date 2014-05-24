@@ -2831,4 +2831,9 @@ public partial class NewEntrys : System.Web.UI.Page
             }
         }
     }
+    protected void btnPhoneCancel_click(object sender, EventArgs e)
+    {
+        MPEUpdate.Hide();
+    }
+
 }

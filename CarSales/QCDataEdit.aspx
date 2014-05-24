@@ -1,5 +1,4 @@
-﻿<%@ Page Language="C#" CodeFile="NewEntrys.aspx.cs" Inherits="NewEntrys" %>
-
+﻿<%@ page language="C#" autoeventwireup="true"  CodeFile="QCDataEdit.aspx.cs" Inherits="QCDataEdit" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -31,15 +30,12 @@
     <script type="text/javascript">
    function pageLoad()
    { 
+ 
+      //InitializeTimer();   
       
-      
-      
-      
-      
-      
-      
-      
-      $('.arrowRight').click(function(){
+      //date = new Date(parseInt(arr[2]), parseInt(arr[0])-1, parseInt(arr[1]) + 1);
+        
+        $('.arrowRight').click(function(){
              var arr = $('#txtStartDate').val().split('/')
             var date = new Date(parseInt(arr[2]), parseInt(arr[0])-1, parseInt(arr[1]) - 1);
             $('#txtStartDate').val((date.getMonth()+1)+'/'+date.getDate()+'/'+date.getFullYear()); 
@@ -53,13 +49,12 @@
         });
         
         $('#GridUserUpdateList tr:last-child').remove();
+        
+     
+}
          
-   }
-   
-    </script>
 
-    <script type="text/javascript">
-    
+   
     var ssTime,TimerID;
    function  InitializeTimer()
    {  
@@ -121,10 +116,7 @@
         ///alert(strMessage);
       } catch (ex) {}
      return false;
-   }
-
- 
-       
+   }  
 
     </script>
 
@@ -192,8 +184,8 @@
 				
 			}
 		});
-		
-		
+			
+			
 		$('#vF input').live('change',function(){
 		    if($(this).is(':checked')){
 		        $(this).closest('label').addClass('act');
@@ -203,18 +195,46 @@
 		});
 		
 		
+		
 	});
     </script>
 
-    <script type="text/javascript">
+    <script type="text/javascript" language="javascript">
+//<![CDATA[
 
-   
+	JoelPurra.PlusAsTab.setOptions({
+		// Use enter instead of plus
+		// Number 13 found through demo at
+		// http://api.jquery.com/event.which/
+		
+		key: 13
+	});
+        /*
+	$("form")
+			.submit(simulateSubmitting);
+
+	function simulateSubmitting(event)
+	{
+		event.preventDefault();
+
+		if (confirm("Simulating that the form has been submitted.\n\nWould you like to reload the page?"))
+		{
+			location.reload();
+		}
+
+		return false;
+	}
+	*/
+//]]>
+    </script>
+
+    <script type="text/javascript" language="javascript">
         //-------------------------- Agents Centers Info END ------------------------------------------
 //    $(window).load(function(){
 //        TransfersInfoBinding();
 //    })
   function TransfersInfoBinding(){
-        youfunction()
+     // youfunction()
         $(window).load(function(){
             //alert('Ok')
             youfunction()
@@ -224,7 +244,7 @@
     
     function youfunction(){
         //alert('ok')
-           $('#feat input[type=radio]').each(function(){
+          $('#feat input[type=radio]').each(function(){
             if($(this).is(':checked')){
                 $(this).parent().next('span').addClass('featAct')  
             }    
@@ -238,59 +258,99 @@
             }  
         });
         
-        
-        
-         $('#feat input[type=checkbox]').each(function(){              
+        $('#feat input[type=checkbox]').each(function(){
                 if($(this).is(':checked')){
-                    $(this).parent().next('span').addClass('featAct')  
+                $(this).parent().next('span').addClass('featAct')  
                 }  
         });
-        
-        
-          $('#feat input[type=checkbox]').each(function(){
-            $(this).click(function(){
-                if($(this).parent().hasClass('noLM')){
-                    $(this).parent().next('span').toggleClass('featAct')
-                }else{
-                    $(this).next('span').toggleClass('featAct')
-                }
-                if($(this).is(':checked')){
-                    $(this).parent().next('span').addClass('featAct')  
-                }  
-            })
-        });
-       
-        
-        
-         $('#feat input[type=radio]').each(function(){
-            $(this).click(function(){
-              // var name = $(this).attr('name');
-               $('#feat input[type=radio]').each(function(){
-                    //if(name != $(this).attr('name')){
-                        $(this).parent().next('span').removeClass('featAct')
-                    //}
-               });
-               $(this).parent().next('span').addClass('featAct')             
-               
-            })
-        });
-        
-        
-         $('#infoV input[type=radio]').each(function(){
-            $(this).click(function(){
-               var name = $(this).attr('name');
-               $('#infoV input[type=radio]').each(function(){
-                    if(name == $(this).attr('name')){
-                        $(this).parent().next('span').removeClass('featAct')
-                    }
-               })  
-               $(this).parent().next('span').addClass('featAct')           
-               
-            })
-        });
-        /*
-        $('.hid').click(function(){			
-			if($(this).attr('id') == 'Vinfo'){
+        	
+    }
+    
+    // Generating Unique Array 
+    function unique1(list) {
+      var result = [];
+      $.each(list, function(i, e) {
+        if ($.inArray(e, result) == -1) result.push(e);
+      });
+      return result;
+    }
+ //-------------------------- Agents Centers Info END ------------------------------------------
+    </script>
+
+    <script type="text/javascript" language="javascript">
+	
+	$(function(){	
+		
+		if($('#Vinfo .barControl span').hasClass('bar0') ){
+				var str = '';
+				if($('#ddlMake option:selected').val() != 0){
+					str += $('#ddlMake option:selected').text()+"-";				
+				}
+				else
+				{
+				    str += "Unspecified"+"-";
+				}
+				if($('#ddlModel option:selected').val() != 0){
+					str += $('#ddlModel option:selected').text()+"-";				
+				}
+				else
+				{
+				    str += "Unspecified"+"-";
+				}
+				if($('#ddlYear option:selected').val() != 0){
+					str += $('#ddlYear option:selected').text()+"-";
+				}
+				else
+				{
+				    str += "Unspecified"+"-";
+				}
+				if($('#txtAskingPrice').val().length>0){
+					str += "<span class='price11'>"+$('#txtAskingPrice').val()+"</span>-";
+				}
+				else
+				{
+				    str += "Unspecified"+"-";
+				}				
+				if($('#txtMileage').val().length>1){
+					str += $('#txtMileage').val()+' mi';
+				}
+				else
+				{
+				   str += "Unspecified";
+				}	
+				if(($('#ddlMake option:selected').val() == 0) &&($('#ddlModel option:selected').val() == 0)&&($('#ddlYear option:selected').val() == 0)&&($('#txtAskingPrice').val().length<1)&&($('#txtMileage').val().length<1))			
+				{
+				   str = "";
+				}				
+						
+				$('#selected').html(str);	
+				$('.price11').formatCurrency();				
+				
+				
+				
+			}else{
+				$('#selected').empty()
+			}
+		
+		
+		   // barControl
+      $('.boxBlue .hed1').each(function(){
+            var $this = $(this);
+            $this.next('div.inn').hide();     
+            $obj = $(this).children('div.barControl').children('span');        
+            $obj.removeAttr('class').addClass('bar'+$('#hdns1').val());    
+            if($obj.hasClass('bar0')){
+                $this.next('div.inn').hide();
+            }else{
+                $this.next('div.inn').show();
+            }
+                    
+      });
+      
+      $('.boxBlue .hed1 .barControl span').click(function(){
+            
+            
+            if($(this).closest('.hed1').attr('id') == 'Vinfo' && $(this).hasClass('bar1') ){
 				var str = '';
 				if($('#ddlMake option:selected').val() != 0){
 					str += $('#ddlMake option:selected').text()+"-";				
@@ -331,150 +391,124 @@
 				{
 				   str = "";
 				}				
-				if($('#Vinfo').next('div.hidden').is(':visible')){				
-					$('#Vinfo label.selected').empty().append(str);	
-					$('.price11').formatCurrency();
-				}else{
-					$('#Vinfo label.selected').empty()
-				}	
+						
+				$('#selected').html(str);	
+				$('.price11').formatCurrency();				
+				
+				
+				
+			}else{
+				$('#selected').empty()
 			}
-			$(this).next('div.hidden').slideToggle();
-		});		
-        */
-        
-        
-            var result =[];
-        //$('#grdTest').onload(function(){ alert('Ok') })
-        //console.log($('#grdTest tr').length);
-        if($('#grdTest tr').length >0 ){
-        for(i=0; i<$('#grdTest tr').length; i++){
-            var cc = [];
-            cc.push($.trim($('#grdTest tr:eq('+i+') td:eq(0) span').text()));
-            cc.push($.trim($('#grdTest tr:eq('+i+') td:eq(1) span').text()));
-            result.push(cc);
-        }
-        //console.log(result)
-        
-        
-        var centers = [];
-        var centersUniq = [];
-        var agents = [];
-        var finalArray2 = [];
-        var finalArray = [];
-        var menu = '';  
-        
-        for (i=0; i<result.length; i++){       
-            centersUniq.push($.trim(result[i][1]));          
-        }
-         
-        finalArray =  result;    
-        centersUniq = unique1(centersUniq);
+            
+           
+            
+            
+            if($(this).hasClass('bar0')){
+                $(this).removeAttr('class').addClass('bar1'); 
+                $(this).closest('.hed1').next().show();
                 
-        for(i=0; i<centersUniq.length; i++){
-            var cent = $.trim(centersUniq[i]);            
-            var dum = [];
-            var counter = 0;
-            for(k=0; k<finalArray.length; k++){
-                if(centersUniq[i] == $.trim(finalArray[k][1])){
-                    var cn = [];
-                    dum.push($.trim(finalArray[k][0])) ;             
-                    counter++;
-                }
-            }            
-            var dum2 = [];
-            dum2.push(cent);
-            dum2.push(dum);
-            dum2.push(counter);            
-            finalArray2.push(dum2);       
-        }
-        var text = $('#lblTransferAgentsCount').text(); 
-        menu = '';
-        menu += "<div id='smoothmenu1' class='ddsmoothmenu'><ul><li><a href='#'>"+text+"</a><ul>";
-        for(i=0;i<finalArray2.length;i++){
-            menu += '<li><a href="#" >'+finalArray2[i][0]+' ('+finalArray2[i][2]+')</a>';
-            if(finalArray2[i][1].length > 0){                
-                for(k=0;k<finalArray2[i][1].length;k++){
-                    if(k==0){menu += '<ul>';}
-                    menu += '<li><a href="#" >'+finalArray2[i][1][k]+'</a></li>';
-                    if(k==(finalArray2[i][1].length-1)){menu += '</ul>';}
-                }                
+                var indx = ($(this).closest('.boxBlue').index()) + 1;                
+                $('#hdns'+indx).val(1);
+            }else{
+                $(this).removeAttr('class').addClass('bar0'); 
+                $(this).closest('.hed1').next().hide();
+                
+                var indx = ($(this).closest('.boxBlue').index()) + 1;                
+                $('#hdns'+indx).val(1);
             }
-            menu += '</li>';            
-        } 
-      
-        menu += "</ul></li></ul></div>";  
-        $('#lblTransferAgentsCount').empty().append(menu);        
-        $('<a href="#"></a>').remove();
-        
-        ddsmoothmenu.init({
-	        mainmenuid: "smoothmenu1", //menu DIV id
-	        orientation: 'h', //Horizontal or vertical menu: Set to "h" or "v"
-	        classname: 'ddsmoothmenu', //class added to menu's outer DIV
-	        //customtheme: ["#1c5a80", "#18374a"],
-	        contentsource: "markup" //"markup" or ["container_id", "path_to_menu_file"]
-        });     
-        }  
-    }
-    var ssTime,TimerID;
-   function  InitializeTimer()
-   {  
-     WebService.sessionGet(onsuccessGet,onError);      
-   }
-     function onsuccessGet(result)
-     {
-      ssTime=result; 
-      ssTime=parseInt(ssTime)*60000;
-     
-      TimerDec(ssTime);
-     }
-   
-  
-   
-   function  TimerDec(ssTime)
-   {
-   
-     ssTime=ssTime-1000;
-   
-    TimerID=setTimeout(function(){TimerDec(ssTime);},1000);
-      
-    if(ssTime==60000)
-    {      
-     SessionInc();     
-    }
-     
-   }
-  
-    
-    function SessionInc()//Increase the session time
-    {
-     debugger    
-      ssTime=parseInt("<%= Session.Timeout %>");     
-      WebService.sessionSet(ssTime,onsuccessInc,onError);//call webservice to set the session variable
-       ssTime=(parseInt(ssTime)-2)*60000;       
-       TimerDec(ssTime);     
-    }
-    
-    function onsuccessInc(result)
-    {
-     
-    }    
+            
+            
+            
+            
+            
+            
+            
+            
+      })
+		
+				
+		$('.sample4').numeric();	
+		
+		if($('#txtAskingPrice').val().length >2){
+		         $('#txtAskingPrice').formatCurrency({ symbol: '' });
+		    } 
+		    
+		 if($('#txtMileage').val().length >0){
+		         $('#txtMileage').formatCurrency({ symbol: '' });
+		         $('#txtMileage').val($('#txtMileage').val()+' mi')
+		   } 
+			
+	})	
+	
+	
+    </script>
 
-     function onError(exception, userContext, methodName)
-     {
-       try 
-       {
-        //window.location.href='error.aspx';
-        strMessage = strMessage + 'ErrorType: ' + exception._exceptionType + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
-        strMessage = strMessage + 'Message: ' + exception._message + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
-        strMessage = strMessage + 'Stack Trace: ' + exception._stackTrace + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
-        strMessage = strMessage + 'Status Code: ' + exception._statusCode + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
-        strMessage = strMessage + 'Timed Out: ' + exception._timedOut;
-        ///alert(strMessage);
-      } catch (ex) {}
-     return false;
-   }
-       
-
+    <script type="text/javascript" language="javascript">
+	
+	
+	$(function(){	
+	    	
+		
+		
+		$('.sample4').numeric();	
+		
+		
+		$('#txtAskingPrice').live('blur',function(){
+		    if($('#txtAskingPrice').val().length >0){      
+                 if($('#txtAskingPrice').val() == 0)
+                 {
+                    alert('Enter valid price');
+                    $('#txtAskingPrice').focus();
+                     return false;
+                 }
+              }
+		    if($('#txtAskingPrice').val().length >2){
+		         $('#txtAskingPrice').formatCurrency({ symbol: '' });
+		    } 
+		});
+		
+		$('#txtAskingPrice').live('focus',function(){
+		    if($('#txtAskingPrice').val().length >2){
+		        var text = $('#txtAskingPrice').val();
+		         //text = text.substring(1);
+		         text = text.replace(',','');
+		         $('#txtAskingPrice').val(text);
+		           //alert(text)
+		    }  
+		    
+		});
+		
+		$('#txtMileage').live('blur',function(){
+		     if($('#txtMileage').val().length >0){
+		         if($('#txtMileage').val()< 1000){ 
+		         alert('Mileage must be greater than 1000')
+		         $('#txtMileage').focus();
+		         return false;
+		         }   		    
+		         $('#txtMileage').formatCurrency({ symbol: '' });
+		         $('#txtMileage').val($('#txtMileage').val()+' mi')
+		    } 
+		});
+		
+		$('#txtMileage').live('focus',function(){
+		    if($('#txtMileage').val().length >0){
+		        var text = $('#txtMileage').val();
+		         //text = text.substring(1);
+		         text = text.replace(' mi','');
+		         text = text.replace(',','');
+		         $('#txtMileage').val(text);
+		           //alert(text)
+		    }  
+		    
+		});
+		
+		
+		
+		
+		
+			
+	})	
     </script>
 
     <script type="text/javascript" language="javascript">
@@ -570,13 +604,13 @@
     </script>
 
     <script type="text/javascript" language="javascript">
-     function ValidateDraftData()
+     function ValidateAbandonData()
       {
          var valid = true;        
                
               if (document.getElementById('<%= txtPhone.ClientID%>').value.trim().length < 1) {
                 document.getElementById('<%= txtPhone.ClientID%>').focus();
-                alert("Phone number is mandatory to save");
+                alert("Enter customer phone number");
                 document.getElementById('<%=txtPhone.ClientID%>').value = ""
                 document.getElementById('<%=txtPhone.ClientID%>').focus()                
                 valid = false;
@@ -617,177 +651,50 @@
     </script>
 
     <script type="text/javascript" language="javascript">
-	
-	
-	$(function(){	
-	    
-	    
-	    
-	    // barControl
-      $('.boxBlue .hed1').each(function(){
-            var $this = $(this);
-            $this.next('div.inn').hide();     
-            $obj = $(this).children('div.barControl').children('span');        
-            $obj.removeAttr('class').addClass('bar'+$('#hdns1').val());    
-            if($obj.hasClass('bar0')){
-                $this.next('div.inn').hide();
-            }else{
-                $this.next('div.inn').show();
-            }
-                    
-      });
-      
-      $('.boxBlue .hed1 .barControl span').click(function(){
+     function ValidateDraftData()
+      {
+         var valid = true;        
+               
+              if (document.getElementById('<%= txtPhone.ClientID%>').value.trim().length < 1) {
+                document.getElementById('<%= txtPhone.ClientID%>').focus();
+                alert("Phone number is mandatory to save the draft");
+                document.getElementById('<%=txtPhone.ClientID%>').value = ""
+                document.getElementById('<%=txtPhone.ClientID%>').focus()                
+                valid = false;
+                 return valid;     
+             }    
+             if((document.getElementById('<%= txtPhone.ClientID%>').value.trim().length > 0) && (document.getElementById('<%= txtPhone.ClientID%>').value.trim().length < 10)) {
+                document.getElementById('<%= txtPhone.ClientID%>').focus();
+                document.getElementById('<%=txtPhone.ClientID%>').value = "";
+                alert("Enter valid phone number");
+                valid = false; 
+                 return valid;                
             
+              }  
+             if ((document.getElementById('<%=txtEmail.ClientID%>').value.trim().length > 0) && (echeck(document.getElementById('<%=txtEmail.ClientID%>').value.trim()) == false) )
+             {               
+                document.getElementById('<%=txtEmail.ClientID%>').value = ""
+                document.getElementById('<%=txtEmail.ClientID%>').focus()
+                valid = false;               
+                return valid;     
+             }        
             
-            if($(this).closest('.hed1').attr('id') == 'Vinfo' && $(this).hasClass('bar1') ){
-				var str = '';
-				if($('#ddlMake option:selected').val() != 0){
-					str += $('#ddlMake option:selected').text()+"-";				
-				}
-				else
-				{
-				    str += "Unspecified"+"-";
-				}
-				if($('#ddlModel option:selected').val() != 0){
-					str += $('#ddlModel option:selected').text()+"-";				
-				}
-				else
-				{
-				    str += "Unspecified"+"-";
-				}
-				if($('#ddlYear option:selected').val() != 0){
-					str += $('#ddlYear option:selected').text()+"-";
-				}
-				else
-				{
-				    str += "Unspecified"+"-";
-				}
-				if($('#txtAskingPrice').val().length>0){
-					str += "<span class='price11'>"+$('#txtAskingPrice').val()+"</span>-";
-				}
-				else
-				{
-				    str += "Unspecified"+"-";
-				}				
-				if($('#txtMileage').val().length>1){
-					str += $('#txtMileage').val();
-				}
-				else
-				{
-				   str += "Unspecified";
-				}	
-				if(($('#ddlMake option:selected').val() == 0) &&($('#ddlModel option:selected').val() == 0)&&($('#ddlYear option:selected').val() == 0)&&($('#txtAskingPrice').val().length<1)&&($('#txtMileage').val().length<1))			
-				{
-				   str = "";
-				}				
-						
-				$('#selected').html(str);	
-				$('.price11').formatCurrency();				
-				
-				
-				
-			}else{
-				$('#selected').empty()
-			}
-            
-           
-            
-            
-            if($(this).hasClass('bar0')){
-                $(this).removeAttr('class').addClass('bar1'); 
-                $(this).closest('.hed1').next().show();
-                
-                var indx = ($(this).closest('.boxBlue').index()) + 1;                
-                $('#hdns'+indx).val(1);
-            }else{
-                $(this).removeAttr('class').addClass('bar0'); 
-                $(this).closest('.hed1').next().hide();
-                
-                var indx = ($(this).closest('.boxBlue').index()) + 1;                
-                $('#hdns'+indx).val(1);
-            }
-            
-            
-            
-            
-            
-            
-            
-            
-      })
-	    
-	    
-		//$('.hid').next('div.hidden').hide();				
-		
-		
-		$('.sample4').numeric();	
-		
-		
-		$('#txtAskingPrice').live('blur',function(){
-		    if($('#txtAskingPrice').val().length >0){      
-                 if($('#txtAskingPrice').val() == 0)
-                 {
-                    alert('Enter valid price');
-                    $('#txtAskingPrice').focus();
-                     return false;
-                 }
-              }
-		    if($('#txtAskingPrice').val().length >2){
-		         $('#txtAskingPrice').formatCurrency({ symbol: '' });
-		    } 
-		});
-		
-		
-		
-		$('#txtAskingPrice').live('focus',function(){
-		    if($('#txtAskingPrice').val().length >2){
-		        var text = $('#txtAskingPrice').val();
-		         //text = text.substring(1);
-		         text = text.replace(',','');
-		         $('#txtAskingPrice').val(text);
-		           //alert(text)
-		    }  
-		    
-		});
-		
-		$('#txtMileage').live('blur',function(){
-		    if($('#txtMileage').val().length >0){
-		     if($('#txtMileage').val()< 1000){ 
-		     alert('Mileage must be greater than 1000')
-		     $('#txtMileage').focus();
-		     return false;
-		     }   
-		         $('#txtMileage').formatCurrency({ symbol: '' });
-		         $('#txtMileage').val($('#txtMileage').val()+' mi')		    		    
-		    } 
-		});
-		
-		$('#txtMileage').live('focus',function(){
-		    if($('#txtMileage').val().length >0){
-		        var text = $('#txtMileage').val();
-		         //text = text.substring(1);
-		         text = text.replace(' mi','');
-		         text = text.replace(',','');
-		         $('#txtMileage').val(text);
-		           //alert(text)
-		    }  
-		    
-		});	
-		
-		
-		
-		
-	
-		
-		
-		
-		
-		
-			
-		
-			
-	})	
+             if(document.getElementById('<%=txtZip.ClientID%>').value.trim().length > 0)
+             {
+                  var isValid = /^[0-9]{5}(?:-[0-9]{4})?$/.test(document.getElementById('<%=txtZip.ClientID%>').value);             
+                   if (isValid == false)
+                   {
+                         document.getElementById('<%= txtZip.ClientID%>').focus();
+                    alert("Please enter valid zipcode");
+                     document.getElementById('<%=txtZip.ClientID%>').value = ""
+                    document.getElementById('<%=txtZip.ClientID%>').focus()
+                    valid = false;  
+                     return valid;      
+                   }                                   
+             } 
+               
+             return valid;
+      }
     </script>
 
     <script type="text/javascript" language="javascript">
@@ -796,14 +703,6 @@
       {
          var valid = true;         
                
-                if(document.getElementById('<%= ddlBrandurl.ClientID%>').value == "0") {
-                document.getElementById('<%= ddlBrandurl.ClientID%>').focus();
-                alert("Select Brand");                 
-                document.getElementById('<%=ddlBrandurl.ClientID%>').focus()
-                valid = false;            
-                 return valid;     
-               }  
-               
                 if(document.getElementById('<%= ddlPackage.ClientID%>').value == "0") {
                 document.getElementById('<%= ddlPackage.ClientID%>').focus();
                 alert("Select package");                 
@@ -811,7 +710,7 @@
                 valid = false;            
                  return valid;     
                }  
-               if (document.getElementById('<%= txtFirstName.ClientID%>').value.trim().length < 1) {
+                   if (document.getElementById('<%= txtFirstName.ClientID%>').value.trim().length < 1) {
                 document.getElementById('<%= txtFirstName.ClientID%>').focus();
                 alert("Enter customer first name");
                 document.getElementById('<%=txtFirstName.ClientID%>').value = ""
@@ -845,7 +744,7 @@
             
               }   
            
-                 if(document.getElementById('<%= chkbxEMailNA.ClientID%>').checked == false)
+                if(document.getElementById('<%=chkbxEMailNA.ClientID%>').checked == false)
                 {
                       if (document.getElementById('<%= txtEmail.ClientID%>').value.trim().length < 1) {
                         document.getElementById('<%= txtEmail.ClientID%>').focus();
@@ -854,9 +753,8 @@
                         document.getElementById('<%=txtEmail.ClientID%>').focus()                
                         valid = false;
                          return valid;     
-                     } 
-                 }
-            
+                     }    
+               }
               if ((document.getElementById('<%=txtEmail.ClientID%>').value.trim().length > 0) && (echeck(document.getElementById('<%=txtEmail.ClientID%>').value.trim()) == false) )
              {               
                 document.getElementById('<%=txtEmail.ClientID%>').value = ""
@@ -928,16 +826,105 @@
                 valid=false;
                 document.getElementById('ddlYear').focus();  
                 return valid;
-            }               
-              if (document.getElementById('<%= txtAskingPrice.ClientID%>').value.trim().length < 1) {
+            }  
+               if (document.getElementById('<%= txtAskingPrice.ClientID%>').value.trim().length < 1) {
                 document.getElementById('<%= txtAskingPrice.ClientID%>').focus();
                 alert("Enter price");
                 document.getElementById('<%=txtAskingPrice.ClientID%>').value = ""
                 document.getElementById('<%=txtAskingPrice.ClientID%>').focus()                
                 valid = false;
                  return valid;     
+            } 
+            var string = $('#ddlPackage option:selected').text();
+            var p =string.split('$');
+            var pp = p[1].split(')');
+            //alert(pp[0]);
+            //pp[0] = parseInt(pp[0]);
+            pp[0] = parseFloat(pp[0]);
+            var selectedPack = pp[0].toFixed(2);
+            if($('#ddldiscount option:selected').val()!='undefined')
+            var string1 = $('#ddldiscount option:selected').val();
+            else
+             var string1="0";
+                  var curr1 ;
+                if(string1==0)curr1="0";
+                else  if(string1==1)curr1="25"; 
+                else  if(string1==2)curr1="50";
+
+            var EnterAmt = parseFloat($('#txtPDAmountNow').val());
+
+            if(document.getElementById('<%= txtPDAmountNow.ClientID%>').value.trim().length < 1) {
+            document.getElementById('<%= txtPDAmountNow.ClientID%>').focus();
+            alert("Enter amount being paid now");
+            document.getElementById('<%=txtPDAmountNow.ClientID%>').value = ""
+            document.getElementById('<%=txtPDAmountNow.ClientID%>').focus()
+            valid = false;            
+            return valid;     
+            }    
+
+            if(EnterAmt > selectedPack){
+            document.getElementById('<%= txtPDAmountNow.ClientID%>').focus();
+            alert("Amount more than selected package price");
+            document.getElementById('<%=txtPDAmountNow.ClientID%>').value = ""
+            document.getElementById('<%=txtPDAmountNow.ClientID%>').focus()
+            valid = false; 
+            return valid;     
+            } 
+            if(document.getElementById('<%= chkboxlstPDsale.ClientID%>').checked == false)
+            { 
+                 if(EnterAmt < selectedPack-curr1){
+                document.getElementById('<%= txtPDAmountNow.ClientID%>').focus();
+                alert("Amount less than selected package price");
+                document.getElementById('<%=txtPDAmountNow.ClientID%>').value = ""
+                document.getElementById('<%=txtPDAmountNow.ClientID%>').focus()
+                valid = false; 
+                return valid;     
+                } 
+            }  
+
+              if(document.getElementById('<%= chkboxlstPDsale.ClientID%>').checked == true)
+            {                
+                      if(document.getElementById('<%=ddlPDDate.ClientID%>').value =="0")
+                    {
+                    alert("Please select PD date"); 
+                    valid=false;
+                    document.getElementById('ddlPDDate').focus();  
+                    return valid;               
+                    }  
+                    
+                     var string = $('#ddlPackage option:selected').text();
+                    var p =string.split('$');
+                    var pp = p[1].split(')');
+                    //alert(pp[0]);
+                    //pp[0] = parseInt(pp[0]);
+                    pp[0] = parseFloat(pp[0]);
+                    var selectedPack = pp[0].toFixed(2);
+
+
+                    var EnterAmt = parseFloat($('#txtPDAmountNow').val());
+
+                    if(document.getElementById('<%= txtPDAmountNow.ClientID%>').value.trim().length < 1) {
+                    document.getElementById('<%= txtPDAmountNow.ClientID%>').focus();
+                    alert("Enter amount being paid now");
+                    document.getElementById('<%=txtPDAmountNow.ClientID%>').value = ""
+                    document.getElementById('<%=txtPDAmountNow.ClientID%>').focus()
+                    valid = false;            
+                    return valid;     
+                    }    
+
+                    if(EnterAmt > selectedPack){
+                    document.getElementById('<%= txtPDAmountNow.ClientID%>').focus();
+                    alert("Amount more than selected package price");
+                    document.getElementById('<%=txtPDAmountNow.ClientID%>').value = ""
+                    document.getElementById('<%=txtPDAmountNow.ClientID%>').focus()
+                    valid = false; 
+                    return valid;     
+                    }    
+                    
             }   
-              if(document.getElementById('<%= ddlpayme.ClientID%>').value == "3")
+            
+              
+           if(document.getElementById('<%= ddlpayme.ClientID%>').value == "3")
             {
                 if (document.getElementById('<%= txtCardholderName.ClientID%>').value.trim().length < 1) {
                 document.getElementById('<%= txtCardholderName.ClientID%>').focus();
@@ -946,16 +933,15 @@
                 document.getElementById('<%=txtCardholderName.ClientID%>').focus()                
                 valid = false;
                 return valid;     
-                }   
-                
-                if (document.getElementById('<%= txtCardholderLastName.ClientID%>').value.trim().length < 1) {
+                }  
+                 if (document.getElementById('<%= txtCardholderLastName.ClientID%>').value.trim().length < 1) {
                 document.getElementById('<%= txtCardholderLastName.ClientID%>').focus();
                 alert("Enter card holder last name");
                 document.getElementById('<%=txtCardholderLastName.ClientID%>').value = ""
                 document.getElementById('<%=txtCardholderLastName.ClientID%>').focus()                
                 valid = false;
                 return valid;     
-                } 
+                }  
                 if (document.getElementById('<%= CardNumber.ClientID%>').value.trim().length < 1) {
                 document.getElementById('<%= CardNumber.ClientID%>').focus();
                 alert("Enter card number");
@@ -1059,7 +1045,7 @@
                 }  
 
            }
-             if(document.getElementById('<%= ddlpayme.ClientID%>').value == "0")
+         if(document.getElementById('<%= ddlpayme.ClientID%>').value == "0")
             {
                 if (document.getElementById('<%= txtCardholderName.ClientID%>').value.trim().length < 1) {
                 document.getElementById('<%= txtCardholderName.ClientID%>').focus();
@@ -1068,16 +1054,15 @@
                 document.getElementById('<%=txtCardholderName.ClientID%>').focus()                
                 valid = false;
                 return valid;     
-                }   
-                   
-                if (document.getElementById('<%= txtCardholderLastName.ClientID%>').value.trim().length < 1) {
+                } 
+                  if (document.getElementById('<%= txtCardholderLastName.ClientID%>').value.trim().length < 1) {
                 document.getElementById('<%= txtCardholderLastName.ClientID%>').focus();
                 alert("Enter card holder last name");
                 document.getElementById('<%=txtCardholderLastName.ClientID%>').value = ""
                 document.getElementById('<%=txtCardholderLastName.ClientID%>').focus()                
                 valid = false;
                 return valid;     
-                } 
+                }    
                 if (document.getElementById('<%= CardNumber.ClientID%>').value.trim().length < 1) {
                 document.getElementById('<%= CardNumber.ClientID%>').focus();
                 alert("Enter card number");
@@ -1182,7 +1167,7 @@
 
            }    
             
-              if(document.getElementById('<%= ddlpayme.ClientID%>').value == "1")
+             if(document.getElementById('<%= ddlpayme.ClientID%>').value == "1")
             {
                 if (document.getElementById('<%= txtCardholderName.ClientID%>').value.trim().length < 1) {
                 document.getElementById('<%= txtCardholderName.ClientID%>').focus();
@@ -1192,15 +1177,14 @@
                 valid = false;
                 return valid;     
                 }   
-                   
-                if (document.getElementById('<%= txtCardholderLastName.ClientID%>').value.trim().length < 1) {
+                  if (document.getElementById('<%= txtCardholderLastName.ClientID%>').value.trim().length < 1) {
                 document.getElementById('<%= txtCardholderLastName.ClientID%>').focus();
                 alert("Enter card holder last name");
                 document.getElementById('<%=txtCardholderLastName.ClientID%>').value = ""
                 document.getElementById('<%=txtCardholderLastName.ClientID%>').focus()                
                 valid = false;
                 return valid;     
-                } 
+                }  
                 if (document.getElementById('<%= CardNumber.ClientID%>').value.trim().length < 1) {
                 document.getElementById('<%= CardNumber.ClientID%>').focus();
                 alert("Enter card number");
@@ -1305,7 +1289,7 @@
                 }  
 
            }       
-              if(document.getElementById('<%= ddlpayme.ClientID%>').value == "2")
+            if(document.getElementById('<%= ddlpayme.ClientID%>').value == "2")
             {
                 if (document.getElementById('<%= txtCardholderName.ClientID%>').value.trim().length < 1) {
                 document.getElementById('<%= txtCardholderName.ClientID%>').focus();
@@ -1315,15 +1299,14 @@
                 valid = false;
                 return valid;     
                 } 
-                   
-                if (document.getElementById('<%= txtCardholderLastName.ClientID%>').value.trim().length < 1) {
+                  if (document.getElementById('<%= txtCardholderLastName.ClientID%>').value.trim().length < 1) {
                 document.getElementById('<%= txtCardholderLastName.ClientID%>').focus();
                 alert("Enter card holder last name");
                 document.getElementById('<%=txtCardholderLastName.ClientID%>').value = ""
                 document.getElementById('<%=txtCardholderLastName.ClientID%>').focus()                
                 valid = false;
                 return valid;     
-                }   
+                }    
                 if (document.getElementById('<%= CardNumber.ClientID%>').value.trim().length < 1) {
                 document.getElementById('<%= CardNumber.ClientID%>').focus();
                 alert("Enter card number");
@@ -1427,8 +1410,9 @@
                 }                                   
                 }  
 
-           }       
-            if(document.getElementById('<%= ddlpayme.ClientID%>').value == "4")
+           }     
+           if(document.getElementById('<%= ddlpayme.ClientID%>').value == "4")  
+           
             {                   
                     if(document.getElementById('<%= txtPaytransID.ClientID%>').value.length < 1) {
                     document.getElementById('<%= txtPaytransID.ClientID%>').focus();
@@ -1456,9 +1440,9 @@
                     }          
             }    
             
-              if(document.getElementById('<%= ddlpayme.ClientID%>').value == "5")
+            if(document.getElementById('<%= ddlpayme.ClientID%>').value == "5")
             {
-                      if(document.getElementById('<%= txtAccNumberForCheck.ClientID%>').value.length < 1) {
+                   if(document.getElementById('<%= txtAccNumberForCheck.ClientID%>').value.length < 1) {
                     document.getElementById('<%= txtAccNumberForCheck.ClientID%>').focus();
                     alert("Enter account number");
                     document.getElementById('<%=txtAccNumberForCheck.ClientID%>').value = ""
@@ -1502,10 +1486,10 @@
                     document.getElementById('<%=txtCustNameForCheck.ClientID%>').focus()
                     valid = false;            
                     return valid;     
-                    }                                           
+                    }  
+                                          
             }
-            
-            
+           
             if(document.getElementById('<%= txtVoicefileConfirmNo.ClientID%>').value.length < 1) {
             document.getElementById('<%= txtVoicefileConfirmNo.ClientID%>').focus();
             alert("Enter voice file confirmation #");
@@ -1513,103 +1497,22 @@
             document.getElementById('<%=txtVoicefileConfirmNo.ClientID%>').focus()
             valid = false;            
             return valid;     
-            }    
-
+            }  
             if(document.getElementById('<%=ddlVoiceFileLocation.ClientID%>').value =="0")
             {
             alert("Please select voice file location"); 
             valid=false;
             document.getElementById('ddlVoiceFileLocation').focus();  
             return valid;               
-            } 
-           
-            var string = $('#ddlPackage option:selected').text();
-            var p =string.split('$');
-            var pp = p[1].split(')');
-            //alert(pp[0]);
-            //pp[0] = parseInt(pp[0]);
-            pp[0] = parseFloat(pp[0]);
-            var selectedPack = pp[0].toFixed(2);
-
-
-            var EnterAmt = parseFloat($('#txtPDAmountNow').val());
-
-            if(document.getElementById('<%= txtPDAmountNow.ClientID%>').value.trim().length < 1) {
-            document.getElementById('<%= txtPDAmountNow.ClientID%>').focus();
-            alert("Enter amount being paid now");
-            document.getElementById('<%=txtPDAmountNow.ClientID%>').value = ""
-            document.getElementById('<%=txtPDAmountNow.ClientID%>').focus()
-            valid = false;            
-            return valid;     
-            }    
-
-            if(EnterAmt > selectedPack-curr1){
-            document.getElementById('<%= txtPDAmountNow.ClientID%>').focus();
-            alert("Amount more than selected package price");
-            document.getElementById('<%=txtPDAmountNow.ClientID%>').value = ""
-            document.getElementById('<%=txtPDAmountNow.ClientID%>').focus()
-            valid = false; 
-            return valid;     
-            } 
-            
-             if(document.getElementById('<%= chkboxlstPDsale.ClientID%>').checked == false)
-            {
-              
-                    if(EnterAmt < selectedPack-curr1){
-                    document.getElementById('<%= txtPDAmountNow.ClientID%>').focus();
-                    alert("Amount less than selected package price");
-                    document.getElementById('<%=txtPDAmountNow.ClientID%>').value = ""
-                    document.getElementById('<%=txtPDAmountNow.ClientID%>').focus()
-                    valid = false; 
-                    return valid;     
-                    }    
             }                 
-            if(document.getElementById('<%= chkboxlstPDsale.ClientID%>').checked == true)
-            {
-                    var string1 = $('#ddlDiscount option:selected').val();
-                    var curr1 ;
-                    if(string1==0)curr1="0";
-                    else  if(string1==1)curr1="25"; 
-                    else  if(string1==2)curr1="50"; 
-                
-                    if(document.getElementById('<%=ddlPDDate.ClientID%>').value =="0")
-                    {
-                    alert("Please select PD date"); 
-                    valid=false;
-                    document.getElementById('ddlPDDate').focus();  
-                    return valid;               
-                    }  
-                    var EnterAmt = parseFloat($('#txtPDAmountNow').val());
-
-                    if(document.getElementById('<%= txtPDAmountNow.ClientID%>').value.trim().length < 1) {
-                    document.getElementById('<%= txtPDAmountNow.ClientID%>').focus();
-                    alert("Enter amount being paid now");
-                    document.getElementById('<%=txtPDAmountNow.ClientID%>').value = ""
-                    document.getElementById('<%=txtPDAmountNow.ClientID%>').focus()
-                    valid = false;            
-                    return valid;     
-                    }    
-
-                    if(EnterAmt > selectedPack-curr1){
-                    document.getElementById('<%= txtPDAmountNow.ClientID%>').focus();
-                    alert("Amount more than selected package price");
-                    document.getElementById('<%=txtPDAmountNow.ClientID%>').value = ""
-                    document.getElementById('<%=txtPDAmountNow.ClientID%>').focus()
-                    valid = false; 
-                    return valid;     
-                    }                
-                    
-            }           
-            
-                         
-            return valid;
+             return valid;
       }
      
      function PhoneOnblur()
      {
-           if((document.getElementById('<%= txtPhone.ClientID%>').value.trim().length > 0) && (document.getElementById('<%= txtPhone.ClientID%>').value.trim().length < 10)) {                           
+           if((document.getElementById('<%= txtPhone.ClientID%>').value.trim().length > 0) && (document.getElementById('<%= txtPhone.ClientID%>').value.trim().length < 10)) {
+                document.getElementById('<%= txtPhone.ClientID%>').focus();             
                 alert("Enter valid phone number");
-                document.getElementById('<%= txtPhone.ClientID%>').focus();  
                 valid = false; 
                  return valid;              
             
@@ -1627,7 +1530,7 @@
      }
      function CreditCardOnblur()
      {
-            if(document.getElementById('<%= ddlpayme.ClientID%>').value == "3")
+        if(document.getElementById('<%= ddlpayme.ClientID%>').value == "3")
          {
            if((document.getElementById('<%= CardNumber.ClientID%>').value.trim().length > 0) && (document.getElementById('<%= CardNumber.ClientID%>').value.trim().length != 15)) {
                 document.getElementById('<%= CardNumber.ClientID%>').focus();             
@@ -1650,8 +1553,7 @@
             }
          }
          
-         
-   if(document.getElementById('<%= ddlpayme.ClientID%>').value == "0")
+        if(document.getElementById('<%= ddlpayme.ClientID%>').value == "0")
          {
            if((document.getElementById('<%= CardNumber.ClientID%>').value.trim().length > 0) && (document.getElementById('<%= CardNumber.ClientID%>').value.trim().length != 16)) {
                 document.getElementById('<%= CardNumber.ClientID%>').focus();             
@@ -1673,8 +1575,7 @@
                 }
             }
          }
-      
-   if(document.getElementById('<%= ddlpayme.ClientID%>').value == "1")
+        if(document.getElementById('<%= ddlpayme.ClientID%>').value == "1")
          {
            if((document.getElementById('<%= CardNumber.ClientID%>').value.trim().length > 0) && (document.getElementById('<%= CardNumber.ClientID%>').value.trim().length != 16)) {
                 document.getElementById('<%= CardNumber.ClientID%>').focus();             
@@ -1696,8 +1597,7 @@
                 }
             }
          }
-       
-        if(document.getElementById('<%= ddlpayme.ClientID%>').value == "2")
+       if(document.getElementById('<%= ddlpayme.ClientID%>').value == "2")
          {
            if((document.getElementById('<%= CardNumber.ClientID%>').value.trim().length > 0) && (document.getElementById('<%= CardNumber.ClientID%>').value.trim().length != 16)) {
                 document.getElementById('<%= CardNumber.ClientID%>').focus();             
@@ -1725,8 +1625,7 @@
      
      function CVVOnblur()
      {
-       
-   if(document.getElementById('<%= ddlpayme.ClientID%>').value == "3")
+        if(document.getElementById('<%= ddlpayme.ClientID%>').value == "3")
          {
            if((document.getElementById('<%= cvv.ClientID%>').value.trim().length > 0) && (document.getElementById('<%= cvv.ClientID%>').value.trim().length != 4)) {
                 document.getElementById('<%= cvv.ClientID%>').focus();             
@@ -1737,8 +1636,7 @@
             }                      
          }
          
-       
-   if(document.getElementById('<%= ddlpayme.ClientID%>').value == "0")
+        if(document.getElementById('<%= ddlpayme.ClientID%>').value == "0")
          {
            if((document.getElementById('<%= cvv.ClientID%>').value.trim().length > 0) && (document.getElementById('<%= cvv.ClientID%>').value.trim().length != 3)) {
                 document.getElementById('<%= cvv.ClientID%>').focus();             
@@ -1748,8 +1646,7 @@
             
             }     
          }
-       
-   if(document.getElementById('<%= ddlpayme.ClientID%>').value == "1")
+         if(document.getElementById('<%= ddlpayme.ClientID%>').value == "1")
          {
             if((document.getElementById('<%= cvv.ClientID%>').value.trim().length > 0) && (document.getElementById('<%= cvv.ClientID%>').value.trim().length != 3)) {
                 document.getElementById('<%= cvv.ClientID%>').focus();             
@@ -1759,8 +1656,7 @@
             
             }  
          }
-        
-   if(document.getElementById('<%= ddlpayme.ClientID%>').value == "2")
+     if(document.getElementById('<%= ddlpayme.ClientID%>').value == "2")
          {
             if((document.getElementById('<%= cvv.ClientID%>').value.trim().length > 0) && (document.getElementById('<%= cvv.ClientID%>').value.trim().length != 3)) {
                 document.getElementById('<%= cvv.ClientID%>').focus();             
@@ -1828,25 +1724,16 @@
             }     
                        
      }
-     function PaypalEmailblur()
+        function PaypalEmailblur()
      {           
-         if ((document.getElementById('<%=txtpayPalEmailAccount.ClientID%>').value.trim().length > 0) && (echeck(document.getElementById('<%=txtpayPalEmailAccount.ClientID%>').value.trim()) == false) )
-         {                           
-            document.getElementById('<%=txtpayPalEmailAccount.ClientID%>').focus()
-            valid = false;               
-            return valid;     
-         }              
+               if ((document.getElementById('<%=txtpayPalEmailAccount.ClientID%>').value.trim().length > 0) && (echeck(document.getElementById('<%=txtpayPalEmailAccount.ClientID%>').value.trim()) == false) )
+             {                           
+                document.getElementById('<%=txtpayPalEmailAccount.ClientID%>').focus()
+                valid = false;               
+                return valid;     
+            }     
+                       
      }
-     function EmailNAClick(){
-     var checkbox = document.getElementById("chkbxEMailNA");
-      if(checkbox.checked){        
-        document.getElementById('<%= txtEmail.ClientID%>').disabled  = true;            
-      }
-      else
-      {
-         document.getElementById('<%= txtEmail.ClientID%>').disabled  = false;
-      }
-    }              
               
     </script>
 
@@ -1918,85 +1805,6 @@
     </script>
 
     <script type="text/javascript" language="javascript">
-    function ValidatePhone(){
-            if (document.getElementById('<%= txtLoadPhone.ClientID%>').value.trim().length < 1) {
-                document.getElementById('<%= txtLoadPhone.ClientID%>').focus();
-                alert("Enter customer phone number");
-                document.getElementById('<%=txtLoadPhone.ClientID%>').value = ""
-                document.getElementById('<%=txtLoadPhone.ClientID%>').focus()                
-                valid = false;
-                 return valid;     
-             }    
-           else if((document.getElementById('<%= txtLoadPhone.ClientID%>').value.trim().length > 0) && (document.getElementById('<%= txtLoadPhone.ClientID%>').value.trim().length < 10)) {
-                document.getElementById('<%= txtLoadPhone.ClientID%>').focus();
-                document.getElementById('<%=txtLoadPhone.ClientID%>').value = "";
-                alert("Enter valid phone number");
-                valid = false; 
-                 return valid;                
-            
-              }  
-              else 
-              
-              {
-             
-               /* padma*/
-              
-               $('div.inn').show();  
-            $obj = $('div.barControl').children('span');        
-            $obj.removeAttr('class').addClass('bar1');  
-              }
-              
-                  
-              
-    }
-    
-     function ValidateAbandonData()
-      {
-         var valid = true;        
-               
-//              if (document.getElementById('<%= txtPhone.ClientID%>').value.trim().length < 1) {
-//                document.getElementById('<%= txtPhone.ClientID%>').focus();
-//                alert("Enter customer phone number");
-//                document.getElementById('<%=txtPhone.ClientID%>').value = ""
-//                document.getElementById('<%=txtPhone.ClientID%>').focus()                
-//                valid = false;
-//                 return valid;     
-//             }    
-             if((document.getElementById('<%= txtPhone.ClientID%>').value.trim().length > 0) && (document.getElementById('<%= txtPhone.ClientID%>').value.trim().length < 10)) {
-                document.getElementById('<%= txtPhone.ClientID%>').focus();
-                document.getElementById('<%=txtPhone.ClientID%>').value = "";
-                alert("Enter valid phone number");
-                valid = false; 
-                 return valid;                
-            
-              }  
-             if ((document.getElementById('<%=txtEmail.ClientID%>').value.trim().length > 0) && (echeck(document.getElementById('<%=txtEmail.ClientID%>').value.trim()) == false) )
-             {               
-                document.getElementById('<%=txtEmail.ClientID%>').value = ""
-                document.getElementById('<%=txtEmail.ClientID%>').focus()
-                valid = false;               
-                return valid;     
-             }        
-            
-             if(document.getElementById('<%=txtZip.ClientID%>').value.trim().length > 0)
-             {
-                  var isValid = /^[0-9]{5}(?:-[0-9]{4})?$/.test(document.getElementById('<%=txtZip.ClientID%>').value);             
-                   if (isValid == false)
-                   {
-                         document.getElementById('<%= txtZip.ClientID%>').focus();
-                    alert("Please enter valid zipcode");
-                     document.getElementById('<%=txtZip.ClientID%>').value = ""
-                    document.getElementById('<%=txtZip.ClientID%>').focus()
-                    valid = false;  
-                     return valid;      
-                   }                                   
-             } 
-               
-             return valid;
-      }
-    </script>
-
-    <script type="text/javascript" language="javascript">
        function isNumberKey(evt)
          {
          debugger
@@ -2040,6 +1848,17 @@
                 return false;
             return true;
         }
+        function EmailNAClick(){
+        var checkbox = document.getElementById("chkbxEMailNA");
+        if(checkbox.checked){            
+            document.getElementById('<%= txtEmail.ClientID%>').disabled  = true;            
+        }
+        else
+        {
+            document.getElementById('<%= txtEmail.ClientID%>').disabled  = false;
+        }
+        }        
+        
     </script>
 
     <script type="text/javascript" language="javascript">   
@@ -2138,9 +1957,18 @@
             alert('Select package');
         }
     });
-     function OnchangeDropdown(){  
-           
-           
+     function OnchangeDropdown(){    
+         
+           if($('#ddlPackage option:selected').text() == 'Gold Deluxe ($199.99)')
+           {
+           $('#discountchk').show();
+           }
+           else
+           {
+              $('#ddldiscount').val(0);
+              $('#discountchk').hide();
+         
+         }
             if($('#ddlPackage option:selected').text() != 'Select'){  
                var string = $('#ddlPackage option:selected').text();
                 var p =string.split('$');
@@ -2150,16 +1978,21 @@
                 pp[0] = parseFloat(pp[0]);
                 var selectedPack = pp[0].toFixed(2);
                 selectedPack = parseFloat(selectedPack); 
+           
+              if( $('#ddldiscount option:selected').val()!='undefined')
+                var string1 = $('#ddldiscount option:selected').val();
+               else
+               var string1 ="0";
              
-                  //for selected discount amount
-                var string1 = $('#ddlDiscount option:selected').val();
+               
                 var curr1 ;
                 if(string1==0)curr1="0";
                 else  if(string1==1)curr1="25"; 
                 else  if(string1==2)curr1="50"; 
+                  
                 curr1=parseFloat(curr1);
-                var curr2=(selectedPack-curr1);
-                curr2=curr2.toFixed(2);
+                 var curr2=selectedPack-curr1;
+                 curr2=curr2.toFixed(2) 
                 $('#txtPDAmountNow').val(curr2);
                  $('#txtTotalAmount').val(curr2);
                   if(document.getElementById('<%= chkboxlstPDsale.ClientID%>').checked == true)
@@ -2206,46 +2039,182 @@
                 pp[0] = parseFloat(pp[0]);
                 var selectedPack = pp[0].toFixed(2);
                 selectedPack = parseFloat(selectedPack); 
-               
+                
                 //for selected discount amount
-                  var string1 = $('#ddlDiscount option:selected').val();
+                if( $('#ddldiscount option:selected').val()!='undefined')
+                  var string1 = $('#ddldiscount option:selected').val();
+                  else
+                  var string1="0";
+             
                   var curr1 ;
                 if(string1==0)curr1="0";
                 else  if(string1==1)curr1="25"; 
+                else  if(string1==2)curr1="50"; 
                 
-               // console.log(curr1);
-                   var finalpack =(selectedPack-curr1);
-                   //finalpack=finalpack.toFixed(2);
-               
-                if(finalpack < curr){
-              
+                if(selectedPack-curr1 < curr){
                     alert('Entered amount can not be graterthen selected package..')
                      document.getElementById('<%=txtPDAmountNow.ClientID%>').focus()
                 }else{
+                
+                console.log(curr1);
                     var value = parseFloat(selectedPack-curr-curr1);
                     value = value.toFixed(2); 
                     $('#txtPDAmountLater').val(value);
-                    var amntval=selectedPack- curr1;
-                    amntval=amntval.toFixed(2);
-                    $('#txtTotalAmount').val(amntval);
+                    $('#txtTotalAmount').val(selectedPack- parseFloat(curr1));
                 }                            
                       
             }            
     });
     
-    function  OnchangeCheckDiscount() 
-    {
-    if( $('#ddlPackage option:selected').text() == 'Gold Deluxe ($199.99)')
-    $('#discount').show();
-    else
-    {
-     $('#ddlDiscount').val(0);
-     $('#discount').hide();
+    
+    
+    $(function(){
+    
+        $('#feat input[type=radio]').each(function(){
+            if($(this).is(':checked')){
+                $(this).parent().next('span').addClass('featAct')  
+            }    
+            
+        });
+        
+        
+         $('#infoV input[type=radio]').each(function(){
+            if($(this).is(':checked')){
+                $(this).parent().next('span').addClass('featAct')  
+            }  
+        });
+       
+       
+    
+        $('#feat input[type=checkbox]').each(function(){
+            $(this).click(function(){
+                if($(this).parent().hasClass('noLM')){
+                    $(this).parent().next('span').toggleClass('featAct')
+                }else{
+                    $(this).next('span').toggleClass('featAct')
+                }
+            })
+        });
+       
+        
+        
+         $('#feat input[type=radio]').each(function(){
+            $(this).click(function(){
+              // var name = $(this).attr('name');
+               $('#feat input[type=radio]').each(function(){
+                    //if(name != $(this).attr('name')){
+                        $(this).parent().next('span').removeClass('featAct')
+                    //}
+               });
+               $(this).parent().next('span').addClass('featAct')             
+               
+            })
+        });
+        
+        
+         $('#infoV input[type=radio]').each(function(){
+            $(this).click(function(){
+               var name = $(this).attr('name');
+               $('#infoV input[type=radio]').each(function(){
+                    if(name == $(this).attr('name')){
+                        $(this).parent().next('span').removeClass('featAct')
+                    }
+               })  
+               $(this).parent().next('span').addClass('featAct')           
+               
+            })
+        });
+        
+        
+        
+        
+        
+    });
+    
+     function ChangeValues()
+       {
+         var answer = confirm("If you move out of this page, changes will be permanently lost. Are you sure you want to move out of this page?")
+           if (answer)
+           {
+              return true;
+//              window.location.href = "CustomerView.aspx ";  
+           }
+           else           
+           {
+              return false;
+           }         
+       }    
+          
+   
+    </script>
+
+    <script type="text/javascript">
+ function pageLoad()
+   { 
+      //InitializeTimer();      
+   }
+   
+    var ssTime,TimerID;
+   function  InitializeTimer()
+   {  
+     WebService.sessionGet(onsuccessGet,onError);      
+   }
+     function onsuccessGet(result)
+     {
+      ssTime=result; 
+      ssTime=parseInt(ssTime)*60000;
+     
+      TimerDec(ssTime);
      }
-   return this
-  }
    
+  
    
+   function  TimerDec(ssTime)
+   {
+   
+     ssTime=ssTime-1000;
+   
+    TimerID=setTimeout(function(){TimerDec(ssTime);},1000);
+      
+    if(ssTime==60000)
+    {      
+     SessionInc();     
+    }
+     
+   }
+  
+    
+    function SessionInc()//Increase the session time
+    {
+     debugger    
+      ssTime=parseInt("<%= Session.Timeout %>");     
+      WebService.sessionSet(ssTime,onsuccessInc,onError);//call webservice to set the session variable
+       ssTime=(parseInt(ssTime)-2)*60000;       
+       TimerDec(ssTime);     
+    }
+    
+    function onsuccessInc(result)
+    {
+     
+    }    
+
+     function onError(exception, userContext, methodName)
+     {
+       try 
+       {
+        //window.location.href='error.aspx';
+        strMessage = strMessage + 'ErrorType: ' + exception._exceptionType + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
+        strMessage = strMessage + 'Message: ' + exception._message + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
+        strMessage = strMessage + 'Stack Trace: ' + exception._stackTrace + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
+        strMessage = strMessage + 'Status Code: ' + exception._statusCode + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
+        strMessage = strMessage + 'Timed Out: ' + exception._timedOut;
+        ///alert(strMessage);
+      } catch (ex) {}
+     return false;
+   }
+
+
+
     </script>
 
 </head>
@@ -2262,8 +2231,7 @@
     <asp:HiddenField runat="server" ID="hdns4" Value="0" />
     <asp:HiddenField runat="server" ID="hdns5" Value="0" />
     <asp:HiddenField runat="server" ID="hdns6" Value="0" />
-    <asp:UpdateProgress ID="Progress" runat="server" AssociatedUpdatePanelID="updtpnlSave"
-        DisplayAfter="0">
+    <asp:UpdateProgress ID="Progress" runat="server" DisplayAfter="0">
         <ProgressTemplate>
             <div id="spinner">
                 <h4>
@@ -2275,7 +2243,7 @@
             </div>
         </ProgressTemplate>
     </asp:UpdateProgress>
-    <asp:UpdateProgress ID="UpdateProgress1" runat="server" AssociatedUpdatePanelID="updatePnlSave2"
+    <asp:UpdateProgress ID="UpdateProgress1" runat="server" AssociatedUpdatePanelID="updtpnlSave"
         DisplayAfter="0">
         <ProgressTemplate>
             <div id="spinner">
@@ -2326,11 +2294,11 @@
                                             <asp:LinkButton ID="FreePackage" runat="server" Text="Free Pkg" Enabled="false" PostBackUrl="~/FreePackages.aspx"></asp:LinkButton></li>
                             </ul>
                         </li>
-                        <li class="parent active "><a href="#">Sales <span class="cert"></span></a>
+                        <li class="parent "><a href="#">Sales <span class="cert"></span></a>
                             <ul class="sub1">
                                 <li>
                                     <asp:LinkButton ID="IntroMail" runat="server" Text="Intro Mial" Enabled="false" PostBackUrl="~/IntroMails.aspx"></asp:LinkButton></li>
-                                <li class="act">
+                                <li>
                                     <asp:LinkButton ID="NewEntry" runat="server" Text="New Entry" Enabled="false" PostBackUrl="~/NewEntrys.aspx"></asp:LinkButton>
                                 </li>
                                 <li>
@@ -2352,9 +2320,9 @@
                                     <asp:LinkButton ID="lnkGroupreport" runat="server" Text="Group Report" Enabled="false"></asp:LinkButton></li>
                             </ul>
                         </li>
-                        <li class="parent"><a href="#">Process <span class="cert"></span></a>
+                        <li class="parent active"><a href="#">Process <span class="cert"></span></a>
                             <ul class="sub1">
-                                <li>
+                                <li class="act">
                                     <asp:LinkButton ID="QC" runat="server" Text="QC" Enabled="false" PostBackUrl="~/QCReport.aspx"></asp:LinkButton></li>
                                 <li>
                                     <asp:LinkButton ID="Payments" runat="server" Text="Payments" Enabled="false" PostBackUrl="~/LiveTransfers.aspx"></asp:LinkButton></li>
@@ -2440,7 +2408,7 @@
                                             <asp:LinkButton ID="LeadsAssign" runat="server" Text="Leads Assign" PostBackUrl="~/LeadAssign.aspx"></asp:LinkButton></li>
                                     </ul>
                                 </li>
-                                <li class="act"><a href="#">Sales <span class="cert"></span></a>
+                                <li><a href="#">Sales <span class="cert"></span></a>
                                     <ul class="sub2">
                                         <li>
                                             <asp:LinkButton ID="SalesAdmin" runat="server" Text="User Rights" PostBackUrl="~/SalesUserRights.aspx"
@@ -2468,16 +2436,14 @@
                                     </ul>
                                 </li>
                                 <li>
-                                    <asp:LinkButton ID="CentersAdmin" runat="server" Text="Locations" PostBackUrl="~/Center.aspx"
+                                    <asp:LinkButton ID="CentersAdmin" runat="server" Text="Locations" PostBackUrl="~/Locations.aspx"
                                         Enabled="false"></asp:LinkButton></li>
                                 <li>
                                     <asp:LinkButton ID="UsersLog" runat="server" Text="User Log" PostBackUrl="~/UserLog.aspx"
                                         Enabled="false"></asp:LinkButton></li>
-                                <li>
+                                <li class="last">
                                     <asp:LinkButton ID="EditLog" runat="server" Text="Edit Log" PostBackUrl="~/EditLogs.aspx"
                                         Enabled="false"></asp:LinkButton></li>
-                                <li class="last">
-                                    <asp:LinkButton ID="SuperAdmin" runat="server" Text="Super Admin" PostBackUrl="~/SuperadminRights.aspx"></asp:LinkButton></li>
                             </ul>
                         </li>
                     </ul>
@@ -2485,140 +2451,156 @@
             </div>
         </div>
         <!-- Headder End  -->
-        <!-- Headder End  -->
         <!-- Content Start  -->
         <!-- Content Start  -->
         <div class="content wid1000">
             <div class="clear">
                 &nbsp;</div>
             <div class="box1">
-                <div class="inn">
-                    <table style="display: none" id="tblAgents" runat="server">
+                <div class="inn readonly">
+                    <table width="100%">
                         <tr>
-                            <td>
-                                <asp:GridView ID="grdTest" runat="server" ShowHeader="false" AutoGenerateColumns="false">
-                                    <Columns>
-                                        <asp:TemplateField>
-                                            <ItemTemplate>
-                                                <asp:Label ID="lblGridAgnetName" runat="server" Text='<%# Eval("AgentUFirstName")%>'></asp:Label>
-                                            </ItemTemplate>
-                                        </asp:TemplateField>
-                                        <asp:TemplateField>
-                                            <ItemTemplate>
-                                                <asp:Label ID="lblGridAgentCenter" runat="server" Text='<%# Eval("AgentCenterCode")%>'></asp:Label>
-                                            </ItemTemplate>
-                                        </asp:TemplateField>
-                                    </Columns>
-                                </asp:GridView>
+                            <td style="width: 32%">
+                                <h4 class="field">
+                                    <label class="left">
+                                        Sale ID:</label>
+                                    <%-- <input type="text" style="width: 245px" />--%>
+                                    <span class="left2">
+                                        <asp:Label ID="lblSaleID" runat="server"></asp:Label>
+                                </h4>
+                            </td>
+                            <td style="width: 2%;">
+                                &nbsp;
+                            </td>
+                            <td style="width: 32%">
+                                <h4 class="field">
+                                    <label class="left">
+                                        Sale Date:</span> <span class="left2">
+                                    </label>
+                                    <span class="left2">
+                                        <asp:Label ID="lblSaleDate" runat="server"></asp:Label></span>
+                                </h4>
+                            </td>
+                            <td style="width: 2%px;">
+                                &nbsp;
+                            </td>
+                            <td style="width: 32%">
+                                <h4 class="field">
+                                    <label class="left">
+                                        Location:</label>
+                                    <%-- <input type="text" style="width: 245px" />--%>
+                                    <span class="left2">
+                                        <asp:Label ID="lblLocation" runat="server"></asp:Label></span>
+                                </h4>
                             </td>
                         </tr>
-                    </table>
-                    <table>
                         <tr>
-                            <td width="400px;">
-                                <asp:Label ID="lblTransferAgentsCount" runat="server"></asp:Label>
+                            <td>
+                                <h4 class="field">
+                                    <label class="left">
+                                        Agent:</label>
+                                    <%-- <input type="text" style="width: 245px" />--%>
+                                    <span class="left2">
+                                        <asp:Label ID="lblSaleAgent" runat="server"></asp:Label>&nbsp;<asp:DropDownList ID="ddlUpAgenU"
+                                            runat="server" Height="22px" Width="150px">
+                                        </asp:DropDownList>
+                                    </span>
+                                </h4>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                                <h4 class="field">
+                                    <label class="left">
+                                        Verifier:</label>
+                                    <span class="left2">
+                                        <asp:Label ID="lblVerifierName" runat="server"></asp:Label>&nbsp;<asp:DropDownList
+                                            ID="ddlVerfNamU" runat="server" Height="22px" Width="150px">
+                                        </asp:DropDownList>
+                                    </span>
+                                </h4>
                             </td>
                             <td>
                                 &nbsp;
                             </td>
+                            <td>
+                                <h4 class="field">
+                                    <label class="left">
+                                        Verifier:</label>
+                                    <span class="left2">
+                                        <asp:Label ID="lblVerifierLocation" runat="server"></asp:Label>
+                                    </span>
+                                </h4>
+                            </td>
                         </tr>
                         <tr>
-                            <td style="width: 40%">
+                            <td>
                                 <h4 class="field">
                                     <label class="left">
-                                        <span class="star">*</span>Package:
-                                    </label>
+                                        Package:</label>
                                     <span class="left2">
-                                        <asp:DropDownList ID="ddlPackage" runat="server" onchange="return OnchangeCheckDiscount()">
+                                        <asp:DropDownList ID="ddlPackage" runat="server" onchange="return OnchangeDropdown()">
                                         </asp:DropDownList>
                                     </span>
                                 </h4>
                             </td>
-                            <td style="width: 200px;">
+                            <td>
+                                &nbsp;
+                            </td>
+                            <td>
                                 <h4 class="field">
                                     <label class="left">
-                                        &nbsp;&nbsp;Brand:</label>
+                                        Payment Status:</label>
                                     <span class="left2">
-                                        <asp:DropDownList ID="ddlBrandurl" runat="server">
+                                        <asp:Label ID="lblPaymentStatusView" runat="server"></asp:Label>
+                                    </span>
+                                </h4>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                                <h4 class="field">
+                                    <label class="left">
+                                        QC Status</label>
+                                    <span class="left2">
+                                        <asp:Label ID="lblQCStatus" runat="server"></asp:Label>
+                                    </span>
+                                </h4>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <h4 class="field">
+                                    <label class="left" id="discountchk" runat="server" style="display: block;">
+                                        Discount:</label>
+                                    <span class="left2">
+                                        <asp:DropDownList CssClass="left2" ID="ddldiscount" onchange="return OnchangeDropdown()"
+                                            runat="server">
                                         </asp:DropDownList>
                                     </span>
                                 </h4>
                             </td>
-                            <td style="text-align: right;">
+                            <td colspan="4">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="4">
+                            </td>
+                            <td style="text-align: right" colspan="4">
                                 <asp:UpdatePanel ID="updtpnlSave" runat="server">
                                     <ContentTemplate>
-                                        <asp:Button ID="btnTransfer" runat="server" CssClass="btn btn-warning btn-sm" Text="Transfer"
-                                            OnClientClick="return ValidateDraftData();" OnClick="btnTransfer_Click" />
+                                        <asp:Button ID="btnQCUpdate" runat="server" CssClass="btn btn-warning btn-sm" Text="Update"
+                                            OnClick="btnQCUpdate_Click" OnClientClick="return ValidateSavedData();" />
                                         &nbsp;
-                                        <asp:Button ID="btnSale" runat="server" CssClass="btn btn-success btn-sm" Text="Sale"
-                                            OnClientClick="return ValidateSavedData();" OnClick="btnSale_Click" />
-                                        &nbsp;
-                                        <asp:Button ID="btnSavedraft" runat="server" CssClass="btn btn-info btn-sm" Text="Save as draft"
-                                            OnClick="btnSavedraft_Click" OnClientClick="return ValidateDraftData();" />
-                                        &nbsp;
-                                        <asp:Button ID="btnAbandon" runat="server" CssClass="btn btn-danger btn-sm" Text="Abandon"
-                                            OnClick="btnAbandon_Click" OnClientClick="return ValidateAbandonData();" />
+                                        <asp:Button ID="btnQCBack" runat="server" CssClass="btn btn-warning btn-sm" Text="Close"
+                                            OnClick="BtnClsUpdated_Click" OnClientClick="return ChangeValues();" />
                                     </ContentTemplate>
                                 </asp:UpdatePanel>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td width="400px;">
-                                <span id="discount" style="display: none;">
-                                    <h4 class="field">
-                                        <label class="left">
-                                            <span class="star">*</span>Discount:
-                                        </label>
-                                        <span class="left2">
-                                            <asp:DropDownList ID="ddlDiscount" runat="server" onchange="return OnchangeDropdown()">
-                                            </asp:DropDownList>
-                                        </span>
-                                    </h4>
-                                </span>
-                            </td>
-                            <td>
-                                &nbsp;
-                            </td>
-                            <td>
-                                &nbsp;
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="3" style="height: 20px;">
-                                &nbsp;
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <h4 class="field">
-                                    <label class="left">
-                                        Agent:
-                                    </label>
-                                    <span class="left2">
-                                        <asp:DropDownList ID="ddlSaleAgent" runat="server" onchange="return OnchangeDropdown()">
-                                        </asp:DropDownList>
-                                    </span>
-                                </h4>
-                            </td>
-                            <td>
-                                &nbsp;
-                            </td>
-                            <td>
-                                <h4 class="field">
-                                    <label class="left">
-                                        Verifier:
-                                    </label>
-                                    <span class="left2">
-                                        <asp:DropDownList ID="ddlVerifier" runat="server" onchange="return OnchangeDropdown()">
-                                        </asp:DropDownList>
-                                    </span>
-                                </h4>
                             </td>
                         </tr>
                     </table>
                 </div>
             </div>
- 
             <div class="clear">
                 &nbsp;</div>
             <!-- SELLER INFORMATION Start -->
@@ -2637,10 +2619,8 @@
                                 <tr>
                                     <td style="width: 49%;">
                                         <h4 class="field">
-                                            <label class="left">
-                                                <span class="star">*</span>First name:</label>
-                                            <span class="left2">
-                                                <asp:TextBox ID="txtFirstName" runat="server" MaxLength="30"></asp:TextBox>
+                                            <span class="left"><span class="star">*</span>First name:</span> <span class="left2">
+                                                <asp:TextBox ID="txtFirstName" runat="server" MaxLength="30" Enabled="false"></asp:TextBox>
                                         </h4>
                                     </td>
                                     <td style="width: 40px;">
@@ -2648,19 +2628,15 @@
                                     </td>
                                     <td>
                                         <h4 class="field">
-                                            <label class="left">
-                                                <span class="star">*</span>Last name:</label>
-                                            <span class="left2">
-                                                <asp:TextBox ID="txtLastName" runat="server" MaxLength="30"></asp:TextBox>
+                                            <span class="left"><span class="star">*</span>Last name:</span> <span class="left2">
+                                                <asp:TextBox ID="txtLastName" runat="server" MaxLength="30" Enabled="false"></asp:TextBox>
                                         </h4>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
                                         <h4 class="field">
-                                            <label class="left">
-                                                <span class="star">*</span>Phone #:</label>
-                                            <span class="left2">
+                                            <span class="left"><span class="star">*</span>Phone #:</span> <span class="left2">
                                                 <asp:TextBox ID="txtPhone" runat="server" MaxLength="10" onkeypress="return isNumberKey(event)"
                                                     onblur="return PhoneOnblur();" onfocus="return PhoneOnfocus();"></asp:TextBox>
                                         </h4>
@@ -2670,12 +2646,10 @@
                                     </td>
                                     <td>
                                         <h4 class="field">
-                                            <label class="left">
-                                                <span class="star">*</span>Email:</label>
-                                            <span class="left2">
+                                            <span class="left"><span class="star">*</span>Email:</span> <span class="left2">
                                                 <asp:TextBox ID="txtEmail" runat="server" MaxLength="60" onblur="return EmailOnblur();"
                                                     Style="width: 336px;"></asp:TextBox>
-                                                <asp:CheckBox ID="chkbxEMailNA" runat="server" Text="NA" Font-Bold="true" onclick="return EmailNAClick();" />
+                                                <asp:CheckBox ID="chkbxEMailNA" runat="server" Text="NA" Font-Bold="true" Enabled="false" />
                                             </span>
                                         </h4>
                                     </td>
@@ -2683,10 +2657,8 @@
                                 <tr>
                                     <td>
                                         <h4 class="field">
-                                            <label class="left">
-                                                <span class="star">*</span>Address:</label>
-                                            <span class="left2">
-                                                <asp:TextBox ID="txtAddress" runat="server" MaxLength="40"></asp:TextBox>
+                                            <span class="left"><span class="star">*</span>Address:</span> <span class="left2">
+                                                <asp:TextBox ID="txtAddress" runat="server" MaxLength="40"></asp:TextBox></span>
                                         </h4>
                                     </td>
                                     <td>
@@ -2694,9 +2666,7 @@
                                     </td>
                                     <td>
                                         <h4 class="field">
-                                            <label class="left">
-                                                <span class="star">*</span>City:</label>
-                                            <span class="left2">
+                                            <span class="left"><span class="star">*</span>City:</span> <span class="left2">
                                                 <asp:TextBox ID="txtCity" runat="server" MaxLength="40" Style="width: 110px;"></asp:TextBox>
                                                 &nbsp;
                                                 <label>
@@ -2733,15 +2703,13 @@
                         <span class="bar0"></span>
                     </div>
                 </h1>
-                <div class="inn">
+                <div class="inn" id="feat">
                     <!-- Start  -->
                     <table class="table2">
                         <tr>
                             <td style="width: 31%">
                                 <h4 class="field">
-                                    <label class="left">
-                                        <span class="star">*</span>Make:</label>
-                                    <span class="left2">
+                                    <span class="left"><span class="star">*</span>Make:</span> <span class="left2">
                                         <asp:UpdatePanel ID="updtMake" runat="server">
                                             <ContentTemplate>
                                                 <asp:DropDownList ID="ddlMake" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlMake_SelectedIndexChanged"
@@ -2757,9 +2725,7 @@
                             </td>
                             <td style="width: 31%">
                                 <h4 class="field">
-                                    <label class="left">
-                                        <span class="star">*</span>Model:</label>
-                                    <span class="left2">
+                                    <span class="left"><span class="star">*</span>Model:</span> <span class="left2">
                                         <asp:UpdatePanel ID="updtpnlModel" runat="server">
                                             <ContentTemplate>
                                                 <asp:DropDownList ID="ddlModel" runat="server" onchange="ChangeValuesHidden()">
@@ -2774,15 +2740,9 @@
                             </td>
                             <td>
                                 <h4 class="field">
-                                    <label class="left">
-                                        <span class="star">*</span>Year:</label>
-                                    <span class="left2">
-                                        <asp:UpdatePanel ID="UpdatePanel5" runat="server">
-                                            <ContentTemplate>
-                                                <asp:DropDownList ID="ddlYear" runat="server">
-                                                </asp:DropDownList>
-                                            </ContentTemplate>
-                                        </asp:UpdatePanel>
+                                    <span class="left"><span class="star">*</span>Year:</span> <span class="left2">
+                                        <asp:DropDownList ID="ddlYear" runat="server">
+                                        </asp:DropDownList>
                                     </span>
                                 </h4>
                             </td>
@@ -2790,14 +2750,8 @@
                         <tr>
                             <td>
                                 <h4 class="field">
-                                    <label class="left">
-                                        <span class="star">*</span>Price:</label>
-                                    <span class="left2">
-                                        <asp:UpdatePanel ID="u3" runat="server">
-                                            <ContentTemplate>
-                                                <asp:TextBox ID="txtAskingPrice" runat="server" MaxLength="6" class="sample4" onkeypress="return isNumberKey(event);"></asp:TextBox></span>
-                                            </ContentTemplate>
-                                        </asp:UpdatePanel>
+                                    <span class="left"><span class="star">*</span>Price:</span> <span class="left2">
+                                        <asp:TextBox ID="txtAskingPrice" runat="server" MaxLength="6" class="sample4" onkeypress="return isNumberKey(event);"></asp:TextBox></span>
                                 </h4>
                             </td>
                             <td>
@@ -2805,9 +2759,7 @@
                             </td>
                             <td>
                                 <h4 class="field">
-                                    <label class="left">
-                                        Mileage:</label>
-                                    <span class="left2">
+                                    <span class="left">Mileage:</span> <span class="left2">
                                         <asp:TextBox ID="txtMileage" runat="server" MaxLength="6" class="sample4" onkeypress="return isNumberKey(event);"></asp:TextBox></span>
                                 </h4>
                             </td>
@@ -2816,9 +2768,7 @@
                             </td>
                             <td>
                                 <h4 class="field">
-                                    <label class="left">
-                                        Cylinders:</label>
-                                    <span class="left2">
+                                    <span class="left">Cylinders:</span> <span class="left2">
                                         <asp:DropDownList ID="ddlcylindars" runat="server">
                                             <asp:ListItem Value="0">Unspecified</asp:ListItem>
                                             <asp:ListItem Value="1">3</asp:ListItem>
@@ -2835,9 +2785,7 @@
                         <tr>
                             <td>
                                 <h4 class="field">
-                                    <label class="left">
-                                        Body style:</label>
-                                    <span class="left2">
+                                    <span class="left">Body style:</span> <span class="left2">
                                         <asp:DropDownList ID="ddlBodyStyle" runat="server" onchange="ChangeValuesHidden()">
                                         </asp:DropDownList>
                                     </span>
@@ -2848,9 +2796,7 @@
                             </td>
                             <td>
                                 <h4 class="field">
-                                    <label class="left">
-                                        Exterior color:</label>
-                                    <span class="left2">
+                                    <span class="left">Exterior color:</span> <span class="left2">
                                         <asp:DropDownList ID="ddlExteriorColor" runat="server">
                                         </asp:DropDownList>
                                     </span>
@@ -2861,9 +2807,7 @@
                             </td>
                             <td>
                                 <h4 class="field">
-                                    <label class="left">
-                                        Interior color:</label>
-                                    <span class="left2">
+                                    <span class="left">Interior color:</span> <span class="left2">
                                         <asp:DropDownList ID="ddlInteriorColor" runat="server">
                                         </asp:DropDownList>
                                     </span>
@@ -2873,9 +2817,7 @@
                         <tr>
                             <td>
                                 <h4 class="field">
-                                    <label class="left">
-                                        Transmission:</label>
-                                    <span class="left2">
+                                    <span class="left">Transmission:</span> <span class="left2">
                                         <asp:DropDownList ID="ddltransm" runat="server">
                                             <asp:ListItem Value="0">Unspecified</asp:ListItem>
                                             <asp:ListItem Value="1">Auto</asp:ListItem>
@@ -2890,9 +2832,7 @@
                             </td>
                             <td>
                                 <h4 class="field">
-                                    <label class="left">
-                                        Doors:</label>
-                                    <span class="left2">
+                                    <span class="left">Doors:</span> <span class="left2">
                                         <asp:DropDownList ID="ddldoors" runat="server">
                                             <asp:ListItem Value="0">Unspecified</asp:ListItem>
                                             <asp:ListItem Value="1">2</asp:ListItem>
@@ -2908,9 +2848,7 @@
                             </td>
                             <td>
                                 <h4 class="field">
-                                    <label class="left">
-                                        Drive train:</label>
-                                    <span class="left2">
+                                    <span class="left">Drive train:</span> <span class="left2">
                                         <asp:DropDownList ID="ddldrivetrain" runat="server">
                                             <asp:ListItem Value="0">Unspecified</asp:ListItem>
                                             <asp:ListItem Value="1">2WD</asp:ListItem>
@@ -2925,9 +2863,7 @@
                         <tr>
                             <td>
                                 <h4 class="field">
-                                    <label class="left">
-                                        Fuel type:</label>
-                                    <span class="left2">
+                                    <span class="left">Fuel type:</span> <span class="left2">
                                         <asp:DropDownList ID="ddlfueltype" runat="server">
                                             <asp:ListItem Value="0">Unspecified</asp:ListItem>
                                             <asp:ListItem Value="1">Diesel</asp:ListItem>
@@ -2946,9 +2882,7 @@
                             </td>
                             <td>
                                 <h4 class="field">
-                                    <label class="left">
-                                        Condition:</label>
-                                    <span class="left2">
+                                    <span class="left">Condition:</span> <span class="left2">
                                         <asp:DropDownList ID="ddlcondition" runat="server">
                                             <asp:ListItem Value="0">Unspecified</asp:ListItem>
                                             <asp:ListItem Value="1">Excellent</asp:ListItem>
@@ -2966,9 +2900,7 @@
                             </td>
                             <td>
                                 <h4 class="field">
-                                    <label class="left">
-                                        VIN #:</label>
-                                    <span class="left2">
+                                    <span class="left">VIN #:</span> <span class="left2">
                                         <asp:TextBox ID="txtVin" runat="server" Style="width: 409px" MaxLength="20"></asp:TextBox></span>
                                 </h4>
                             </td>
@@ -2981,58 +2913,58 @@
                 &nbsp;</div>
             <!-- VEHICLE FEATURES Start  -->
             <div class=" box1 boxBlue">
-                <h1 class="hed1 hed2">
+                <h1 class="hed1 hed2 ">
                     VEHICLE FEATURES
                     <div class="pull-right barControl">
                         <span class="bar0"></span>
                     </div>
                 </h1>
-                <div class="inn">
+                <div class="inn " id="feat">
                     <!-- Start  -->
                     <table class="table3" id='vF'>
                         <tr>
                             <td style="width: 120px;">
                                 <label class="hed2">
-                                    Comfort:</label>
+                                    <span class="featNon">Comfort:</label>
                             </td>
                             <td class="chkLabel">
                                 <label>
                                     <asp:CheckBox ID="chkFeatures51" runat="server" class="noLM" />
-                                    A/C</label>
+                                   <span class="featNon"> A/C</label>
                                 <label>
                                     <asp:CheckBox ID="chkFeatures1" runat="server" class="noLM" />
-                                    A/C: Front</label>
+                                    <span class="featNon">A/C: Front</label>
                                 <label>
                                     <asp:CheckBox ID="chkFeatures2" runat="server" class="noLM" />
-                                    A/C: Rear</label>
+                                    <span class="featNon">A/C: Rear</label>
                                 <label>
                                     <asp:CheckBox ID="chkFeatures3" runat="server" class="noLM" />
-                                    Cruise control</label>
+                                   <span class="featNon"> Cruise control</label>
                                 <label>
                                     <asp:CheckBox ID="chkFeatures4" runat="server" class="noLM" />
-                                    Navigation system</label>
+                                   <span class="featNon"> Navigation system</label>
                                 <label>
                                     <asp:CheckBox ID="chkFeatures5" runat="server" class="noLM" />
-                                    Power locks</label>
+                                   <span class="featNon"> Power locks</label>
                                 <label>
                                     <asp:CheckBox ID="chkFeatures6" runat="server" class="noLM" />
-                                    Power steering</label>
+                                   <span class="featNon"> Power steering</label>
                                 <label>
                                     <asp:CheckBox ID="chkFeatures7" runat="server" class="noLM" />
-                                    Remote keyless entry</label>
+                                    <span class="featNon">Remote keyless entry</label>
                                 <label>
                                     <asp:CheckBox ID="chkFeatures8" runat="server" class="noLM" />
-                                    TV/VCR
+                                   <span class="featNon"> TV/VCR
                                 </label>
                                 <label>
-                                    <asp:CheckBox ID="chkFeatures31" runat="server" class="noLM" />Remote start</label>
+                                    <asp:CheckBox ID="chkFeatures31" runat="server" class="noLM" /><span class="featNon">Remote start</label>
                                 <label>
-                                    <asp:CheckBox ID="chkFeatures33" runat="server" class="noLM" />Tilt
+                                    <asp:CheckBox ID="chkFeatures33" runat="server" class="noLM" /><span class="featNon">Tilt
                                 </label>
                                 <label>
-                                    <asp:CheckBox ID="chkFeatures35" runat="server" class="noLM" />Rearview camera</label>
+                                    <asp:CheckBox ID="chkFeatures35" runat="server" class="noLM" /><span class="featNon">Rearview camera</label>
                                 <label>
-                                    <asp:CheckBox ID="chkFeatures36" runat="server" class="noLM" />Power mirrors</label>
+                                    <asp:CheckBox ID="chkFeatures36" runat="server" class="noLM" /><span class="featNon">Power mirrors</label>
                             </td>
                         </tr>
                         <tr>
@@ -3042,13 +2974,13 @@
                             </td>
                             <td class="chkLabel">
                                 <label>
-                                    <asp:CheckBox ID="chkFeatures9" runat="server" class="noLM" />Bucket seats</label>
+                                    <asp:CheckBox ID="chkFeatures9" runat="server" CssClass="noLM" /><span class="featNon">Bucket seats</span></label>
                                 <label>
-                                    <asp:CheckBox ID="chkFeatures11" runat="server" />Memory seats</label>
+                                    <asp:CheckBox ID="chkFeatures11" runat="server" CssClass="noLM" /><span class="featNon">Memory seats</span></label>
                                 <label>
-                                    <asp:CheckBox ID="chkFeatures12" runat="server" />Power seats</label>
+                                    <asp:CheckBox ID="chkFeatures12" runat="server" CssClass="noLM" /><span class="featNon">Power seats</label>
                                 <label>
-                                    <asp:CheckBox ID="chkFeatures32" runat="server" />Heated seats
+                                    <asp:CheckBox ID="chkFeatures32" runat="server" CssClass="noLM" /><span class="featNon">Heated seats
                                 </label>
                             </td>
                         </tr>
@@ -3060,16 +2992,16 @@
                             <td class="chkLabel">
                                 <label>
                                     <asp:RadioButton ID="rdbtnLeather" runat="server" CssClass="noLM" GroupName="Seats"
-                                        Text="" />Leather</label>
+                                        Text="" /><span class="featNon">Leather</span></label>
                                 <label>
                                     <asp:RadioButton ID="rdbtnVinyl" runat="server" CssClass="noLM" GroupName="Seats"
-                                        Text="" />Vinyl</label>
+                                        Text="" /><span class="featNon">Vinyl</span></label>
                                 <label>
                                     <asp:RadioButton ID="rdbtnCloth" runat="server" CssClass="noLM" GroupName="Seats"
-                                        Text="" /><span class="featNon">Cloth</label>
+                                        Text="" /><span class="featNon">Cloth</span></label>
                                 <label>
                                     <asp:RadioButton ID="rdbtnInteriorNA" runat="server" CssClass="noLM" GroupName="Seats"
-                                        Text="" Checked="true" />NA</label>
+                                        Text="" Checked="true" /><span class="featNon">NA</span></label>
                             </td>
                         </tr>
                         <tr>
@@ -3078,20 +3010,22 @@
                                     Safety:</label>
                             </td>
                             <td class="chkLabel">
+                                <label id="i1" runat="server">
+                                    <asp:CheckBox ID="chkFeatures13" runat="server" class="noLM" /><span class="featNon">Airbag:</span>
+                                    Driver</label>
                                 <label>
-                                    <asp:CheckBox ID="chkFeatures13" runat="server" class="noLM" />Airbag: Driver</label>
+                                    <asp:CheckBox ID="chkFeatures14" runat="server" class="noLM" /><span class="featNon">Airbag:</span>
+                                    Passenger</label>
                                 <label>
-                                    <asp:CheckBox ID="chkFeatures14" runat="server" class="noLM" />Airbag: Passenger</label>
+                                    <asp:CheckBox ID="chkFeatures15" runat="server" class="noLM" /><span class="featNon">Airbag: Side</span></label>
                                 <label>
-                                    <asp:CheckBox ID="chkFeatures15" runat="server" class="noLM" />Airbag: Side</label>
+                                    <asp:CheckBox ID="chkFeatures16" runat="server" class="noLM" /><span class="featNon">Alarm</span></label>
                                 <label>
-                                    <asp:CheckBox ID="chkFeatures16" runat="server" class="noLM" />Alarm</label>
+                                    <asp:CheckBox ID="chkFeatures17" runat="server" class="noLM" /><span class="featNon">Anti-lock brakes</span></label>
                                 <label>
-                                    <asp:CheckBox ID="chkFeatures17" runat="server" class="noLM" />Anti-lock brakes</label>
+                                    <asp:CheckBox ID="chkFeatures18" runat="server" class="noLM" /><span class="featNon">Fog lights</span></label>
                                 <label>
-                                    <asp:CheckBox ID="chkFeatures18" runat="server" class="noLM" />Fog lights</label>
-                                <label>
-                                    <asp:CheckBox ID="chkFeatures39" runat="server" class="noLM" />Power brakes</label>
+                                    <asp:CheckBox ID="chkFeatures39" runat="server" class="noLM" /><span class="featNon">Power brakes</span></label>
                             </td>
                         </tr>
                         <tr>
@@ -3101,17 +3035,17 @@
                             </td>
                             <td class="chkLabel">
                                 <label>
-                                    <asp:CheckBox ID="chkFeatures19" runat="server" class="noLM" />Cassette radio</label>
+                                    <asp:CheckBox ID="chkFeatures19" runat="server" class="noLM" /><span class="featNon">Cassette radio</span></label>
                                 <label>
-                                    <asp:CheckBox ID="chkFeatures20" runat="server" class="noLM" />CD changer</label>
+                                    <asp:CheckBox ID="chkFeatures20" runat="server" class="noLM" /><span class="featNon">CD changer</span></label>
                                 <label>
-                                    <asp:CheckBox ID="chkFeatures21" runat="server" class="noLM" />CD player</label>
+                                    <asp:CheckBox ID="chkFeatures21" runat="server" class="noLM" /><span class="featNon">CD player</span></label>
                                 <label>
-                                    <asp:CheckBox ID="chkFeatures22" runat="server" class="noLM" />Premium sound</label>
+                                    <asp:CheckBox ID="chkFeatures22" runat="server" class="noLM" /><span class="featNon">Premium sound</span></label>
                                 <label>
-                                    <asp:CheckBox ID="chkFeatures34" runat="server" class="noLM" />AM/FM</label>
+                                    <asp:CheckBox ID="chkFeatures34" runat="server" class="noLM" /><span class="featNon">AM/FM</span></label>
                                 <label>
-                                    <asp:CheckBox ID="chkFeatures40" runat="server" class="noLM" />DVD</label>
+                                    <asp:CheckBox ID="chkFeatures40" runat="server" class="noLM" /><span class="featNon">DVD</span></label>
                             </td>
                         </tr>
                         <tr>
@@ -3121,13 +3055,13 @@
                             </td>
                             <td class="chkLabel">
                                 <label>
-                                    <asp:CheckBox ID="chkFeatures44" runat="server" class="noLM" />Battery</label>
+                                    <asp:CheckBox ID="chkFeatures44" runat="server" class="noLM" /><span class="featNon">Batter</span>y</label>
                                 <label>
-                                    <asp:CheckBox ID="chkFeatures45" runat="server" class="noLM" />Tires</label>
+                                    <asp:CheckBox ID="chkFeatures45" runat="server" class="noLM" /><span class="featNon">Tires</span></label>
                                 <label>
-                                    <asp:CheckBox ID="chkFeatures52" runat="server" class="noLM" />Rotors</label>
+                                    <asp:CheckBox ID="chkFeatures52" runat="server" class="noLM" /><span class="featNon">Rotors</span></label>
                                 <label>
-                                    <asp:CheckBox ID="chkFeatures53" runat="server" class="noLM" />Brakes</label>
+                                    <asp:CheckBox ID="chkFeatures53" runat="server" class="noLM" /><span class="featNon">Brakes</span></label>
                             </td>
                         </tr>
                         <tr>
@@ -3137,13 +3071,13 @@
                             </td>
                             <td class="chkLabel">
                                 <label>
-                                    <asp:CheckBox ID="chkFeatures23" runat="server" class="noLM" />Power windows</label>
+                                    <asp:CheckBox ID="chkFeatures23" runat="server" class="noLM" /><span class="featNon">Power windows</span></label>
                                 <label>
-                                    <asp:CheckBox ID="chkFeatures24" runat="server" class="noLM" />Rear window defroster</label>
+                                    <asp:CheckBox ID="chkFeatures24" runat="server" class="noLM" /><span class="featNon">Rear window defroster</span></label>
                                 <label>
-                                    <asp:CheckBox ID="chkFeatures25" runat="server" class="noLM" />Rear window wiper</label>
+                                    <asp:CheckBox ID="chkFeatures25" runat="server" class="noLM" /><span class="featNon">Rear window wiper</span></label>
                                 <label>
-                                    <asp:CheckBox ID="chkFeatures26" runat="server" class="noLM" />Tinted glass</label>
+                                    <asp:CheckBox ID="chkFeatures26" runat="server" class="noLM" /><span class="featNon">Tinted glass</span></label>
                             </td>
                         </tr>
                         <tr>
@@ -3153,19 +3087,19 @@
                             </td>
                             <td class="chkLabel">
                                 <label>
-                                    <asp:CheckBox ID="chkFeatures27" runat="server" class="noLM" />Alloy wheels</label>
+                                    <asp:CheckBox ID="chkFeatures27" runat="server" class="noLM" /><span class="featNon">Alloy wheels</span></label>
                                 <label>
-                                    <asp:CheckBox ID="chkFeatures28" runat="server" class="noLM" />Sunroof</label>
+                                    <asp:CheckBox ID="chkFeatures28" runat="server" class="noLM" /><span class="featNon">Sunroof</span></label>
                                 <label>
-                                    <asp:CheckBox ID="chkFeatures41" runat="server" class="noLM" />Panoramic roof</label>
+                                    <asp:CheckBox ID="chkFeatures41" runat="server" class="noLM" /><span class="featNon">Panoramic roof</span></label>
                                 <label>
-                                    <asp:CheckBox ID="chkFeatures42" runat="server" class="noLM" />Moonroof</label>
+                                    <asp:CheckBox ID="chkFeatures42" runat="server" class="noLM" /><span class="featNon">Moonroof</span></label>
                                 <label>
-                                    <asp:CheckBox ID="chkFeatures29" runat="server" class="noLM" />Third row seats</label>
+                                    <asp:CheckBox ID="chkFeatures29" runat="server" class="noLM" /><span class="featNon">Third row seats</label>
                                 <label>
-                                    <asp:CheckBox ID="chkFeatures30" runat="server" class="noLM" />Tow package</label>
+                                    <asp:CheckBox ID="chkFeatures30" runat="server" class="noLM" /><span class="featNon">Tow package</label>
                                 <label>
-                                    <asp:CheckBox ID="chkFeatures43" runat="server" class="noLM" />Dashboard wood frame</label>
+                                    <asp:CheckBox ID="chkFeatures43" runat="server" class="noLM" /><span class="featNon">Dashboard wood frame</span></label>
                             </td>
                         </tr>
                         <tr class="last">
@@ -3175,16 +3109,16 @@
                             </td>
                             <td class="chkLabel">
                                 <label>
-                                    <asp:CheckBox ID="chkFeatures46" runat="server" class="noLM" />Garage kept</label>
+                                    <asp:CheckBox ID="chkFeatures46" runat="server" class="noLM" /><span class="featNon">Garage kept</span></label>
                                 <label>
-                                    <asp:CheckBox ID="chkFeatures47" runat="server" class="noLM" />Non smoking</label>
+                                    <asp:CheckBox ID="chkFeatures47" runat="server" class="noLM" /><span class="featNon">Non smoking</span></label>
                                 <label>
-                                    <asp:CheckBox ID="chkFeatures48" runat="server" class="noLM" />Records/Receipts
+                                    <asp:CheckBox ID="chkFeatures48" runat="server" class="noLM" /><span class="featNon">Records/Receipts</span>
                                     kept</label>
                                 <label>
-                                    <asp:CheckBox ID="chkFeatures49" runat="server" class="noLM" />Well maintained</label>
+                                    <asp:CheckBox ID="chkFeatures49" runat="server" class="noLM" /><span class="featNon">Well maintained</span></label>
                                 <label>
-                                    <asp:CheckBox ID="chkFeatures50" runat="server" class="noLM" />Regular oil changes</label>
+                                    <asp:CheckBox ID="chkFeatures50" runat="server" class="noLM" /><span class="featNon">Regular oil changes</span></label>
                             </td>
                         </tr>
                     </table>
@@ -3196,7 +3130,7 @@
             <!-- VEHICLE DESCRIPTION Start  -->
             <div class=" box1 boxBlue">
                 <h1 class="hed1 hed2">
-                    DESCRIPTION
+                    VEHICLE Description
                     <div class="pull-right barControl">
                         <span class="bar0"></span>
                     </div>
@@ -3204,12 +3138,8 @@
                 <div class="inn">
                     <h4 class="field">
                         <span class="left2 noMrg">
-                            <asp:UpdatePanel ID="u2" runat="server">
-                                <ContentTemplate>
-                                    <asp:TextBox ID="txtDescription" runat="server" MaxLength="1000" Style="width: 99%;
-                                        height: 75px; resize: none;" TextMode="MultiLine" CssClass="textAr" data-plus-as-tab="false"></asp:TextBox></textarea></span>
-                                </ContentTemplate>
-                            </asp:UpdatePanel>
+                            <asp:TextBox ID="txtDescription" runat="server" MaxLength="1000" Style="width: 99%;
+                                height: 75px; resize: none;" TextMode="MultiLine" CssClass="textAr" data-plus-as-tab="false"></asp:TextBox></span>
                     </h4>
                 </div>
             </div>
@@ -3237,17 +3167,13 @@
                             </td>
                             <td style="width: 350px; vertical-align: text-bottom;">
                                 <h4 class="field">
-                                    <label class="left">
-                                        Source of photos:</label>
-                                    <span class="left2">
+                                    <span class="left">Source of photos:</span> <span class="left2">
                                         <asp:DropDownList ID="ddlPhotosSource" runat="server" onchange="ChangeValuesHidden()">
                                         </asp:DropDownList>
                                     </span>
                                 </h4>
                                 <h4 class="field">
-                                    <label class="left">
-                                        Source of description:</label>
-                                    <span class="left2">
+                                    <span class="left">Source of description:</span> <span class="left2">
                                         <asp:DropDownList ID="ddlDescriptionSource" runat="server">
                                         </asp:DropDownList>
                                     </span>
@@ -3270,12 +3196,12 @@
                     <table style="width: 350px;">
                         <tr>
                             <td>
-                                <asp:UpdatePanel ID="updtpnlPaymentDetails" runat="server">
-                                    <ContentTemplate>
-                                        <h4 class="field">
-                                            <label class="left">
-                                                Pay method:</label>
-                                            <span class="left2">
+                                <h4 class="field">
+                                    <label class="left">
+                                        Pay method:</label>
+                                    <span class="left2">
+                                        <asp:UpdatePanel ID="updtpnlPaymentDetails" runat="server">
+                                            <ContentTemplate>
                                                 <asp:DropDownList ID="ddlpayme" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlpayme_SelectedIndex">
                                                     <asp:ListItem Value="0">Visa</asp:ListItem>
                                                     <asp:ListItem Value="1">Mastercard</asp:ListItem>
@@ -3284,7 +3210,10 @@
                                                     <asp:ListItem Value="4">Paypal</asp:ListItem>
                                                     <asp:ListItem Value="5">Check</asp:ListItem>
                                                 </asp:DropDownList>
-                                                <%--<asp:RadioButton ID="rdbtnPayVisa" CssClass="noLM" Text="Visa" Checked="true" GroupName="PayType"
+                                            </ContentTemplate>
+                                        </asp:UpdatePanel>
+                            </td>
+                            <%--<asp:RadioButton ID="rdbtnPayVisa" CssClass="noLM" Text="Visa" Checked="true" GroupName="PayType"
                                             runat="server" OnCheckedChanged="rdbtnPayVisa_CheckedChanged" AutoPostBack="true" />
                                         <asp:RadioButton ID="rdbtnPayMasterCard" CssClass="noLM" Text="Mastercard" GroupName="PayType"
                                             runat="server" OnCheckedChanged="rdbtnPayMasterCard_CheckedChanged" AutoPostBack="true" />
@@ -3296,10 +3225,7 @@
                                             runat="server" OnCheckedChanged="rdbtnPayPaypal_CheckedChanged" AutoPostBack="true" />
                                         <asp:RadioButton ID="rdbtnPayCheck" CssClass="noLM" Text="Check" GroupName="PayType"
                                             runat="server" OnCheckedChanged="rdbtnPayCheck_CheckedChanged" AutoPostBack="true" /></span>--%>
-                                        </h4>
-                                    </ContentTemplate>
-                                </asp:UpdatePanel>
-                            </td>
+                            </h4>
                         </tr>
                     </table>
                     <div class="clear">
@@ -3420,7 +3346,7 @@
                                                 <td>
                                                     <h4 class="field">
                                                         <label class="left">
-                                                            <span class="star" style="color: Red">*</span><strong style="width: 40px">CVV#:</strong>
+                                                            <span class="star" style="color: Red">*</span><strong style="width: 40px">CVV#</strong>
                                                         </label>
                                                         <span class="left2">
                                                             <asp:TextBox ID="cvv" MaxLength="4" Style="width: 60px; margin-left: 5px;" runat="server"
@@ -3717,202 +3643,18 @@
                 </div>
             </div>
             <!-- PAYMENT DETAILS End  -->
-            <div style="text-align: right; padding: 10px 0 20px 0">
-                <asp:UpdatePanel ID="updatePnlSave2" runat="server">
-                    <ContentTemplate>
-                        <asp:Button ID="btnTransfer2" runat="server" CssClass="btn btn-warning btn-sm" Text="Transfer"
-                            OnClientClick="return ValidateDraftData();" OnClick="btnTransfer_Click" />
-                        &nbsp;
-                        <asp:Button ID="btnSale2" runat="server" CssClass="btn btn-success btn-sm" Text="Sale"
-                            OnClientClick="return ValidateSavedData();" OnClick="btnSale_Click" />
-                        &nbsp;
-                        <asp:Button ID="btnSavedraft2" runat="server" CssClass="btn btn-info btn-sm" Text="Save as draft"
-                            OnClick="btnSavedraft_Click" OnClientClick="return ValidateDraftData();" />
-                        &nbsp
-                        <asp:Button ID="btnAbandon2" runat="server" CssClass="btn btn-danger btn-sm" Text="Abandon"
-                            OnClick="btnAbandon_Click" OnClientClick="return ValidateAbandonData();" />
-                    </ContentTemplate>
-                </asp:UpdatePanel>
-            </div>
-            <div class="clear">
-                &nbsp;</div>
         </div>
-        <!-- Content End  -->
-        <div class="clear">
-            &nbsp;</div>
     </div>
     <!-- Main Wrapper Emd  -->
     <!-- Footer Start  -->
     <div class="footer">
         United Car Exchange © 2013
     </div>
-    <cc1:ModalPopupExtender ID="MPEUpdate" runat="server" PopupControlID="tblChangePW2"
-        BackgroundCssClass="ModalPopupBG" TargetControlID="HiddenField1" CancelControlID="ImageButton1">
-    </cc1:ModalPopupExtender>
-    <asp:HiddenField ID="HiddenField1" runat="server" />
-    <div id="tblChangePW2" style="display: none; width: 450px;" class="popup">
-        <h2>
-            Phone Number
-            <asp:ImageButton ID="ImageButton1" runat="server" ImageUrl="images\close.png" CssClass="floarR" /></h2>
-        <div class="content">
-            <asp:UpdatePanel ID="updat" runat="server">
-                <ContentTemplate>
-                    <table width="100%" style="margin-top: 10px;">
-                        <tr>
-                            <td style="width: 100px;">
-                                <b>Phone #:</b> &nbsp;
-                            </td>
-                            <td style="width: 200px;">
-                                <asp:TextBox ID="txtLoadPhone" runat="server" MaxLength="10" onkeypress="return isNumberKey(event)"></asp:TextBox>
-                            </td>
-                            <td>
-                                &nbsp;
-                            </td>
-                        </tr>
-                    </table>
-                </ContentTemplate>
-            </asp:UpdatePanel>
-            <asp:UpdatePanel ID="updtpnlBtns" runat="server">
-                <ContentTemplate>
-                    <table style="width: 100%;">
-                        <tr align="center">
-                            <td colspan="4" style="padding-top: 15px;">
-                                <div style="width: 240px; margin: 0 auto;">
-                                    <asp:Button ID="btnPhoneOk" runat="server" Text="Ok" CssClass="btn btn-warning" OnClientClick="return ValidatePhone();"
-                                        OnClick="btnPhoneOk_Click" />
-                                    <asp:Button ID="btnPhoneCancel" runat="server" Text="Cancel" CssClass="btn btn-default" OnClick="btnPhoneCancel_click" />
-                                </div>
-                            </td>
-                        </tr>
-                    </table>
-                </ContentTemplate>
-            </asp:UpdatePanel>
-        </div>
-    </div>
-    <cc1:ModalPopupExtender ID="mdepDraftExistsShow" runat="server" PopupControlID="divDraftExistsShow"
-        BackgroundCssClass="ModalPopupBG" TargetControlID="hdnDraftExistsShow">
-    </cc1:ModalPopupExtender>
-    <asp:HiddenField ID="hdnDraftExistsShow" runat="server" />
-    <div id="divDraftExistsShow" class="popup" style="display: none; width: 450px;">
-        <h2>
-            Alert
-            <!-- <div class="cls">
-            </div> -->
-        </h2>
-        <div class="content">
-            <p>
-                <asp:UpdatePanel ID="UpdatePanel8" runat="server">
-                    <ContentTemplate>
-                        <asp:Label ID="lblDraftExistsShow" runat="server" Visible="false"></asp:Label>
-                    </ContentTemplate>
-                </asp:UpdatePanel>
-            </p>
-            <asp:Button ID="btnDraftExistsShowYes" class="btn btn-default btn-sm" runat="server"
-                Text="Yes" OnClick="btnDraftExistsShowYes_Click" />
-            <asp:Button ID="btnDraftExistsShowNo" class="btn btn-warning btn-sm" runat="server"
-                Text="No" OnClick="btnDraftExistsShowNo_Click" />&nbsp;
-        </div>
-    </div>
-    <cc1:ModalPopupExtender ID="MdepAddAnotherCarAlert" runat="server" PopupControlID="divAddAnotherCarAlert"
-        BackgroundCssClass="ModalPopupBG" TargetControlID="hdnAddAnotherCarAlert">
-    </cc1:ModalPopupExtender>
-    <asp:HiddenField ID="hdnAddAnotherCarAlert" runat="server" />
-    <div id="divAddAnotherCarAlert" class="popup" style="display: none; width: 450px;">
-        <h2>
-            Alert
-            <!-- <div class="cls">
-            </div> -->
-        </h2>
-        <div class="content">
-            <p>
-                <asp:UpdatePanel ID="UpdatePanel9" runat="server">
-                    <ContentTemplate>
-                        <asp:Label ID="lblAddAnotherCarAlertError" runat="server" Visible="false"></asp:Label>
-                    </ContentTemplate>
-                </asp:UpdatePanel>
-            </p>
-            <asp:Button ID="btnAddAnotherCarNo" class="btn btn-warning btn-sm" runat="server"
-                Text="No" OnClick="btnAddAnotherCarNo_Click" />&nbsp;
-            <asp:Button ID="btnAddAnotherCarYes" class="btn btn-default btn-sm" runat="server"
-                Text="Yes" OnClick="btnAddAnotherCarYes_Click" />
-        </div>
-    </div>
-    <cc1:ModalPopupExtender ID="mdepAlertAfterSave" runat="server" PopupControlID="divAlertAfterSave"
-        BackgroundCssClass="ModalPopupBG" TargetControlID="hdnAlertAfterSave">
-    </cc1:ModalPopupExtender>
-    <asp:HiddenField ID="hdnAlertAfterSave" runat="server" />
-    <div id="divAlertAfterSave" class="popup" style="display: none; width: 450px;">
-        <h2>
-            Alert
-            <!-- <div class="cls">
-            </div> -->
-        </h2>
-        <div class="content">
-            <p>
-                <asp:UpdatePanel ID="UpdatePanel10" runat="server">
-                    <ContentTemplate>
-                        <asp:Label ID="lblAlertAfterSave" runat="server" Visible="false"></asp:Label>
-                    </ContentTemplate>
-                </asp:UpdatePanel>
-            </p>
-            <asp:Button ID="btnAlertAfterSaveNo" class="btn-warning btn-sm" runat="server" Text="No"
-                OnClick="btnAlertAfterSaveNo_Click" />&nbsp;
-            <asp:Button ID="btnAlertAfterSaveYes" class="btn btn-warning btn-sm" runat="server"
-                Text="Yes" OnClick="btnAlertAfterSaveYes_Click" />
-        </div>
-    </div>
-    <cc1:ModalPopupExtender ID="mdepExistsAlertShow" runat="server" PopupControlID="divExistsAlertShow"
-        BackgroundCssClass="ModalPopupBG" TargetControlID="hdnExistsAlertShow">
-    </cc1:ModalPopupExtender>
-    <asp:HiddenField ID="hdnExistsAlertShow" runat="server" />
-    <div id="divExistsAlertShow" class="popup" style="display: none; width: 450px;">
-        <h2>
-            Alert
-            <asp:Button ID="btnAlertExistTop" class="cls" runat="server" Text="" BorderWidth="0"
-                OnClick="btnAlertExistShow_Click" />
-            <!-- <div class="cls">
-            </div> -->
-        </h2>
-        <div class="content">
-            <p>
-                <asp:UpdatePanel ID="UpdatePanel7" runat="server">
-                    <ContentTemplate>
-                        <asp:Label ID="lblExistsAlertShow" runat="server" Visible="false"></asp:Label>
-                    </ContentTemplate>
-                </asp:UpdatePanel>
-            </p>
-            <asp:Button ID="btnAlertExistShow" class="btn btn-default " runat="server" Text="Ok"
-                OnClick="btnAlertExistShow_Click" />
-        </div>
-    </div>
-    <cc1:ModalPopupExtender ID="mdepAlertExists" runat="server" PopupControlID="divExists"
-        BackgroundCssClass="ModalPopupBG" TargetControlID="hdnExists" OkControlID="btnExustCls"
-        CancelControlID="btnOk">
-    </cc1:ModalPopupExtender>
-    <asp:HiddenField ID="hdnExists" runat="server" />
-    <div id="divExists" class="popup" style="display: none; width: 450px;">
-        <h2>
-            Alert
-            <asp:Button ID="btnExustCls" class="btn" runat="server" Text="" BorderWidth="0" />
-            <!-- <div class="cls">
-            </div> -->
-        </h2>
-        <div class="content">
-            <p>
-                <asp:UpdatePanel ID="UpdatePanel2" runat="server">
-                    <ContentTemplate>
-                        <asp:Label ID="lblErrorExists" runat="server" Visible="false"></asp:Label>
-                    </ContentTemplate>
-                </asp:UpdatePanel>
-            </p>
-            <asp:Button ID="btnOk" class="btn btn-default btn-sm" runat="server" Text="Ok" />
-        </div>
-    </div>
     <cc1:ModalPopupExtender ID="mpealteruserUpdated" runat="server" PopupControlID="AlertUserUpdated"
         BackgroundCssClass="ModalPopupBG" TargetControlID="hdnAlertuserUpdated">
     </cc1:ModalPopupExtender>
     <asp:HiddenField ID="hdnAlertuserUpdated" runat="server" />
-    <div id="AlertUserUpdated" class="popup" style="display: none; width: 450px;">
+    <div id="AlertUserUpdated" class="popup" style="display: none">
         <h2>
             Alert
             <asp:Button ID="BtnClsUpdated" class="cls" runat="server" Text="" BorderWidth="0"
@@ -3928,8 +3670,52 @@
                     </ContentTemplate>
                 </asp:UpdatePanel>
             </p>
-            <asp:Button ID="btnYesUpdated" class="btn btn-default btn-sm" runat="server" Text="Ok"
-                OnClick="BtnClsUpdated_Click" />
+            <asp:Button ID="btnYesUpdated" class="btn" runat="server" Text="Ok" OnClick="BtnClsUpdated_Click" />
+        </div>
+    </div>
+    <cc1:ModalPopupExtender ID="mdepAlertExists" runat="server" PopupControlID="divExists"
+        BackgroundCssClass="ModalPopupBG" TargetControlID="hdnExists" OkControlID="btnExustCls"
+        CancelControlID="btnOk">
+    </cc1:ModalPopupExtender>
+    <asp:HiddenField ID="hdnExists" runat="server" />
+    <div id="divExists" class="popup" style="display: none">
+        <h2>
+            Alert
+            <asp:Button ID="btnExustCls" class="cls" runat="server" Text="" BorderWidth="0" />
+            <!-- <div class="cls">
+            </div> -->
+        </h2>
+        <div class="content">
+            <p>
+                <asp:UpdatePanel ID="UpdatePanel5" runat="server">
+                    <ContentTemplate>
+                        <asp:Label ID="lblErrorExists" runat="server" Visible="false"></asp:Label>
+                    </ContentTemplate>
+                </asp:UpdatePanel>
+            </p>
+            <asp:Button ID="btnOk" class="btn" runat="server" Text="Ok" />
+        </div>
+    </div>
+    <cc1:ModalPopupExtender ID="mdepDraftExistsShow" runat="server" PopupControlID="divDraftExistsShow"
+        BackgroundCssClass="ModalPopupBG" TargetControlID="hdnDraftExistsShow" OkControlID="btnDraftExistsShowNo">
+    </cc1:ModalPopupExtender>
+    <asp:HiddenField ID="hdnDraftExistsShow" runat="server" />
+    <div id="divDraftExistsShow" class="popup" style="display: none">
+        <h2>
+            Alert
+            <!-- <div class="cls">
+            </div> -->
+        </h2>
+        <div class="content">
+            <p>
+                <asp:UpdatePanel ID="UpdatePanel8" runat="server">
+                    <ContentTemplate>
+                        <asp:Label ID="lblDraftExistsShow" runat="server" Visible="false"></asp:Label>
+                    </ContentTemplate>
+                </asp:UpdatePanel>
+            </p>
+            <asp:Button ID="btnDraftExistsShowNo" class="btn" runat="server" Text="No" />&nbsp;
+            <asp:Button ID="btnDraftExistsShowYes" class="btn" runat="server" Text="Yes" OnClick="btnDraftExistsShowYes_Click" />
         </div>
     </div>
     </form>

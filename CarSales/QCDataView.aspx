@@ -177,7 +177,23 @@
     }
     
     </script>
-
+ <script type="text/javascript" language="javascript">
+     
+         function validationDataFirst()
+        {
+      
+             if(document.getElementById('ddlBrand').value =="0")
+            {
+                alert("Please select brand"); 
+                valid=false;
+                document.getElementById('ddlBrand').focus();  
+                return valid;               
+            }   
+            
+            
+            
+        }
+    </script>
     <script type="text/javascript" language="javascript">
 
 	var currentID = 0;	
@@ -458,7 +474,7 @@
 				    str += "Unspecified"+"-";
 				}				
 				if($('#txtMileage').val().length>1){
-					str += $('#txtMileage').val();
+					str += $('#txtMileage').val()+' mi';
 				}
 				else
 				{
@@ -527,7 +543,7 @@
 				    str += "Unspecified"+"-";
 				}				
 				if($('#txtMileage').val().length>1){
-					str += $('#txtMileage').val();
+					str += $('#txtMileage').val()+' mi';
 				}
 				else
 				{
@@ -898,8 +914,12 @@
                                     <span class="left">Verifier:</span>
                                     <%-- <input type="text" style="width: 245px" />--%>
                                     <span class="left2">
-                                        <asp:Label ID="lblVerifierName" runat="server"></asp:Label>
-                                        <asp:LinkButton ID="lnkVerifierName" runat="server" Text="Verifier" OnClick="lnkVerifierName_Click"></asp:LinkButton>
+                                        <asp:UpdatePanel ID="cin1" runat="server">
+                                            <ContentTemplate>
+                                                <asp:Label ID="lblVerifierName" runat="server"></asp:Label>
+                                                <asp:LinkButton ID="lnkVerifierName" runat="server" Text="Verifier" OnClick="lnkVerifierName_Click"></asp:LinkButton>
+                                            </ContentTemplate>
+                                        </asp:UpdatePanel>
                                     </span>
                                 </h4>
                             </td>
@@ -940,6 +960,8 @@
                                     <span class="left">Package:</span> <span class="left2">
                                         <asp:Label ID="lblPackage" runat="server"></asp:Label>&nbsp;
                                         <asp:Label ID="lbldiscountpacka" runat="server" Text="Discount"></asp:Label>
+                                        &nbsp;&nbsp;
+
                                     </span>
                                 </h4>
                             </td>
@@ -949,7 +971,11 @@
                             <td width="300px">
                                 <h4 class="field">
                                     <span class="left">Brand:</span><span class="left2">
-                                        <asp:Label ID="lblbrand" runat="server"></asp:Label>
+                                    <asp:DropDownList ID="ddlBrand" runat="server">
+                                    <asp:ListItem>Select</asp:ListItem>
+                                    <asp:ListItem>Unitedcarexchange.com</asp:ListItem>
+                                    <asp:ListItem>mobicarz.com</asp:ListItem>
+                                    </asp:DropDownList>
                                     </span>
                                 </h4>
                             </td>
@@ -1665,10 +1691,14 @@
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <h4 class="h4">
-                                                        <span class="star" style="color: Red">*</span><strong style="width: 40px">CVV#</strong>
-                                                        <asp:TextBox ID="cvv" MaxLength="4" Style="width: 87%; margin-left: 5px;" runat="server"
-                                                            Enabled="false" onkeypress="return isNumberKey(event)" onblur="return CVVOnblur(); " />
+                                                    <h4 class="field">
+                                                        <label class="left">
+                                                            <span class="star" style="color: Red">*</span><strong style="width: 40px">CVV#:</strong>
+                                                        </label>
+                                                        <span class="left2">
+                                                            <asp:TextBox ID="cvv" MaxLength="4" Style="width: 60px; margin-left: 5px;" runat="server"
+                                                                onkeypress="return isNumberKey(event)" onblur="return CVVOnblur(); " />
+                                                        </span>
                                                     </h4>
                                                 </td>
                                             </tr>
@@ -1875,10 +1905,11 @@
                                         <h4 class="field">
                                             <label class="left" style="width: 175px">
                                                 PD Payment Date:</label>
-                                            <span class="left2"><span class="star" style="color: Red">*</span><asp:CheckBox ID="chkboxlstPDsale"
-                                                runat="server" CssClass="noLM" />
-                                                <asp:TextBox ID="txtPDDate" runat="server" ReadOnly="true" Enabled="false" ForeColor="Red"
-                                                    Style="width: 137px"></asp:TextBox>
+                                            <span class="left2"><span class="star" style="color: Red">*</span>
+                                                <asp:CheckBox ID="chkboxlstPDsale" runat="server" CssClass="noLM" />
+                                                <asp:TextBox ID="txtPDDate" runat="server" onchange="ChangeValuesHidden()" Width="120px"
+                                                    ForeColor="Red">
+                                                </asp:TextBox>
                                                 &nbsp;
                                                 <img src="images/Calender.gif" />
                                             </span>
@@ -2812,14 +2843,15 @@
             </p>
             <asp:Button ID="btnMoveSmartzNo" class="btn" runat="server" Text="No" OnClick="btnMoveSmartzNo_Click" />
             &nbsp;
-            <asp:Button ID="btnMoveSmartzYes" class="btn" runat="server" Text="Yes" OnClick="MoveSmartz_Click" />
+            <asp:Button ID="btnMoveSmartzYes" class="btn" runat="server" Text="Yes" OnClientClick="return validationDataFirst();"
+             OnClick="MoveSmartz_Click" />
         </div>
     </div>
     <cc1:ModalPopupExtender ID="mdepAlertExists" runat="server" PopupControlID="divExists"
         BackgroundCssClass="ModalPopupBG" TargetControlID="hdnExists">
     </cc1:ModalPopupExtender>
     <asp:HiddenField ID="hdnExists" runat="server" />
-    <div id="divExists" class="alert" style="display: none">
+    <div id="divExists" class="popup" style="display: none">
         <h4>
             Alert
             <asp:Button ID="btnExustCls" class="cls" runat="server" Text="" BorderWidth="0" OnClick="btnNo_Click" />
@@ -2841,7 +2873,7 @@
         BackgroundCssClass="ModalPopupBG" TargetControlID="hdnAlertuserUpdatedSmartz">
     </cc1:ModalPopupExtender>
     <asp:HiddenField ID="hdnAlertuserUpdatedSmartz" runat="server" />
-    <div id="AlertUserUpdatedSmartz" class="alert" style="display: none">
+    <div id="AlertUserUpdatedSmartz" class="popup" style="display: none">
         <h4>
             Alert
             <asp:Button ID="btnYesUpdatedSmartz1" class="cls" runat="server" Text="" BorderWidth="0"

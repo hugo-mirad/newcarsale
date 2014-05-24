@@ -112,11 +112,14 @@ public partial class QCDataView : System.Web.UI.Page
                         //FillPaymentDate();
                         //FillPhotoSource();
                         //FillDescriptionSource();
+
                         Session["ViewQCStatus"] = "";
                         //FillBillingStates();
                         //FillCheckTypes();
                         if ((Session["AgentQCPostingID"] != null) && (Session["AgentQCPostingID"].ToString() != ""))
                         {
+
+
                             int PostingID = Convert.ToInt32(Session["AgentQCPostingID"].ToString());
                             DataSet Cardetais = objHotLeadBL.GetCarDetailsByPostingID(PostingID);
 
@@ -695,8 +698,10 @@ public partial class QCDataView : System.Web.UI.Page
 
                             try
                             {
-                                DataSet Brandinformation = objHotLeadBL.BrandName(PostingID);
-                                lblbrand.Text = Brandinformation.Tables[0].Rows[0]["MBrandurl"].ToString();
+                              DataSet Brandinformation = objHotLeadBL.BrandName(PostingID);
+                              string brand = Brandinformation.Tables[0].Rows[0]["MBrandurl"].ToString();
+                              if (brand == "unitedcarexchange.com") ddlBrand.SelectedIndex = 1;
+                              else if (brand == "mobicarz.com") ddlBrand.SelectedIndex = 2;
                             }
                             catch { }
                         }
@@ -1357,7 +1362,6 @@ public partial class QCDataView : System.Web.UI.Page
     {
         try
         {
-
             int PostingID = Convert.ToInt32(Session["AgentQCPostingID"].ToString());
             Session["AgentQCMovingPostingID"] = PostingID;
             DataSet Cardetais = objHotLeadBL.GetCarDetailsByPostingID(PostingID);
@@ -1611,7 +1615,7 @@ public partial class QCDataView : System.Web.UI.Page
             int SalesAgentID = 0;
             int VerifierID = Convert.ToInt32(0);
             string VerifierCenterCode = Cardetais.Tables[0].Rows[0]["SaleverifierCenterCode"].ToString();
-            string CenterCode = Cardetais.Tables[0].Rows[0]["AgentCenterCode"].ToString();
+            string CenterCode = Cardetais.Tables[0].Rows[0]["Locationname"].ToString();
             if (CenterCode == "INBH")
             {
                 SalesAgentID = Convert.ToInt32(56);
@@ -1902,7 +1906,7 @@ public partial class QCDataView : System.Web.UI.Page
             string CustEmail = Cardetais.Tables[0].Rows[0]["email"].ToString();
             DateTime SaleDate = Convert.ToDateTime(Cardetais.Tables[0].Rows[0]["SaleDate"].ToString());
             int SaleEnteredBy;
-            string CenterCode = Cardetais.Tables[0].Rows[0]["AgentCenterCode"].ToString();
+            string CenterCode = Cardetais.Tables[0].Rows[0]["Locationname"].ToString();
             if (CenterCode == "INBH")
             {
                 SaleEnteredBy = Convert.ToInt32(56);
@@ -1930,6 +1934,16 @@ public partial class QCDataView : System.Web.UI.Page
                     SaleEnteredBy = Convert.ToInt32(35);
                 }
             }
+            int brandid = 1;
+            try
+            {
+                if (ddlBrand.SelectedValue == "1")
+                    brandid = 1;
+                else if (ddlBrand.SelectedValue == "2")
+                    brandid = 2;
+
+            }
+            catch { }
             int SourceOfPhotos = Convert.ToInt32(Cardetais.Tables[0].Rows[0]["SourceOfPhotosID"].ToString());
             Session["SourceOfPhotos"] = SourceOfPhotos;
             int SourceOfDescription = Convert.ToInt32(Cardetais.Tables[0].Rows[0]["SourceOfDescriptionID"].ToString());
@@ -1937,7 +1951,7 @@ public partial class QCDataView : System.Web.UI.Page
             DataSet dsPosting = new DataSet();
             Session["CarSellerZip"] = SellerZip;
             int CarsalesID = Convert.ToInt32(Cardetais.Tables[0].Rows[0]["CarID"].ToString());
-            dsPosting = objdropdownBL.USP_SmartzSaveCarDetailsFromCarSales(YearOfMake, MakeModelID, BodyTypeID, ConditionID, Price, Mileage, ExteriorColor, Transmission, InteriorColor, NumberOfDoors, VIN, NumberOfCylinder, FuelTypeID, SellerZip, SellCity, SellStateID, DriveTrain, Description, Condition, InternalNotesNew, Title, SellerName, Address1, CustState, CustPhone, AltCustPhone, CustEmail, RegUID, PackageID, SaleDate, SaleEnteredBy, strIp, SourceOfPhotos, SourceOfDescription, CarsalesID);
+            dsPosting = objdropdownBL.USP_SmartzSaveCarDetailsFromCarSales(YearOfMake, MakeModelID, BodyTypeID, ConditionID, Price, Mileage, ExteriorColor, Transmission, InteriorColor, NumberOfDoors, VIN, NumberOfCylinder, FuelTypeID, SellerZip, SellCity, SellStateID, DriveTrain, Description, Condition, InternalNotesNew, Title, SellerName, Address1, CustState, CustPhone, AltCustPhone, CustEmail, RegUID, PackageID, SaleDate, SaleEnteredBy, strIp, SourceOfPhotos, SourceOfDescription, CarsalesID,brandid);
             Session["PostingID"] = Convert.ToInt32(dsPosting.Tables[0].Rows[0]["PostingID"].ToString());
             Session["CarID"] = Convert.ToInt32(dsPosting.Tables[0].Rows[0]["CarID"].ToString());
             Session["UniqueID"] = dsPosting.Tables[0].Rows[0]["CarUniqueID"].ToString();
@@ -2216,7 +2230,11 @@ public partial class QCDataView : System.Web.UI.Page
                 {
                     if (Session["RegEmailExists"].ToString() == "1")
                     {
-                        ResendRegMail();
+                        if (ddlBrand.SelectedValue == "1")
+                            ResendRegMail();
+                        else if (ddlBrand.SelectedValue == "2")
+                            ResendRegMailMobi();
+
                         DataSet dsDatetime = objHotLeadBL.GetDatetime();
                         DateTime dtNow = Convert.ToDateTime(dsDatetime.Tables[0].Rows[0]["Datetime"].ToString());
                         int CarID = Convert.ToInt32(Session["CarID"].ToString());
@@ -2269,11 +2287,11 @@ public partial class QCDataView : System.Web.UI.Page
             {
                 DateTime PostDate = Convert.ToDateTime(Session["NewUserPDDate"].ToString());
                 PDDate = PostDate.ToString("MM/dd/yyyy");
-                text = format.SendRegistrationdetailsForPDSales(RegLogUserID, LoginPassword, UserDisName, ref text, PDDate);
+                text = format.SendRegistrationdetailsForPDSales(RegLogUserID, LoginPassword, UserDisName, ref text, PDDate,ddlBrand.SelectedValue);
             }
             else
             {
-                text = format.SendRegistrationdetails(RegLogUserID, LoginPassword, UserDisName, ref text, Link, TermsLink);
+                text = format.SendRegistrationdetails(RegLogUserID, LoginPassword, UserDisName, ref text, Link, TermsLink,ddlBrand.SelectedValue);
             }
             msg.Body = text.ToString();
             SmtpClient smtp = new SmtpClient();
@@ -2303,6 +2321,72 @@ public partial class QCDataView : System.Web.UI.Page
             Response.Redirect("EmailServerError.aspx");
         }
     }
+    private void ResendRegMailMobi()
+    {
+        try
+        {
+            string PDDate = string.Empty;
+            string LoginPassword = Session["RegPassword"].ToString();
+            string LoginName = Session["RegUserName"].ToString();
+            string UserDisName = Session["RegName"].ToString();
+            string RegLogUserID = Session["RegLogUserID"].ToString();
+            string Year = Session["SelYear"].ToString();
+            string Model = Session["SelModel"].ToString();
+            string Make = Session["SelMake"].ToString();
+            string UniqueID = Session["UniqueID"].ToString();
+            Make = Make.Replace(" ", "%20");
+            Model = Model.Replace(" ", "%20");
+            Model = Model.Replace("&", "@");
+            string Link = "http://Mobicarz.com/Buy-Sell-UsedCar/" + Year + "-" + Make + "-" + Model + "-" + UniqueID;
+            string TermsLink = "http://Mobicarz.com/TermsandConditions.aspx";
+            clsMailFormats format = new clsMailFormats();
+            MailMessage msg = new MailMessage();
+            msg.From = new MailAddress("info@Mobicarz.com");
+            msg.To.Add(LoginName);
+            //msg.Bcc.Add("archive@unitedcarexchange.com");
+            msg.Subject = "Registration Details From Mobicarz For Car ID# " + Session["CarID"].ToString();
+            msg.IsBodyHtml = true;
+            string text = string.Empty;
+            if (Session["NewUserPayStatus"].ToString() == "5")
+            {
+                DateTime PostDate = Convert.ToDateTime(Session["NewUserPDDate"].ToString());
+                PDDate = PostDate.ToString("MM/dd/yyyy");
+
+                text = format.SendRegistrationdetailsForPDSales(RegLogUserID, LoginPassword, UserDisName, ref text, PDDate, ddlBrand.SelectedValue);
+            }
+            else
+            {
+                text = format.SendRegistrationdetails(RegLogUserID, LoginPassword, UserDisName, ref text, Link, TermsLink, ddlBrand.SelectedValue);
+            }
+            msg.Body = text.ToString();
+            SmtpClient smtp = new SmtpClient();
+            //smtp.Host = "smtp.gmail.com";
+            //smtp.Port = 587;
+            //smtp.Credentials = new System.Net.NetworkCredential("satheesh.aakula@gmail.com", "hugomirad");
+            //smtp.EnableSsl = true;
+            //smtp.Send(msg);
+            smtp.Host = "127.0.0.1";
+            smtp.Port = 25;
+            smtp.Send(msg);
+        }
+        catch (Exception ex)
+        {
+            //throw ex;
+            DataSet dsDatetime = objHotLeadBL.GetDatetime();
+            DateTime dtNow = Convert.ToDateTime(dsDatetime.Tables[0].Rows[0]["Datetime"].ToString());
+            int CarID = Convert.ToInt32(Session["CarID"].ToString());
+            int UID;
+            string CenterCode = Session[Constants.CenterCode].ToString();
+            UID = 15;
+            String UpdatedBy = Session[Constants.NAME].ToString();
+            string InternalNotesNew = "welcome email could not be sent from carsales";
+            string UpdateByWithDate = dtNow.ToString("MM/dd/yyyy hh:mm tt") + "-" + UpdatedBy + "<br>";
+            InternalNotesNew = UpdateByWithDate + InternalNotesNew.Trim() + "<br>" + "-------------------------------------------------";
+            DataSet dsNewIntNotes = objdropdownBL.USP_UpdateCustomerInternalNotes(CarID, InternalNotesNew, UID);
+            Response.Redirect("EmailServerError.aspx");
+        }
+    }
+
 
     protected void btnRejectThereYes_Click(object sender, EventArgs e)
     {

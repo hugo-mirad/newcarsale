@@ -27,7 +27,7 @@ public class clsMailFormats
     #region RegisterFormat
 
     GeneralFunc objGeneralFunc = new GeneralFunc();
-    public string SendRegistrationdetails(string Username, string Password, string Name, ref string strMailFormat, string Link, string TermsLink)
+    public string SendRegistrationdetails(string Username, string Password, string Name, ref string strMailFormat, string Link, string TermsLink, string brand)
     {
         bool bNew = false;
 
@@ -35,7 +35,13 @@ public class clsMailFormats
         string[] arInfo;
         StringBuilder sbQuery;
         string line;
-        string SalesMailFile = HttpContext.Current.Server.MapPath("~/MailTemplate/RegisterSuccess.txt");
+        string SalesMailFile = "";
+        if (brand == "1")
+            SalesMailFile = HttpContext.Current.Server.MapPath("~/MailTemplate/RegisterSuccess.txt");
+        else if (brand == "2")
+            SalesMailFile = HttpContext.Current.Server.MapPath("~/MailTemplate/RegisterSuccessMobi.txt");
+
+       // string SalesMailFile = HttpContext.Current.Server.MapPath("~/MailTemplate/RegisterSuccess.txt");
         StreamReader objStreamReader;
         objStreamReader = File.OpenText(SalesMailFile);
         sbQuery = new StringBuilder();
@@ -70,7 +76,7 @@ public class clsMailFormats
         bNew = true;
         return strMailFormat;
     }
-    public string SendRegistrationdetailsForPDSales(string Username, string Password, string Name, ref string strMailFormat, string PDDate)
+    public string SendRegistrationdetailsForPDSales(string Username, string Password, string Name, ref string strMailFormat, string PDDate, string brand)
     {
         bool bNew = false;
 
@@ -78,7 +84,13 @@ public class clsMailFormats
         string[] arInfo;
         StringBuilder sbQuery;
         string line;
-        string SalesMailFile = HttpContext.Current.Server.MapPath("~/MailTemplate/RegistrationForPDSales.txt");
+        //string SalesMailFile = HttpContext.Current.Server.MapPath("~/MailTemplate/RegistrationForPDSales.txt");
+        //Mobi RegistrationForPDSalesMobi.txt SendRegistrationdetailsForPDSales
+        string SalesMailFile = "";
+        if (brand == "1")
+            SalesMailFile = HttpContext.Current.Server.MapPath("~/MailTemplate/RegistrationForPDSales.txt");
+        else if (brand == "2")
+            SalesMailFile = HttpContext.Current.Server.MapPath("~/MailTemplate/RegistrationForPDSalesMobi.txt");
         StreamReader objStreamReader;
         objStreamReader = File.OpenText(SalesMailFile);
         sbQuery = new StringBuilder();

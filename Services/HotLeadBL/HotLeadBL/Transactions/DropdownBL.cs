@@ -718,7 +718,7 @@ namespace HotLeadBL.Transactions
         public DataSet USP_SmartzSaveCarDetailsFromCarSales(int YearOfMake, int MakeModelID, int BodyTypeID, int VehicleConditionID, string Price, string Mileage, string ExteriorColor,
            string Transmission, string InteriorColor, string NumberOfDoors, string VIN, string NumberOfCylinder, int FuelTypeID, string Zipcode, string City, int StateID,
           string DriveTrain, string Description, string ConditionDescription, string InternalNotes, string Title, string SellerName, string Address1, string State, string Phone, string altPhone, string Email,
-            int UID, int PackageID, DateTime SaleDate, int SaleEnteredBy, string Ip, int SourceOfPhotosID, int SourceOfDescriptionID, int CarsalesID)
+            int UID, int PackageID, DateTime SaleDate, int SaleEnteredBy, string Ip, int SourceOfPhotosID, int SourceOfDescriptionID, int CarsalesID, int brandid)
         {
             try
             {
@@ -768,6 +768,7 @@ namespace HotLeadBL.Transactions
                 dbDatabase.AddInParameter(dbCommand, "@SourceOfPhotosID", System.Data.DbType.Int32, SourceOfPhotosID);
                 dbDatabase.AddInParameter(dbCommand, "@SourceOfDescriptionID", System.Data.DbType.Int32, SourceOfDescriptionID);
                 dbDatabase.AddInParameter(dbCommand, "@CarsalesID", System.Data.DbType.Int32, CarsalesID);
+                dbDatabase.AddInParameter(dbCommand, "@brandid", System.Data.DbType.Int32, brandid);
                 dsCars = dbDatabase.ExecuteDataSet(dbCommand);
                 return dsCars;
             }

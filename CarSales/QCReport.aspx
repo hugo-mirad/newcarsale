@@ -438,7 +438,7 @@
         <div class="content wid1000">
             <asp:UpdatePanel ID="UpdatePanel1" runat="server">
                 <ContentTemplate>
-                    <div class=" box1 box50p" style="width: 640px">
+                    <div class=" box1 box50p" style="width: 540px">
                         <asp:UpdatePanel ID="UpdatePanel4" runat="server">
                             <ContentTemplate>
                                 <table class="tbl3" style="width: 100%; padding: 10px; border-collapse: initial;
@@ -461,9 +461,7 @@
                                                 <ContentTemplate>
                                                     <asp:Button ID="btnGenerate" runat="server" CssClass="btn btn-warning btn-sm" Text="Generate"
                                                         OnClientClick="return ValidateData();" OnClick="btnGenerate_Click" />&nbsp;
-                                                    <asp:DropDownList ID="ddlBrandurl" runat="server" Style="width: 100px;" OnSelectedIndexChanged="ddlBrandurl_SelectedIndexChanged"
-                                                        AutoPostBack="true">
-                                                    </asp:DropDownList>
+                                                    
                                                 </ContentTemplate>
                                             </asp:UpdatePanel>
                                         </td>
@@ -472,14 +470,14 @@
                             </ContentTemplate>
                         </asp:UpdatePanel>
                     </div>
-                    <div class=" box1 box33p" style="width: 330px">
+                    <div class=" box1 box33p" style="width: 440px">
                         <table class="tbl3" style="width: 100%; padding: 10px; border-collapse: collapse;
                             border: #ccc 1px solid; float: left; height: 61px; margin-left: 0px;">
                             <tr>
                                 <td style="vertical-align: middle; padding-left: 10px;">
                                     search:&nbsp;&nbsp;
                                 </td>
-                                <td style="vertical-align: middle; width: 80px;">
+                                <td style="vertical-align: middle; width: 70px;">
                                     <asp:DropDownList ID="ddlQCSearch" runat="server">
                                         <asp:ListItem>SaleID</asp:ListItem>
                                         <%-- <asp:ListItem>Sale Date</asp:ListItem>--%>
@@ -494,6 +492,9 @@
                                     <asp:Button ID="BtnQCSearch" runat="server" Text="QC Search" CssClass="btn btn-warning btn-sm"
                                         OnClick="BtnQCSearch_Click" />
                                 </td>
+                                <td>Brand&nbsp;</td>
+                                <td><asp:DropDownList ID="ddlbrands" runat="server" Style="width: 100px;">
+                                                    </asp:DropDownList></td> <%--OnSelectedIndexChanged="ddlBrandurl_SelectedIndexChanged"--%>
                             </tr>
                         </table>
                     </div>

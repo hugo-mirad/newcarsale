@@ -109,11 +109,11 @@ public partial class QCReport : System.Web.UI.Page
         try
         {
             DataSet dsDropDown1 = objdropdownBL.GetBrandurl();
-            ddlBrandurl.DataSource = dsDropDown1.Tables[0];
-            ddlBrandurl.DataTextField = "MBrandurl";
-            ddlBrandurl.DataValueField = "MBrandId";
-            ddlBrandurl.DataBind();
-            ddlBrandurl.Items.Insert(0, new ListItem("Select", "0"));
+            ddlbrands.DataSource = dsDropDown1.Tables[0];
+            ddlbrands.DataTextField = "MBrandurl";
+            ddlbrands.DataValueField = "MBrandId";
+            ddlbrands.DataBind();
+            ddlbrands.Items.Insert(0, new ListItem("Select", "0"));
 
         }
         catch (Exception ex)
@@ -845,77 +845,99 @@ public partial class QCReport : System.Web.UI.Page
             }
             if (e.CommandName == "MoveSmartz")
             {
-
-                if (db.State != ConnectionState.Open)
-                    db.Open();
-                transaction = db.BeginTransaction();
-                try
+                if (ddlbrands.SelectedValue != "0")
                 {
-
-
-                    int PostingID = Convert.ToInt32(e.CommandArgument.ToString());
-                    DataSet ds1 = objHotLeadBL.IsMovedSmarts(PostingID);
-                    string Smartzcar = ds1.Tables[0].Rows[0]["Smartzcarid"].ToString();
-                    if (Smartzcar == null || Smartzcar == "")
+                    if (db.State != ConnectionState.Open)
+                        db.Open();
+                    //transaction = db.BeginTransaction();
+                    try
                     {
-                        Session["AgentQCMovingPostingID"] = PostingID;
-                        DataSet Cardetais = objHotLeadBL.GetCarDetailsByPostingID(PostingID);
-                        string RegPhone = Cardetais.Tables[0].Rows[0]["phone"].ToString();
-                        DataSet dsPhoneExists = objdropdownBL.ChkUserExistsPhoneNumber(RegPhone);
-                        string Email = Cardetais.Tables[0].Rows[0]["UserName"].ToString();
-                        string UserID;
-                        string FistName = Cardetais.Tables[0].Rows[0]["LastName"].ToString();
-                        if (FistName.Length > 3)
+
+
+                        int PostingID = Convert.ToInt32(e.CommandArgument.ToString());
+                        DataSet ds1 = objHotLeadBL.IsMovedSmarts(PostingID);
+                        string Smartzcar = ds1.Tables[0].Rows[0]["Smartzcarid"].ToString();
+                        if (Smartzcar == null || Smartzcar == "")
                         {
-                            FistName = FistName.Substring(0, 3);
-                        }
-                        string s = "";
-                        int j;
-                        Random random1 = new Random();
-                        for (j = 1; j < 4; j++)
-                        {
-                            s += random1.Next(0, 9).ToString();
-                        }
-                        UserID = FistName + RegPhone.ToString();
-                        int EmailExists = Convert.ToInt32(Cardetais.Tables[0].Rows[0]["EmailExists"].ToString());
-                        if (dsPhoneExists.Tables.Count > 0)
-                        {
-                            if (dsPhoneExists.Tables[0].Rows.Count > 0)
+                            Session["AgentQCMovingPostingID"] = PostingID;
+                            DataSet Cardetais = objHotLeadBL.GetCarDetailsByPostingID(PostingID);
+                            string RegPhone = Cardetais.Tables[0].Rows[0]["phone"].ToString();
+                            DataSet dsPhoneExists = objdropdownBL.ChkUserExistsPhoneNumber(RegPhone);
+                            string Email = Cardetais.Tables[0].Rows[0]["UserName"].ToString();
+                            string UserID;
+                            string FistName = Cardetais.Tables[0].Rows[0]["LastName"].ToString();
+                            if (FistName.Length > 3)
                             {
-                                string PhoneNumber = dsPhoneExists.Tables[0].Rows[0]["PhoneNumber"].ToString();
-                                string CustName = dsPhoneExists.Tables[0].Rows[0]["Name"].ToString();
-                                string CustEmail = dsPhoneExists.Tables[0].Rows[0]["UserName"].ToString();
-                                string Address = dsPhoneExists.Tables[0].Rows[0]["Address"].ToString();
-                                Session["dsExitsUserForSmartz"] = dsPhoneExists;
-                                //mdepAlertExists.Show();
-                                //lblErrorExists.Visible = true;
-                                //lblErrorExists.Text = "Phone number " + RegPhone + " already exists<br />You cannot move it to smartz";
-                                MdepAddAnotherCarAlert.Show();
-                                lblAddAnotherCarAlertError.Visible = true;
-                                //lblAddAnotherCarAlertError.Text = "Phone number " + RegPhone + " already exists<br />Do you want to add another car?";
-                                lblAddAnotherCarAlertError.Text = "Account already exist with <br />Phone number: " + PhoneNumber + "<br />Email: " + CustEmail + "<br />Name: " + CustName + " <br />Do you want to transfer and add to the same account?";
+                                FistName = FistName.Substring(0, 3);
                             }
-                            else
+                            string s = "";
+                            int j;
+                            Random random1 = new Random();
+                            for (j = 1; j < 4; j++)
                             {
-                                if (EmailExists == 1)
+                                s += random1.Next(0, 9).ToString();
+                            }
+                            UserID = FistName + RegPhone.ToString();
+                            int EmailExists = Convert.ToInt32(Cardetais.Tables[0].Rows[0]["EmailExists"].ToString());
+                            if (dsPhoneExists.Tables.Count > 0)
+                            {
+                                if (dsPhoneExists.Tables[0].Rows.Count > 0)
                                 {
-                                    DataSet dsUserExists = objdropdownBL.USP_ChkUserExists(Email);
-                                    if (dsUserExists.Tables.Count > 0)
+                                    string PhoneNumber = dsPhoneExists.Tables[0].Rows[0]["PhoneNumber"].ToString();
+                                    string CustName = dsPhoneExists.Tables[0].Rows[0]["Name"].ToString();
+                                    string CustEmail = dsPhoneExists.Tables[0].Rows[0]["UserName"].ToString();
+                                    string Address = dsPhoneExists.Tables[0].Rows[0]["Address"].ToString();
+                                    Session["dsExitsUserForSmartz"] = dsPhoneExists;
+                                    //mdepAlertExists.Show();
+                                    //lblErrorExists.Visible = true;
+                                    //lblErrorExists.Text = "Phone number " + RegPhone + " already exists<br />You cannot move it to smartz";
+                                    MdepAddAnotherCarAlert.Show();
+                                    lblAddAnotherCarAlertError.Visible = true;
+                                    //lblAddAnotherCarAlertError.Text = "Phone number " + RegPhone + " already exists<br />Do you want to add another car?";
+                                    lblAddAnotherCarAlertError.Text = "Account already exist with <br />Phone number: " + PhoneNumber + "<br />Email: " + CustEmail + "<br />Name: " + CustName + " <br />Do you want to transfer and add to the same account?";
+                                }
+                                else
+                                {
+                                    if (EmailExists == 1)
                                     {
-                                        if (dsUserExists.Tables[0].Rows.Count > 0)
+                                        DataSet dsUserExists = objdropdownBL.USP_ChkUserExists(Email);
+                                        if (dsUserExists.Tables.Count > 0)
                                         {
-                                            string PhoneNumber = dsUserExists.Tables[0].Rows[0]["PhoneNumber"].ToString();
-                                            string CustName = dsUserExists.Tables[0].Rows[0]["Name"].ToString();
-                                            string CustEmail = dsUserExists.Tables[0].Rows[0]["UserName"].ToString();
-                                            string Address = dsUserExists.Tables[0].Rows[0]["Address"].ToString();
-                                            Session["dsExitsUserForSmartz"] = dsUserExists;
-                                            //mdepAlertExists.Show();
-                                            //lblErrorExists.Visible = true;
-                                            //lblErrorExists.Text = "Email " + Email + " already exists<br />You cannot move it to smartz";
-                                            MdepAddAnotherCarAlert.Show();
-                                            lblAddAnotherCarAlertError.Visible = true;
-                                            //lblAddAnotherCarAlertError.Text = "Email " + Email + " already exists<br />Do you want to add another car?";
-                                            lblAddAnotherCarAlertError.Text = "Account already exist with <br />Phone number: " + PhoneNumber + "<br />Email: " + CustEmail + "<br />Name: " + CustName + " <br />Do you want to transfer and add to the same account?";
+                                            if (dsUserExists.Tables[0].Rows.Count > 0)
+                                            {
+                                                string PhoneNumber = dsUserExists.Tables[0].Rows[0]["PhoneNumber"].ToString();
+                                                string CustName = dsUserExists.Tables[0].Rows[0]["Name"].ToString();
+                                                string CustEmail = dsUserExists.Tables[0].Rows[0]["UserName"].ToString();
+                                                string Address = dsUserExists.Tables[0].Rows[0]["Address"].ToString();
+                                                Session["dsExitsUserForSmartz"] = dsUserExists;
+                                                //mdepAlertExists.Show();
+                                                //lblErrorExists.Visible = true;
+                                                //lblErrorExists.Text = "Email " + Email + " already exists<br />You cannot move it to smartz";
+                                                MdepAddAnotherCarAlert.Show();
+                                                lblAddAnotherCarAlertError.Visible = true;
+                                                //lblAddAnotherCarAlertError.Text = "Email " + Email + " already exists<br />Do you want to add another car?";
+                                                lblAddAnotherCarAlertError.Text = "Account already exist with <br />Phone number: " + PhoneNumber + "<br />Email: " + CustEmail + "<br />Name: " + CustName + " <br />Do you want to transfer and add to the same account?";
+                                            }
+                                            else
+                                            {
+                                                DataSet dsUserIDExists = objdropdownBL.ChkUserExistsUserID(UserID);
+                                                if (dsUserIDExists.Tables.Count > 0)
+                                                {
+                                                    if (dsUserExists.Tables[0].Rows.Count > 0)
+                                                    {
+                                                        UserID = UserID + s.ToString();
+                                                        SaveRegData(UserID, Email, Cardetais, EmailExists);
+                                                    }
+                                                    else
+                                                    {
+                                                        SaveRegData(UserID, Email, Cardetais, EmailExists);
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    SaveRegData(UserID, Email, Cardetais, EmailExists);
+                                                }
+                                            }
                                         }
                                         else
                                         {
@@ -943,7 +965,7 @@ public partial class QCReport : System.Web.UI.Page
                                         DataSet dsUserIDExists = objdropdownBL.ChkUserExistsUserID(UserID);
                                         if (dsUserIDExists.Tables.Count > 0)
                                         {
-                                            if (dsUserExists.Tables[0].Rows.Count > 0)
+                                            if (dsUserIDExists.Tables[0].Rows.Count > 0)
                                             {
                                                 UserID = UserID + s.ToString();
                                                 SaveRegData(UserID, Email, Cardetais, EmailExists);
@@ -959,48 +981,49 @@ public partial class QCReport : System.Web.UI.Page
                                         }
                                     }
                                 }
-                                else
+                            }
+                            else
+                            {
+                                if (EmailExists == 1)
                                 {
-                                    DataSet dsUserIDExists = objdropdownBL.ChkUserExistsUserID(UserID);
-                                    if (dsUserIDExists.Tables.Count > 0)
+                                    DataSet dsUserExists = objdropdownBL.USP_ChkUserExists(Email);
+                                    if (dsUserExists.Tables.Count > 0)
                                     {
-                                        if (dsUserIDExists.Tables[0].Rows.Count > 0)
+                                        if (dsUserExists.Tables[0].Rows.Count > 0)
                                         {
-                                            UserID = UserID + s.ToString();
-                                            SaveRegData(UserID, Email, Cardetais, EmailExists);
+                                            string PhoneNumber = dsUserExists.Tables[0].Rows[0]["PhoneNumber"].ToString();
+                                            string CustName = dsUserExists.Tables[0].Rows[0]["Name"].ToString();
+                                            string CustEmail = dsUserExists.Tables[0].Rows[0]["UserName"].ToString();
+                                            string Address = dsUserExists.Tables[0].Rows[0]["Address"].ToString();
+                                            Session["dsExitsUserForSmartz"] = dsUserExists;
+                                            //mdepAlertExists.Show();
+                                            //lblErrorExists.Visible = true;
+                                            //lblErrorExists.Text = "Email " + Email + " already exists<br />You cannot move it to smartz";
+                                            MdepAddAnotherCarAlert.Show();
+                                            lblAddAnotherCarAlertError.Visible = true;
+                                            lblAddAnotherCarAlertError.Text = "Account already exist with <br />Phone number: " + PhoneNumber + "<br />Email: " + CustEmail + "<br />Name: " + CustName + " <br />Do you want to transfer and add to the same account?";
                                         }
                                         else
                                         {
-                                            SaveRegData(UserID, Email, Cardetais, EmailExists);
+                                            DataSet dsUserIDExists = objdropdownBL.ChkUserExistsUserID(UserID);
+                                            if (dsUserIDExists.Tables.Count > 0)
+                                            {
+                                                if (dsUserExists.Tables[0].Rows.Count > 0)
+                                                {
+                                                    UserID = UserID + s.ToString();
+                                                    SaveRegData(UserID, Email, Cardetais, EmailExists);
+                                                }
+                                                else
+                                                {
+                                                    SaveRegData(UserID, Email, Cardetais, EmailExists);
+                                                }
+                                            }
+                                            else
+                                            {
+                                                SaveRegData(UserID, Email, Cardetais, EmailExists);
+                                            }
+
                                         }
-                                    }
-                                    else
-                                    {
-                                        SaveRegData(UserID, Email, Cardetais, EmailExists);
-                                    }
-                                }
-                            }
-                        }
-                        else
-                        {
-                            if (EmailExists == 1)
-                            {
-                                DataSet dsUserExists = objdropdownBL.USP_ChkUserExists(Email);
-                                if (dsUserExists.Tables.Count > 0)
-                                {
-                                    if (dsUserExists.Tables[0].Rows.Count > 0)
-                                    {
-                                        string PhoneNumber = dsUserExists.Tables[0].Rows[0]["PhoneNumber"].ToString();
-                                        string CustName = dsUserExists.Tables[0].Rows[0]["Name"].ToString();
-                                        string CustEmail = dsUserExists.Tables[0].Rows[0]["UserName"].ToString();
-                                        string Address = dsUserExists.Tables[0].Rows[0]["Address"].ToString();
-                                        Session["dsExitsUserForSmartz"] = dsUserExists;
-                                        //mdepAlertExists.Show();
-                                        //lblErrorExists.Visible = true;
-                                        //lblErrorExists.Text = "Email " + Email + " already exists<br />You cannot move it to smartz";
-                                        MdepAddAnotherCarAlert.Show();
-                                        lblAddAnotherCarAlertError.Visible = true;
-                                        lblAddAnotherCarAlertError.Text = "Account already exist with <br />Phone number: " + PhoneNumber + "<br />Email: " + CustEmail + "<br />Name: " + CustName + " <br />Do you want to transfer and add to the same account?";
                                     }
                                     else
                                     {
@@ -1029,7 +1052,7 @@ public partial class QCReport : System.Web.UI.Page
                                     DataSet dsUserIDExists = objdropdownBL.ChkUserExistsUserID(UserID);
                                     if (dsUserIDExists.Tables.Count > 0)
                                     {
-                                        if (dsUserExists.Tables[0].Rows.Count > 0)
+                                        if (dsUserIDExists.Tables[0].Rows.Count > 0)
                                         {
                                             UserID = UserID + s.ToString();
                                             SaveRegData(UserID, Email, Cardetais, EmailExists);
@@ -1043,48 +1066,29 @@ public partial class QCReport : System.Web.UI.Page
                                     {
                                         SaveRegData(UserID, Email, Cardetais, EmailExists);
                                     }
+                                }
 
-                                }
-                            }
-                            else
-                            {
-                                DataSet dsUserIDExists = objdropdownBL.ChkUserExistsUserID(UserID);
-                                if (dsUserIDExists.Tables.Count > 0)
-                                {
-                                    if (dsUserIDExists.Tables[0].Rows.Count > 0)
-                                    {
-                                        UserID = UserID + s.ToString();
-                                        SaveRegData(UserID, Email, Cardetais, EmailExists);
-                                    }
-                                    else
-                                    {
-                                        SaveRegData(UserID, Email, Cardetais, EmailExists);
-                                    }
-                                }
-                                else
-                                {
-                                    SaveRegData(UserID, Email, Cardetais, EmailExists);
-                                }
-                            }
 
+                            }
 
                         }
-
+                        else
+                        {
+                            System.Web.UI.ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "alert('Record already moved.');", true);
+                        }
+                        transaction.Commit();
                     }
-                    else
+                    catch (SqlException sqlError)
                     {
-                        System.Web.UI.ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "alert('Record already moved.');", true);
+                       // transaction.Rollback();
                     }
-                    transaction.Commit();
+                    db.Close();
                 }
-                catch (SqlException sqlError)
+                else
                 {
-                    transaction.Rollback();
+                    System.Web.UI.ScriptManager.RegisterClientScriptBlock(Page, typeof(Page), "Script", "alert('please select brand.');", true);
                 }
-                db.Close();
-
             }
-
         }
         catch (Exception ex)
         {
@@ -1143,7 +1147,7 @@ public partial class QCReport : System.Web.UI.Page
 
         if (db.State != ConnectionState.Open)
             db.Open();
-        transaction = db.BeginTransaction();
+       // transaction = db.BeginTransaction();
         try
         {
             Random random = new Random();
@@ -1174,7 +1178,7 @@ public partial class QCReport : System.Web.UI.Page
             int SalesAgentID = 0;
             int VerifierID = Convert.ToInt32(0);
             string VerifierCenterCode = Cardetais.Tables[0].Rows[0]["SaleverifierCenterCode"].ToString();
-            string CenterCode = Cardetais.Tables[0].Rows[0]["AgentCenterCode"].ToString();
+            string CenterCode = Cardetais.Tables[0].Rows[0]["Locationname"].ToString();
             if (CenterCode == "INBH")
             {
                 SalesAgentID = Convert.ToInt32(56);
@@ -1385,7 +1389,7 @@ public partial class QCReport : System.Web.UI.Page
         }
         catch (SqlException sqlError)
         {
-            transaction.Rollback();
+           // transaction.Rollback();
         }
         catch (Exception ex)
         {
@@ -1464,7 +1468,7 @@ public partial class QCReport : System.Web.UI.Page
             string CustEmail = Cardetais.Tables[0].Rows[0]["email"].ToString();
             DateTime SaleDate = Convert.ToDateTime(Cardetais.Tables[0].Rows[0]["SaleDate"].ToString());
             int SaleEnteredBy;
-            string CenterCode = Cardetais.Tables[0].Rows[0]["AgentCenterCode"].ToString();
+            string CenterCode = Cardetais.Tables[0].Rows[0]["Locationname"].ToString();
             if (CenterCode == "INBH")
             {
                 SaleEnteredBy = Convert.ToInt32(56);
@@ -1492,6 +1496,16 @@ public partial class QCReport : System.Web.UI.Page
                     SaleEnteredBy = Convert.ToInt32(35);
                 }
             }
+            int brandid = 1;
+            try
+            {
+                if (ddlbrands.SelectedValue == "1")
+                    brandid = 1;
+                else if (ddlbrands.SelectedValue == "2")
+                    brandid = 2;
+
+            }
+            catch { }
             int SourceOfPhotos = Convert.ToInt32(Cardetais.Tables[0].Rows[0]["SourceOfPhotosID"].ToString());
             Session["SourceOfPhotos"] = SourceOfPhotos;
             int SourceOfDescription = Convert.ToInt32(Cardetais.Tables[0].Rows[0]["SourceOfDescriptionID"].ToString());
@@ -1499,7 +1513,7 @@ public partial class QCReport : System.Web.UI.Page
             DataSet dsPosting = new DataSet();
             Session["CarSellerZip"] = SellerZip;
             int CarsalesID = Convert.ToInt32(Cardetais.Tables[0].Rows[0]["CarID"].ToString());
-            dsPosting = objdropdownBL.USP_SmartzSaveCarDetailsFromCarSales(YearOfMake, MakeModelID, BodyTypeID, ConditionID, Price, Mileage, ExteriorColor, Transmission, InteriorColor, NumberOfDoors, VIN, NumberOfCylinder, FuelTypeID, SellerZip, SellCity, SellStateID, DriveTrain, Description, Condition, InternalNotesNew, Title, SellerName, Address1, CustState, CustPhone, AltCustPhone, CustEmail, RegUID, PackageID, SaleDate, SaleEnteredBy, strIp, SourceOfPhotos, SourceOfDescription, CarsalesID);
+            dsPosting = objdropdownBL.USP_SmartzSaveCarDetailsFromCarSales(YearOfMake, MakeModelID, BodyTypeID, ConditionID, Price, Mileage, ExteriorColor, Transmission, InteriorColor, NumberOfDoors, VIN, NumberOfCylinder, FuelTypeID, SellerZip, SellCity, SellStateID, DriveTrain, Description, Condition, InternalNotesNew, Title, SellerName, Address1, CustState, CustPhone, AltCustPhone, CustEmail, RegUID, PackageID, SaleDate, SaleEnteredBy, strIp, SourceOfPhotos, SourceOfDescription, CarsalesID, brandid);
             Session["PostingID"] = Convert.ToInt32(dsPosting.Tables[0].Rows[0]["PostingID"].ToString());
             Session["CarID"] = Convert.ToInt32(dsPosting.Tables[0].Rows[0]["CarID"].ToString());
             Session["UniqueID"] = dsPosting.Tables[0].Rows[0]["CarUniqueID"].ToString();
@@ -1999,7 +2013,7 @@ public partial class QCReport : System.Web.UI.Page
                     string CustEmail = Cardetais.Tables[0].Rows[0]["email"].ToString();
                     DateTime SaleDate = Convert.ToDateTime(Cardetais.Tables[0].Rows[0]["SaleDate"].ToString());
                     int SaleEnteredBy;
-                    string CenterCode = Cardetais.Tables[0].Rows[0]["AgentCenterCode"].ToString();
+                    string CenterCode = Cardetais.Tables[0].Rows[0]["Locationname"].ToString();
                     if (CenterCode == "INBH")
                     {
                         SaleEnteredBy = Convert.ToInt32(56);
@@ -2386,13 +2400,13 @@ public partial class QCReport : System.Web.UI.Page
                     {
                         DateTime PostDate = Convert.ToDateTime(Session["NewUserPDDate"].ToString());
                         PDDate = PostDate.ToString("MM/dd/yyyy");
-                        text = format.SendRegistrationdetailsForPDSales(RegLogUserID, LoginPassword, UserDisName, ref text, PDDate);
+                        text = format.SendRegistrationdetailsForPDSales(RegLogUserID, LoginPassword, UserDisName, ref text, PDDate, ddlbrands.SelectedValue);
                     }
                 }
             }
             else
             {
-                text = format.SendRegistrationdetails(RegLogUserID, LoginPassword, UserDisName, ref text, Link, TermsLink);
+                text = format.SendRegistrationdetails(RegLogUserID, LoginPassword, UserDisName, ref text, Link, TermsLink, ddlbrands.SelectedValue);
             }
             msg.Body = text.ToString();
             SmtpClient smtp = new SmtpClient();
@@ -2500,7 +2514,7 @@ public partial class QCReport : System.Web.UI.Page
         try
         {
             string Status = "All";
-            GetResultsForBrand(Status, 0, Convert.ToInt32(ddlBrandurl.SelectedValue));
+            GetResultsForBrand(Status, 0, Convert.ToInt32(ddlbrands.SelectedValue));
 
         }
         catch { }
