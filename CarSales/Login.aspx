@@ -223,7 +223,7 @@
                                         <td>
                                             <asp:UpdatePanel ID="UpdatePanel1" runat="server">
                                                 <ContentTemplate>
-                                                    <asp:TextBox ID="txtUserName" runat="server" MaxLength="50" CssClass="input1" style="text-transform:uppercase;"></asp:TextBox>
+                                                    <asp:TextBox ID="txtUserName" runat="server" MaxLength="50"  style="text-transform:uppercase;"></asp:TextBox>
                                                 </ContentTemplate>
                                             </asp:UpdatePanel>
                                         </td>
@@ -237,7 +237,7 @@
                                         <td>
                                             <asp:UpdatePanel ID="UpdatePanel2" runat="server">
                                                 <ContentTemplate>
-                                                    <asp:TextBox ID="txtPassword" runat="server"  MaxLength="30" CssClass="input1"></asp:TextBox>
+                                                    <asp:TextBox ID="txtPassword" runat="server"  MaxLength="30" TextMode="Password"></asp:TextBox>
                                                 </ContentTemplate>
                                             </asp:UpdatePanel>
                                         </td>
@@ -251,7 +251,7 @@
                                         <td>
                                             <asp:UpdatePanel ID="UpdatePanel3" runat="server">
                                                 <ContentTemplate>
-                                                    <asp:TextBox ID="txtCenterCode" runat="server"  MaxLength="30" CssClass="input1" style="text-transform:uppercase;"></asp:TextBox>
+                                                    <asp:TextBox ID="txtCenterCode" runat="server"  MaxLength="30"  style="text-transform:uppercase;"></asp:TextBox>
                                                 </ContentTemplate>
                                             </asp:UpdatePanel>
                                         </td>

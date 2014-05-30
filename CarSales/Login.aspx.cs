@@ -42,9 +42,9 @@ public partial class Login : System.Web.UI.Page
             Session[Constants.USER_ID] = null;
             Session.Clear();
             Session.Abandon();
-            txtUserName.Text = "HM104";
-            txtPassword.Text = "sujatha";
-            txtCenterCode.Text = "INDG";
+            //txtUserName.Text = "HM104";
+            //txtPassword.Text = "sujatha";
+            //txtCenterCode.Text = "INDG";
             txtUserName.Focus();
             Session.Timeout = 180;
           

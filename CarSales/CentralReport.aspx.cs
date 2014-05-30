@@ -35,69 +35,46 @@ public partial class CentralReport : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
-        if (Session[Constants.NAME] == null)
+        if (this.Session[Constants.NAME] == null)
         {
             Response.Redirect("Login.aspx");
         }
         else
         {
-            if (!IsPostBack)
+            if (this.IsPostBack)
+                return;
+            Session["CurrentPage"] = (object)"Brands";
+            if (!this.LoadIndividualUserRights())
+                Response.Redirect("Login.aspx");
+            else if (this.Session[Constants.NAME] == null)
             {
-                Session["CurrentPage"] = "Brands";
-
-                if (LoadIndividualUserRights() == false)
+                lnkBtnLogout.Visible = false;
+                lblUserName.Visible = false;
+            }
+            else
+            {
+                lnkBtnLogout.Visible = true;
+                lblUserName.Visible = true;
+                string str1 = Session[Constants.NAME].ToString();
+                string str2 = Session[Constants.CenterCode].ToString();
+                string str3 = Session[Constants.USER_NAME].ToString();
+                string str4 = str1 + " " + str3;
+                if (str4.Length > 20)
                 {
-                    Response.Redirect("Login.aspx");
+                    lblUserName.Text = ((object)str4).ToString().Substring(0, 20);
+                    lblUserName.Text = lblUserName.Text + " (" + ((object)str2).ToString() + ")";
                 }
                 else
                 {
-                    if (Session[Constants.NAME] == null)
-                    {
-                        lnkBtnLogout.Visible = false;
-                        lblUserName.Visible = false;
-                    }
-                    else
-                    {
-
-                        // LoadUserRights();
-                        lnkBtnLogout.Visible = true;
-                        lblUserName.Visible = true;
-                        string LogUsername = Session[Constants.NAME].ToString();
-                        string CenterCode = Session[Constants.CenterCode].ToString();
-                        string UserLogName = Session[Constants.USER_NAME].ToString();
-                        string Name = LogUsername + " " + UserLogName;
-                        LogUsername = Name;
-                        if (LogUsername.Length > 20)
-                        {
-                            lblUserName.Text = LogUsername.ToString().Substring(0, 20);
-                            lblUserName.Text = lblUserName.Text + " (" + CenterCode.ToString() + ")";
-
-                        }
-                        else
-                        {
-                            lblUserName.Text = LogUsername;
-                            if (CenterCode.Length > 5)
-                            {
-                                lblUserName.Text = lblUserName.Text + " (" + CenterCode.ToString().Substring(0, 5) + ")";
-                            }
-                            else
-                            {
-                                lblUserName.Text = lblUserName.Text + " (" + CenterCode.ToString() + ")";
-                            }
-                            //lblUserName.Text = lblUserName.Text + " (" + CenterCode.ToString() + ")";
-                        }
-                        FillAgents();
-                        lnkTicker.Attributes.Add("href", "javascript:poptastic('Ticker.aspx?CID=" + Session[Constants.CenterCodeID] + "&CNAME=" + Session[Constants.CenterCode] + "');");
-                        DataSet dsDatetime = objHotLeadBL.GetDatetime();
-                        DateTime dtNow = Convert.ToDateTime(dsDatetime.Tables[0].Rows[0]["Datetime"].ToString());
-                        txtStartDate.Text = dtNow.AddDays(-6).ToString("MM/dd/yyyy");
-                        txtEndDate.Text = dtNow.ToString("MM/dd/yyyy");
-                        DateTime StartDate = Convert.ToDateTime(txtStartDate.Text.ToString());
-                        DateTime EndDate = Convert.ToDateTime(txtEndDate.Text.ToString());
-                        GetResults(StartDate, EndDate);
-
-                    }
+                    lblUserName.Text = str4;
+                    lblUserName.Text = str2.Length <= 5 ? lblUserName.Text + " (" + ((object)str2).ToString() + ")" : lblUserName.Text + " (" + ((object)str2).ToString().Substring(0, 5) + ")";
                 }
+                FillAgents();
+                lnkTicker.Attributes.Add("href", "javascript:poptastic('Ticker.aspx?CID=" + Session[Constants.CenterCodeID] + "&CNAME=" + (string)this.Session[Constants.CenterCode] + "');");
+                DateTime dateTime = Convert.ToDateTime(this.objHotLeadBL.GetDatetime().Tables[0].Rows[0]["Datetime"].ToString());
+                txtStartDate.Text = dateTime.AddDays(-6.0).ToString("MM/dd/yyyy");
+                txtEndDate.Text = dateTime.ToString("MM/dd/yyyy");
+                GetResults(Convert.ToDateTime(((object)this.txtStartDate.Text).ToString()), Convert.ToDateTime(((object)this.txtEndDate.Text).ToString()));
             }
         }
     }
@@ -114,80 +91,52 @@ public partial class CentralReport : System.Web.UI.Page
 
     private void LoadUserRights()
     {
-        DataSet dsSession = new DataSet();
-        dsSession = objHotLeadBL.GetUserSession((Session[Constants.USER_ID].ToString()));
-
-        if (dsSession.Tables[0].Rows[0]["SessionID"].ToString() != HttpContext.Current.Session.SessionID.ToString())
-        {
-
-            Session["SessionTimeOut"] = 1;
-            Response.Redirect("Login.aspx");
-
-        }
+        DataSet dataSet = new DataSet();
+        if (!(this.objHotLeadBL.GetUserSession(this.Session[Constants.USER_ID].ToString()).Tables[0].Rows[0]["SessionID"].ToString() != ((object)HttpContext.Current.Session.SessionID).ToString()))
+            return;
+        Session["SessionTimeOut"] = (object)1;
+        Response.Redirect("Login.aspx");
 
     }
     private bool LoadIndividualUserRights()
     {
-        DataSet dsIndidivitualRights = new DataSet();
-        bool bValid = false;
-        dsIndidivitualRights = objHotLeadBL.GetUserModules_ActiveInactive(Session[Constants.USER_ID].ToString());
-        if (Session["IndividualUserRights"] == null)
+        DataSet dataSet1 = new DataSet();
+        bool flag = false;
+        dataSet1 = objHotLeadBL.GetUserModules_ActiveInactive(this.Session[Constants.USER_ID].ToString());
+        DataSet dataSet2;
+        if (this.Session["IndividualUserRights"] == null)
         {
-            dsIndidivitualRights = objHotLeadBL.GetUserModules_ActiveInactive(Session[Constants.USER_ID].ToString());
-            Session["IndividualUserRights"] = dsIndidivitualRights;
+            dataSet2 = objHotLeadBL.GetUserModules_ActiveInactive(this.Session[Constants.USER_ID].ToString());
+            Session["IndividualUserRights"] = (object)dataSet2;
         }
         else
+            dataSet2 = Session["IndividualUserRights"] as DataSet;
+        if (dataSet2.Tables[0].Rows.Count <= 0)
+            return flag;
+        for (int index = 0; index < dataSet2.Tables[0].Rows.Count; ++index)
         {
-            dsIndidivitualRights = Session["IndividualUserRights"] as DataSet;
-        }
-        if (dsIndidivitualRights.Tables[0].Rows.Count > 0)
-        {
-            for (int i = 0; i < dsIndidivitualRights.Tables[0].Rows.Count; i++)
+            if (dataSet2.Tables[0].Rows[index]["active"].ToString() == "1")
             {
-
-                //if (dsIndidivitualRights.Tables[0].Rows[i]["SubModuleName"].ToString() == Session["CurrentPage"].ToString())
-                //{
-                if (dsIndidivitualRights.Tables[0].Rows[i]["active"].ToString() == "1")
+                LinkButton linkButton = (LinkButton)this.Page.FindControl(dataSet2.Tables[0].Rows[index]["SubModuleName"].ToString());
+                try
                 {
-                    string Modulename = dsIndidivitualRights.Tables[0].Rows[i]["SubModuleName"].ToString();
-
-                    LinkButton lbl;
-                    lbl = (LinkButton)Page.FindControl(Modulename);
-                    try
-                    {
-                        lbl.Enabled = true;
-                    }
-                    catch { }
+                    linkButton.Enabled = true;
                 }
-                //else
-                //{
-                //    string Modulename = dsIndidivitualRights.Tables[0].Rows[i]["SubModuleName"].ToString();
-                //    LinkButton lbl1;
-                //    lbl1 = (LinkButton)Page.FindControl(Modulename);
-                //    try
-                //    {
-                //        lbl1.Enabled = false;
-                //    }
-                //    catch { }
-                //}
-
-
-
+                catch
+                {
+                }
             }
-            bValid = true;
-            return bValid;
-            //}
         }
-        return bValid;
+        return true;
     }
 
     private void FillAgents()
     {
         try
         {
-            DataSet dsverifier = objHotLeadBL.GetAgentsForAgents(Convert.ToInt32(Session[Constants.CenterCodeID].ToString()));
+            DataSet agentsForAgents = objHotLeadBL.GetAgentsForAgents(Convert.ToInt32(this.Session[Constants.CenterCodeID].ToString()));
             ddlSaleAgent.Items.Clear();
-            ddlSaleAgent.DataSource = dsverifier;
+            ddlSaleAgent.DataSource = (object)agentsForAgents;
             ddlSaleAgent.DataTextField = "AgentUFirstName";
             ddlSaleAgent.DataValueField = "EMpid";
             ddlSaleAgent.DataBind();
@@ -202,77 +151,41 @@ public partial class CentralReport : System.Web.UI.Page
     {
         try
         {
-
-            // DateTime StartingDate = Convert.ToDateTime(StartDate.AddDays(-1).ToString("MM/dd/yyyy"));
-            //DateTime EndingDate = Convert.ToDateTime(EndDate.AddDays(1).ToString("MM/dd/yyyy"));
-            string AgentID =ddlSaleAgent.SelectedItem.Value.ToString();
-            DateTime StartingDate = StartDate;
-            DateTime EndingDate = EndDate;
-            string SaleAgentID = Session[Constants.USER_ID].ToString();
-            int CenterCode = Convert.ToInt32(Session[Constants.CenterCodeID]);
-            DataSet SingleAgentSales = new DataSet();
-            SingleAgentSales = objHotLeadBL.GetAllAgentsSalesData(StartingDate, EndingDate, CenterCode, AgentID);
-            DataSet AbandonSales = objHotLeadBL.GetAllAgentsAbandonSalesData(StartingDate, EndingDate, CenterCode, AgentID);
-            DataSet dsTransferIn = objHotLeadBL.GetAllAgentsTransferOutSalesData(StartingDate, EndingDate, CenterCode, AgentID);
-            Session["AllAgentTransfersIN"] = dsTransferIn;
+            string AgentID = ((object)this.ddlSaleAgent.SelectedItem.Value).ToString();
+            DateTime FromDate = StartDate;
+            DateTime ToDate = EndDate;
+            Session[Constants.USER_ID].ToString();
+            int AgentCenterID = Convert.ToInt32(this.Session[Constants.CenterCodeID]);
+            DataSet dataSet = new DataSet();
+            DataSet allAgentsSalesData = objHotLeadBL.GetAllAgentsSalesData(FromDate, ToDate, AgentCenterID, AgentID);
+            DataSet abandonSalesData = objHotLeadBL.GetAllAgentsAbandonSalesData(FromDate, ToDate, AgentCenterID, AgentID);
+            DataSet transferOutSalesData = objHotLeadBL.GetAllAgentsTransferOutSalesData(FromDate, ToDate, AgentCenterID, AgentID);
+            Session["AllAgentTransfersIN"] = (object)transferOutSalesData;
             tblTransfersIN.Style["display"] = "block";
-            Session["AllAgentAbandonSales"] = AbandonSales;
-            Session["AllAgentSales"] = SingleAgentSales;
-            DataSet SingleVerifierSales = objHotLeadBL.GetAllAgentsVerifiesSalesData(StartingDate, EndingDate, CenterCode, AgentID);
-            Session["AllAgentVerifierSales"] = SingleVerifierSales;
+            Session["AllAgentAbandonSales"] = (object)abandonSalesData;
+            Session["AllAgentSales"] = (object)allAgentsSalesData;
+            DataSet verifiesSalesData = objHotLeadBL.GetAllAgentsVerifiesSalesData(FromDate, ToDate, AgentCenterID, AgentID);
+            Session["AllAgentVerifierSales"] = (object)verifiesSalesData;
             lblResHead.Text = "Center performance report for the period " + StartDate.ToString("MM/dd/yyyy") + " to " + EndDate.ToString("MM/dd/yyyy");
-            if (SingleAgentSales.Tables[0].Rows.Count > 0)
+            lblTotSales.Text = allAgentsSalesData.Tables[0].Rows.Count <= 0 ? "0" : allAgentsSalesData.Tables[0].Rows.Count.ToString();
+            lblTotAbandon.Text = abandonSalesData.Tables[0].Rows.Count <= 0 ? "0" : abandonSalesData.Tables[0].Rows.Count.ToString();
+            lblTotVerif.Text = verifiesSalesData.Tables[0].Rows.Count <= 0 ? "0" : verifiesSalesData.Tables[0].Rows.Count.ToString();
+            lblTotTransfers.Text = transferOutSalesData.Tables[0].Rows.Count <= 0 ? "0" : transferOutSalesData.Tables[0].Rows.Count.ToString();
+            if (this.rdbtnSales.Checked)
             {
-                lblTotSales.Text = SingleAgentSales.Tables[0].Rows.Count.ToString();
-            }
-            else
-            {
-                lblTotSales.Text = "0";
-            }
-            if (AbandonSales.Tables[0].Rows.Count > 0)
-            {
-                lblTotAbandon.Text = AbandonSales.Tables[0].Rows.Count.ToString();
-            }
-            else
-            {
-                lblTotAbandon.Text = "0";
-            }
-            if (SingleVerifierSales.Tables[0].Rows.Count > 0)
-            {
-                lblTotVerif.Text = SingleVerifierSales.Tables[0].Rows.Count.ToString();
-            }
-            else
-            {
-                lblTotVerif.Text = "0";
-            }
-            if (dsTransferIn.Tables[0].Rows.Count > 0)
-            {
-                lblTotTransfers.Text = dsTransferIn.Tables[0].Rows.Count.ToString();
-            }
-            else
-            {
-                lblTotTransfers.Text = "0";
-            }
-
-           if (rdbtnSales.Checked == true)
-            {
-                lblResCount.Text = "";
-                lblRes.Text = "";
-                grdWarmLeadInfo.Visible = true;
-                grdVerifierData.Visible = false;
-                grdAbandInfo.Visible = false;
-                grdTransfersIn.Visible = false;
-                if (SingleAgentSales.Tables[0].Rows.Count > 0)
+                Nameoftype.Text = "Sale(s)";
+                if (allAgentsSalesData.Tables[0].Rows.Count > 0)
                 {
-                  
-                    grdWarmLeadInfo.Visible = true;
                     lblResCount.Visible = true;
-                   // lblRes.Visible = false;
-                    lblResCount.Text = "Total " + SingleAgentSales.Tables[0].Rows.Count.ToString() + " records found";
-                    grdWarmLeadInfo.DataSource = SingleAgentSales.Tables[0];
+                    lblRes.Visible = false;
+                    grdWarmLeadInfo.Visible = true;
+                    grdVerifierData.Visible = false;
+                    grdAbandInfo.Visible = false;
+                    grdTransfersIn.Visible = false;
+                    lblResCount.Text = "Total " + allAgentsSalesData.Tables[0].Rows.Count.ToString() + " records found";
+                    grdWarmLeadInfo.DataSource = (object)allAgentsSalesData.Tables[0];
                     grdWarmLeadInfo.DataBind();
-                   
-                    Nameoftype.Text = "Sale(s)";
+                    BizUtility.GridSortInitail("Ascending", "carid", grdWarmLeadInfo, 0, (object)allAgentsSalesData.Tables[0]);
                 }
                 else
                 {
@@ -282,24 +195,44 @@ public partial class CentralReport : System.Web.UI.Page
                     lblRes.Text = "No records exist";
                 }
             }
-            if (rdbtnAbandon.Checked == true)
+            if (this.rdbtnVerifications.Checked)
             {
-                lblResCount.Text = "";
-                lblRes.Text = "";
-                grdWarmLeadInfo.Visible = false;
-                grdVerifierData.Visible = false;
-                grdAbandInfo.Visible = true;
-                grdTransfersIn.Visible = false;
-                if (AbandonSales.Tables[0].Rows.Count > 0)
+                Nameoftype.Text = "Verifier(s)";
+                if (verifiesSalesData.Tables[0].Rows.Count > 0)
                 {
-                   
-                    grdAbandInfo.Visible = true;
+                    grdWarmLeadInfo.Visible = false;
+                    grdVerifierData.Visible = true;
+                    grdAbandInfo.Visible = false;
+                    grdTransfersIn.Visible = false;
                     lblResCount.Visible = true;
-                   // lblRes.Visible = false;
-                    lblResCount.Text = "Total " + AbandonSales.Tables[0].Rows.Count.ToString() + " records found";
-                    grdAbandInfo.DataSource = AbandonSales.Tables[0];
+                    lblRes.Visible = false;
+                    lblResCount.Text = "Total " + verifiesSalesData.Tables[0].Rows.Count.ToString() + " records found";
+                    grdVerifierData.DataSource = (object)verifiesSalesData.Tables[0];
+                    grdVerifierData.DataBind();
+                    BizUtility.GridSortInitail("Ascending", "carid", grdVerifierData, 0, (object)verifiesSalesData.Tables[0]);
+                }
+                else
+                {
+                    grdVerifierData.Visible = false;
+                    lblResCount.Visible = false;
+                    lblRes.Text = "No records exist";
+                }
+            }
+            if (this.rdbtnAbandon.Checked)
+            {
+                Nameoftype.Text = "Abondon(s)";
+                if (abandonSalesData.Tables[0].Rows.Count > 0)
+                {
+                    grdWarmLeadInfo.Visible = false;
+                    grdVerifierData.Visible = false;
+                    grdAbandInfo.Visible = true;
+                    grdTransfersIn.Visible = false;
+                    lblResCount.Visible = true;
+                    lblRes.Visible = false;
+                    lblResCount.Text = "Total " + abandonSalesData.Tables[0].Rows.Count.ToString() + " records found";
+                    grdAbandInfo.DataSource = (object)abandonSalesData.Tables[0];
                     grdAbandInfo.DataBind();
-                    Nameoftype.Text = "Abondon(s)";
+                    BizUtility.GridSortInitail("Ascending", "carid", grdAbandInfo, 0, (object)abandonSalesData.Tables[0]);
                 }
                 else
                 {
@@ -309,68 +242,34 @@ public partial class CentralReport : System.Web.UI.Page
                     lblRes.Text = "No records exist";
                 }
             }
-            if (rdbtnTransfers.Checked == true)
+            if (!this.rdbtnTransfers.Checked)
+                return;
+            Nameoftype.Text = "Transfer(s)";
+            if (transferOutSalesData.Tables[0].Rows.Count > 0)
             {
-                lblResCount.Text = "";
-                lblRes.Text = "";
                 grdWarmLeadInfo.Visible = false;
                 grdVerifierData.Visible = false;
                 grdAbandInfo.Visible = false;
                 grdTransfersIn.Visible = true;
-                if (dsTransferIn.Tables[0].Rows.Count > 0)
-                {
-                    grdTransfersIn.Visible = true;
-                    lblResCount.Visible = true;
-                  //  lblRes.Visible = false;
-                    lblResCount.Text = "Total " + dsTransferIn.Tables[0].Rows.Count.ToString() + " transfer out records found";
-                    grdTransfersIn.DataSource = dsTransferIn.Tables[0];
-                    grdTransfersIn.DataBind();
-                    Nameoftype.Text = "Transfer(s)";
-                }
-                else
-                {
-                    grdTransfersIn.Visible = false;
-                    lblResCount.Visible = false;
-                    lblRes.Visible = true;
-                    lblRes.Text = "No records exist";
-                }
+                lblResCount.Visible = true;
+                lblRes.Visible = false;
+                lblResCount.Text = "Total " + transferOutSalesData.Tables[0].Rows.Count.ToString() + " transfer out records found";
+                grdTransfersIn.DataSource = (object)transferOutSalesData.Tables[0];
+                grdTransfersIn.DataBind();
+                BizUtility.GridSortInitail("Ascending", "carid", grdTransfersIn, 0, (object)transferOutSalesData.Tables[0]);
             }
-            if (rdbtnVerifications.Checked == true)
+            else
             {
-                lblResCount.Text = "";
-                lblRes.Text = "";
-                grdWarmLeadInfo.Visible = false;
-                grdVerifierData.Visible = true;
-                grdAbandInfo.Visible = false;
                 grdTransfersIn.Visible = false;
-                if (SingleVerifierSales.Tables[0].Rows.Count > 0)
-                {
-
-                    Nameoftype.Text = "Verifier(s)";
-                    grdVerifierData.Visible = true;
-                    lblResCount.Visible = true;
-                   // lblRes.Visible = false;
-                    lblResCount.Text = "Total " + SingleVerifierSales.Tables[0].Rows.Count.ToString() + " records found";
-                    grdVerifierData.DataSource = SingleVerifierSales.Tables[0];
-                    grdVerifierData.DataBind();
-                    string S1 = Nameoftype.Text;
-                  
-                }
-                else
-                {
-                    grdVerifierData.Visible = false;
-                    lblResCount.Visible = false;
-                    lblRes.Visible = true;
-                    lblRes.Text = "No records exist";
-                }
+                lblResCount.Visible = false;
+                lblRes.Visible = true;
+                lblRes.Text = "No records exist";
             }
-          //  lblRes.Visible = false;
         }
         catch (Exception ex)
         {
             throw ex;
         }
-      
     }
     protected void btnSearchMonth_Click(object sender, EventArgs e)
     {
@@ -380,7 +279,7 @@ public partial class CentralReport : System.Web.UI.Page
             DateTime EndDate = Convert.ToDateTime(txtEndDate.Text.ToString());
             GetResults(StartDate, EndDate);
         }
-        catch (Exception ex) 
+        catch (Exception ex)
         {
             throw ex;
         }
@@ -1119,7 +1018,7 @@ public partial class CentralReport : System.Web.UI.Page
         }
     }
 
- 
+
     private string CreateTable(string QcNotes)
     {
         QcNotes = QcNotes.Replace("\n", "<br />");
@@ -1179,7 +1078,7 @@ public partial class CentralReport : System.Web.UI.Page
 
             // DateTime StartingDate = Convert.ToDateTime(StartDate.AddDays(-1).ToString("MM/dd/yyyy"));
             //DateTime EndingDate = Convert.ToDateTime(EndDate.AddDays(1).ToString("MM/dd/yyyy"));
-            string AgentID =ddlSaleAgent.SelectedItem.Value;
+            string AgentID = ddlSaleAgent.SelectedItem.Value;
             DateTime StartingDate = StartDate;
             DateTime EndingDate = EndDate;
             string SaleAgentID = Session[Constants.USER_ID].ToString();
@@ -1259,7 +1158,7 @@ public partial class CentralReport : System.Web.UI.Page
             if (rdbtnVerifications.Checked == true)
             {
                 tblSales.Style["display"] = "none";
-              //  tblVerifies.Style["display"] = "block";
+                //  tblVerifies.Style["display"] = "block";
                 tblAbandon.Style["display"] = "none";
                 tblTransfersIN.Style["display"] = "none";
                 if (SingleVerifierSales.Tables[0].Rows.Count > 0)
@@ -1282,7 +1181,7 @@ public partial class CentralReport : System.Web.UI.Page
             if (rdbtnAbandon.Checked == true)
             {
                 tblSales.Style["display"] = "none";
-               // tblVerifies.Style["display"] = "none";
+                // tblVerifies.Style["display"] = "none";
                 tblAbandon.Style["display"] = "block";
                 tblTransfersIN.Style["display"] = "none";
                 if (AbandonSales.Tables[0].Rows.Count > 0)
@@ -1305,7 +1204,7 @@ public partial class CentralReport : System.Web.UI.Page
             if (rdbtnTransfers.Checked == true)
             {
                 tblSales.Style["display"] = "none";
-              //  tblVerifies.Style["display"] = "none";
+                //  tblVerifies.Style["display"] = "none";
                 tblAbandon.Style["display"] = "none";
                 tblTransfersIN.Style["display"] = "block";
                 if (dsTransferIn.Tables[0].Rows.Count > 0)
