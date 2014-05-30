@@ -2270,7 +2270,7 @@
                 <h1>
                     Car Sales System<span></span></h1>
             </div>
-            <div class="headright">
+             <div class="headright">
                 <div class="loginDet">
                     &nbsp;<asp:Label ID="lblUserName" runat="server" CssClass="loginStat"></asp:Label>&nbsp;
                     |&nbsp;

@@ -315,7 +315,7 @@
                                     <asp:LinkButton ID="lnkMmyRep" runat="server" Text="My Report" Enabled="false"></asp:LinkButton></li>
                             </ul>
                         </li>
-                        <li class="parent "><a href="#">Reports <span class="cert"></span></a>
+                     <li class="parent "><a href="#">Reports <span class="cert"></span></a>
                             <ul class="sub1">
                                 <li class=""><a href="#">Leads <span class="cert"></span></a>
                                     <ul class="sub2">
@@ -328,7 +328,7 @@
                                         <li>
                                             <asp:LinkButton ID="leadspermonth" runat="server" Text="Per. Leads Monthly" Enabled="true"
                                                 PostBackUrl="~/LeadsMonthly.aspx"></asp:LinkButton></li>
-                                        <li>
+                                                 <li>
                                             <asp:LinkButton ID="dailleads" runat="server" Text="Daily Leads Graph" Enabled="true"
                                                 PostBackUrl="~/DailyLeadsGraphReport.aspx"></asp:LinkButton></li>
                                         <li>
@@ -355,15 +355,15 @@
                                         <li>
                                             <asp:LinkButton ID="PerfStatusMonthly" runat="server" Text="Per. Sales Monthly" Enabled="true"
                                                 PostBackUrl="~/SalesMonthly.aspx"></asp:LinkButton></li>
-                                        <li>
-                                            <asp:LinkButton ID="DailySalesGraphs" runat="server" Text="Daily Sales Graph" Enabled="true"
+                                                 <li>
+                                               <asp:LinkButton ID="DailySalesGraphs" runat="server" Text="Daily Sales Graph" Enabled="true"
                                                 PostBackUrl="~/DailySalesGraphReport.aspx"></asp:LinkButton></li>
                                         <li>
-                                            <asp:LinkButton ID="WeeklySalesGraphs" runat="server" Text="Weekly Sales Graphs"
-                                                Enabled="true" PostBackUrl="~/WeeklysalesGraphReport.aspx"></asp:LinkButton></li>
+                                            <asp:LinkButton ID="WeeklySalesGraphs" runat="server" Text="Weekly Sales Graphs" Enabled="true"
+                                                PostBackUrl="~/WeeklysalesGraphReport.aspx"></asp:LinkButton></li>
                                         <li>
-                                            <asp:LinkButton ID="MonthlySalesGraphs" runat="server" Text="Monthly Sales Graph"
-                                                Enabled="true" PostBackUrl="~/MonthlysalesGraphReport.aspx"></asp:LinkButton></li>
+                                             <asp:LinkButton ID="MonthlySalesGraphs" runat="server" Text="Monthly Sales Graph" Enabled="true"
+                                                PostBackUrl="~/MonthlysalesGraphReport.aspx"></asp:LinkButton></li>
                                         <li>
                                             <asp:LinkButton ID="DetaStat" runat="server" Text="Detailed Status" Enabled="true"
                                                 PostBackUrl="~/DailyAgentSalesReport.aspx"></asp:LinkButton></li>
@@ -407,16 +407,14 @@
                                         PostBackUrl="~/Executives.aspx"></asp:LinkButton></li>
                                 <li><a href="#">Brands <span class="cert"></span></a>
                                     <ul class="sub2">
-                                        Brands <span class="cert"></span></a>
-                                        <ul class="sub2">
+                                        <li>
+                                            <asp:LinkButton ID="BrandsAdmin" runat="server" Text="Brands" PostBackUrl="~/Brands.aspx"
+                                                Enabled="false"></asp:LinkButton></li>
+                                        <li class="last">
                                             <li>
-                                                <asp:LinkButton ID="BrandsAdmin" runat="server" Text="Brands" PostBackUrl="~/Brands.aspx"
-                                                    Enabled="false"></asp:LinkButton></li>
-                                            <li class="last">
-                                                <li>
-                                                    <asp:LinkButton ID="BrnadsProducts" runat="server" Text="Products" PostBackUrl="~/Products.aspx"
-                                                        Enabled="true"></asp:LinkButton></li>
-                                        </ul>
+                                                <asp:LinkButton ID="BrnadsProducts" runat="server" Text="Products" PostBackUrl="~/Products.aspx"
+                                                    Enabled="true"></asp:LinkButton></li>
+                                    </ul>
                                 </li>
                                 <li>
                                     <asp:LinkButton ID="CentersAdmin" runat="server" Text="Locations" PostBackUrl="~/Locations.aspx"

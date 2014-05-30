@@ -370,7 +370,7 @@ public class clsMailFormats
         return strMailFormat;
     }
 
-    public string SendIntromaildetails(string AgentName, ref string strMailFormat)
+    public string SendIntromaildetails(string AgentName, ref string strMailFormat, string brand)
     {
         bool bNew = false;
 
@@ -378,7 +378,12 @@ public class clsMailFormats
         string[] arInfo;
         StringBuilder sbQuery;
         string line;
-        string SalesMailFile = HttpContext.Current.Server.MapPath("~/MailTemplate/SmartzIntroMail.txt");
+        string SalesMailFile = "";
+
+        if (brand == "1")
+            SalesMailFile = HttpContext.Current.Server.MapPath("~/MailTemplate/SmartzIntroMail.txt");
+        else
+            SalesMailFile = HttpContext.Current.Server.MapPath("~/MailTemplate/SmartzIntroMobiMail.txt");
         StreamReader objStreamReader;
         objStreamReader = File.OpenText(SalesMailFile);
         sbQuery = new StringBuilder();

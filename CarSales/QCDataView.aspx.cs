@@ -427,6 +427,8 @@ public partial class QCDataView : System.Web.UI.Page
                             NumberOfCylinder = NumberOfCylinder.Substring(0, 1);
 
                             txtcylindars.Text = NumberOfCylinder.ToString();
+                            if (txtcylindars.Text == "U")
+                                txtcylindars.Text = "Unspecified";
                          
                             txtExteriorColor.Text = Cardetais.Tables[0].Rows[0]["exteriorColor"].ToString();
 

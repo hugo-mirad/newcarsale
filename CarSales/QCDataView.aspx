@@ -679,7 +679,7 @@
                 <h1>
                     Car Sales System<span></span></h1>
             </div>
-            <div class="headright">
+          <div class="headright">
                 <div class="loginDet">
                     &nbsp;<asp:Label ID="lblUserName" runat="server" CssClass="loginStat"></asp:Label>&nbsp;
                     |&nbsp;
@@ -694,13 +694,13 @@
                             <ul class="sub1">
                                 <li>
                                     <asp:LinkButton ID="LeadsUpload" runat="server" Text="Upload" Enabled="false" PostBackUrl="~/LeadsUpload.aspx"></asp:LinkButton></li><li>
-                                        <li>
-                                            <asp:LinkButton ID="LeadsDownLoad" runat="server" Text="Download" Enabled="false"
-                                                PostBackUrl="~/LeadDownLoad.aspx"></asp:LinkButton></li>
-                                        <li>
-                                            <asp:LinkButton ID="Abondoned" runat="server" Text="Abondon" Enabled="false" PostBackUrl="~/Abonded.aspx"></asp:LinkButton></li>
-                                        <li>
-                                            <asp:LinkButton ID="FreePackage" runat="server" Text="Free Pkg" Enabled="false" PostBackUrl="~/FreePackages.aspx"></asp:LinkButton></li>
+                                <li>
+                                    <asp:LinkButton ID="LeadsDownLoad" runat="server" Text="Download" Enabled="false"
+                                        PostBackUrl="~/LeadDownLoad.aspx"></asp:LinkButton></li>
+                                <li>
+                                    <asp:LinkButton ID="Abondoned" runat="server" Text="Abondon" Enabled="false" PostBackUrl="~/Abonded.aspx"></asp:LinkButton></li>
+                                <li>
+                                    <asp:LinkButton ID="FreePackage" runat="server" Text="Free Pkg" Enabled="false" PostBackUrl="~/FreePackages.aspx"></asp:LinkButton></li>
                             </ul>
                         </li>
                         <li class="parent "><a href="#">Sales <span class="cert"></span></a>
@@ -711,16 +711,13 @@
                                     <asp:LinkButton ID="NewEntry" runat="server" Text="New Entry" Enabled="false" PostBackUrl="~/NewEntrys.aspx"></asp:LinkButton>
                                 </li>
                                 <li>
-                                    <asp:LinkButton ID="Transferin" runat="server" Text="Transfer In" Enabled="false"
-                                        PostBackUrl="~/LiveTransfers.aspx"></asp:LinkButton></li>
-                                <li><a href="#">Reports <span class="cert"></span></a>
+                                    <asp:LinkButton ID="Transferin" runat="server" Text="Transfer In" Enabled="false" PostBackUrl="~/LiveTransfers.aspx"></asp:LinkButton></li>
+                                  <li><a href="#">Reports <span class="cert"></span></a>
                                     <ul class="sub2">
                                         <li>
-                                            <asp:LinkButton ID="AllCentersReport" runat="server" Text="All Centers Report" Enabled="true"
-                                                PostBackUrl="~/AllCentersReport.aspx"></asp:LinkButton></li>
-                                        <li>
-                                            <asp:LinkButton ID="Centersreport" runat="server" Text="Central Report" Enabled="true"
-                                                PostBackUrl="~/CentralReport.aspx"></asp:LinkButton></li>
+                                            <asp:LinkButton ID="AllCentersReport" runat="server" Text="All Centers Report" Enabled="true" PostBackUrl="~/AllCentersReport.aspx"></asp:LinkButton></li>
+                                             <li>
+                                            <asp:LinkButton ID="Centersreport" runat="server" Text="Central Report" Enabled="true" PostBackUrl="~/CentralReport.aspx"></asp:LinkButton></li>
                                     </ul>
                                 </li>
                                 <li>
@@ -741,7 +738,7 @@
                                     <asp:LinkButton ID="lnkMmyRep" runat="server" Text="My Report" Enabled="false"></asp:LinkButton></li>
                             </ul>
                         </li>
-                        <li class="parent "><a href="#">Reports <span class="cert"></span></a>
+                          <li class="parent "><a href="#">Reports <span class="cert"></span></a>
                             <ul class="sub1">
                                 <li class=""><a href="#">Leads <span class="cert"></span></a>
                                     <ul class="sub2">
@@ -754,7 +751,7 @@
                                         <li>
                                             <asp:LinkButton ID="leadspermonth" runat="server" Text="Per. Leads Monthly" Enabled="true"
                                                 PostBackUrl="~/LeadsMonthly.aspx"></asp:LinkButton></li>
-                                        <li>
+                                                 <li>
                                             <asp:LinkButton ID="dailleads" runat="server" Text="Daily Leads Graph" Enabled="true"
                                                 PostBackUrl="~/DailyLeadsGraphReport.aspx"></asp:LinkButton></li>
                                         <li>
@@ -781,15 +778,15 @@
                                         <li>
                                             <asp:LinkButton ID="PerfStatusMonthly" runat="server" Text="Per. Sales Monthly" Enabled="true"
                                                 PostBackUrl="~/SalesMonthly.aspx"></asp:LinkButton></li>
-                                        <li>
-                                            <asp:LinkButton ID="DailySalesGraphs" runat="server" Text="Daily Sales Graph" Enabled="true"
+                                                 <li>
+                                               <asp:LinkButton ID="DailySalesGraphs" runat="server" Text="Daily Sales Graph" Enabled="true"
                                                 PostBackUrl="~/DailySalesGraphReport.aspx"></asp:LinkButton></li>
                                         <li>
-                                            <asp:LinkButton ID="WeeklySalesGraphs" runat="server" Text="Weekly Sales Graphs"
-                                                Enabled="true" PostBackUrl="~/WeeklysalesGraphReport.aspx"></asp:LinkButton></li>
+                                            <asp:LinkButton ID="WeeklySalesGraphs" runat="server" Text="Weekly Sales Graphs" Enabled="true"
+                                                PostBackUrl="~/WeeklysalesGraphReport.aspx"></asp:LinkButton></li>
                                         <li>
-                                            <asp:LinkButton ID="MonthlySalesGraphs" runat="server" Text="Monthly Sales Graph"
-                                                Enabled="true" PostBackUrl="~/MonthlysalesGraphReport.aspx"></asp:LinkButton></li>
+                                             <asp:LinkButton ID="MonthlySalesGraphs" runat="server" Text="Monthly Sales Graph" Enabled="true"
+                                                PostBackUrl="~/MonthlysalesGraphReport.aspx"></asp:LinkButton></li>
                                         <li>
                                             <asp:LinkButton ID="DetaStat" runat="server" Text="Detailed Status" Enabled="true"
                                                 PostBackUrl="~/DailyAgentSalesReport.aspx"></asp:LinkButton></li>
@@ -839,9 +836,9 @@
                                             <asp:LinkButton ID="BrandsAdmin" runat="server" Text="Brands" PostBackUrl="~/Brands.aspx"
                                                 Enabled="false"></asp:LinkButton></li>
                                         <li class="last">
-                                            <li>
-                                                <asp:LinkButton ID="BrnadsProducts" runat="server" Text="Products" PostBackUrl="~/Products.aspx"
-                                                    Enabled="true"></asp:LinkButton></li>
+                                        <li>
+                                            <asp:LinkButton ID="BrnadsProducts" runat="server" Text="Products" PostBackUrl="~/Products.aspx"
+                                                Enabled="true"></asp:LinkButton></li>
                                     </ul>
                                 </li>
                                 <li>
@@ -2113,7 +2110,7 @@
         CancelControlID="btnNotransClose2">
     </cc1:ModalPopupExtender>
     <asp:HiddenField ID="hdnNoTransHis" runat="server" />
-    <div id="divNoTransHIs" class="alert" style="display: none">
+    <div id="divNoTransHIs" class="popup" style="display: none">
         <h4 id="H6">
             Alert
             <asp:Button ID="btnNotransClose1" class="cls" runat="server" Text="" BorderWidth="0"
@@ -2121,7 +2118,7 @@
             <!-- <div class="cls">
             </div> -->
         </h4>
-        <div class="data">
+        <div class="content">
             <p>
                 <asp:UpdatePanel ID="UpdatePanel9" runat="server">
                     <ContentTemplate>
@@ -2136,14 +2133,14 @@
         BackgroundCssClass="ModalPopupBG" TargetControlID="hdnRejectThere" OkControlID="btnRejectThereNo">
     </cc1:ModalPopupExtender>
     <asp:HiddenField ID="hdnRejectThere" runat="server" />
-    <div id="divRejectThere" class="alert" style="display: none">
+    <div id="divRejectThere" class="popup" style="display: none">
         <h4 id="H7">
             Alert
             <%--<asp:Button ID="btnDiv" class="cls" runat="server" Text="" BorderWidth="0" />--%>
             <!-- <div class="cls">
             </div> -->
         </h4>
-        <div class="data">
+        <div class="content">
             <p>
                 <asp:UpdatePanel ID="UpdatePanel10" runat="server">
                     <ContentTemplate>
@@ -2162,13 +2159,13 @@
         BackgroundCssClass="ModalPopupBG" TargetControlID="hdnAddAnotherCarAlert" OkControlID="btnAddAnotherCarNo">
     </cc1:ModalPopupExtender>
     <asp:HiddenField ID="hdnAddAnotherCarAlert" runat="server" />
-    <div id="divAddAnotherCarAlert" class="alert" style="display: none">
+    <div id="divAddAnotherCarAlert" class="popup" style="display: none">
         <h4 id="H8">
             Alert
             <!-- <div class="cls">
             </div> -->
         </h4>
-        <div class="data">
+        <div class="content">
             <p>
                 <asp:UpdatePanel ID="UpdatePanel13" runat="server">
                     <ContentTemplate>
@@ -2796,7 +2793,7 @@
         BackgroundCssClass="ModalPopupBG" TargetControlID="hdnAlertuser">
     </cc1:ModalPopupExtender>
     <asp:HiddenField ID="hdnAlertuser" runat="server" />
-    <div id="AlertUser" class="alert" style="display: none">
+    <div id="AlertUser" class="popup" style="display: none">
         <h4>
             Alert
             <%--<asp:Button ID="BtnCls" class="cls" runat="server" Text="" BorderWidth="0" OnClick="btnNo_Click" />--%>
@@ -2824,7 +2821,7 @@
         BackgroundCssClass="ModalPopupBG" TargetControlID="hdndraftPhNo">
     </cc1:ModalPopupExtender>
     <asp:HiddenField ID="hdndraftPhNo" runat="server" />
-    <div id="divdraftPhone" class="alert" style="display: none">
+    <div id="divdraftPhone" class="popup" style="display: none">
         <h4>
             Alert
             <%--<asp:Button ID="btnDiv" class="cls" runat="server" Text="" BorderWidth="0" />--%>

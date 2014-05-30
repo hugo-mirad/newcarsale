@@ -718,7 +718,7 @@
         BackgroundCssClass="ModalPopupBG" TargetControlID="hdnAlertuser">
     </cc1:ModalPopupExtender>
     <asp:HiddenField ID="hdnAlertuser" runat="server" />
-    <div id="AlertUser" class="alert" style="display: none">
+    <div id="AlertUser" class="popup" style="display: none">
         <h4>
             Alert
             <asp:Button ID="BtnCls" class="cls" runat="server" Text="" BorderWidth="0" />
